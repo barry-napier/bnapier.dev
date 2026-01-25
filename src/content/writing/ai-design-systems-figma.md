@@ -6,8 +6,6 @@ featured: true
 draft: false
 ---
 
-# Do We Still Need Figma?
-
 Here's a question that would have been heresy two years ago: what if we stopped designing in Figma altogether?
 
 I shipped a feature last week in 30 minutes using AI-assisted coding. The same feature would have taken half a day through the traditional workflow—Figma mockup, design review, developer handoff, implementation, "that's not quite right" feedback, iteration. Instead, I described what I wanted, generated working code, and iterated on something real.

@@ -1,0 +1,59 @@
+---
+/**
+ * 404 Error Page - Page not found
+ *
+ * Simple error page with:
+ * - Large 404 heading
+ * - Brief message
+ * - Link back to home
+ */
+import Base from '@layouts/Base.astro';
+---
+
+<Base title="Page Not Found" description="The page you're looking for doesn't exist.">
+  <div class="error-page">
+    <h1 class="error-code">404</h1>
+    <p class="error-message">Page not found</p>
+    <p class="error-description">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+    <a href="/" class="home-link">Go back home &rarr;</a>
+  </div>
+</Base>
+
+<style>
+  .error-page {
+    text-align: center;
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .error-code {
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
+  }
+
+  .error-message {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .error-description {
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .home-link {
+    display: inline-block;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .home-link:hover {
+    text-decoration: underline;
+  }
+</style>

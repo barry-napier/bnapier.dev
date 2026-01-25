@@ -12,7 +12,7 @@ test.describe('SEO Meta Tags', () => {
     await expect(description).toHaveAttribute('content', /Personal website and blog/i);
   });
 
-  test.skip('writing page has correct meta tags', async ({ page }) => {
+  test('writing page has correct meta tags', async ({ page }) => {
     await page.goto('/writing');
 
     await expect(page).toHaveTitle(/Writing/);
@@ -21,24 +21,31 @@ test.describe('SEO Meta Tags', () => {
     await expect(description).toHaveAttribute('content', /.+/);
   });
 
-  test.skip('blog post has correct meta tags', async ({ page }) => {
-    await page.goto('/writing/building-in-public');
+  test('blog post has correct meta tags', async ({ page }) => {
+    await page.goto('/writing/context-engineering');
 
     // Title should include post title
-    await expect(page).toHaveTitle(/Building in Public/);
+    await expect(page).toHaveTitle(/Context Engineering/);
 
     // OG tags for social sharing
     const ogTitle = page.locator('meta[property="og:title"]');
-    await expect(ogTitle).toHaveAttribute('content', /Building in Public/);
+    await expect(ogTitle).toHaveAttribute('content', /Context Engineering/);
 
     const ogType = page.locator('meta[property="og:type"]');
     await expect(ogType).toHaveAttribute('content', 'article');
   });
 
-  test.skip('each page has canonical URL', async ({ page }) => {
+  test('each page has canonical URL', async ({ page }) => {
     await page.goto('/writing');
 
     const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical).toHaveAttribute('href', /bnapier\.dev\/writing/);
+    await expect(canonical).toHaveAttribute('href', /\/writing/);
+  });
+
+  test('RSS autodiscovery link exists', async ({ page }) => {
+    await page.goto('/');
+
+    const rssLink = page.locator('link[type="application/rss+xml"]');
+    await expect(rssLink).toHaveAttribute('href', '/rss.xml');
   });
 });

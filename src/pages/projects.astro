@@ -1,0 +1,136 @@
+---
+/**
+ * Projects Page - List of projects and work
+ *
+ * Static page with:
+ * - Project list (hardcoded)
+ * - Each project: name, description, tech stack, links
+ * - Simple list format
+ */
+import Base from '@layouts/Base.astro';
+import BackLink from '@/components/BackLink.astro';
+
+interface Project {
+  name: string;
+  description: string;
+  tech: string[];
+  link?: string;
+  github?: string;
+}
+
+const projects: Project[] = [
+  {
+    name: 'bnapier.dev',
+    description: 'This personal website and blog, built with Astro 5 and Tailwind CSS 4.',
+    tech: ['Astro', 'TypeScript', 'Tailwind CSS'],
+    github: 'https://github.com/bnapier/bnapier.dev',
+  },
+  // Add more projects as needed
+];
+---
+
+<Base title="Projects" description="Things I've built and worked on.">
+  <BackLink href="/" label="Home" />
+
+  <header class="page-header">
+    <h1>Projects</h1>
+    <p class="description">
+      Things I've built and worked on.
+    </p>
+  </header>
+
+  <ul class="project-list">
+    {projects.map((project) => (
+      <li class="project">
+        <h2 class="project-name">
+          {project.link ? (
+            <a href={project.link} target="_blank" rel="noopener noreferrer">
+              {project.name}
+            </a>
+          ) : (
+            project.name
+          )}
+        </h2>
+        <p class="project-description">{project.description}</p>
+        <div class="project-meta">
+          <span class="tech-stack">{project.tech.join(' · ')}</span>
+          {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" class="github-link">
+              GitHub
+            </a>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<style>
+  .page-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .description {
+    color: var(--color-text-muted);
+  }
+
+  .project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .project {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .project:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .project-name {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .project-name a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .project-name a:hover {
+    color: var(--color-accent);
+  }
+
+  .project-description {
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .project-meta {
+    display: flex;
+    gap: var(--spacing-md);
+    font-size: var(--text-sm);
+  }
+
+  .tech-stack {
+    color: var(--color-text-muted);
+  }
+
+  .github-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .github-link:hover {
+    color: var(--color-accent);
+  }
+</style>

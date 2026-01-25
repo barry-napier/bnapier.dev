@@ -1,8 +1,126 @@
 ---
+/**
+ * Homepage - Personal introduction and featured content
+ *
+ * Content:
+ * - Personal introduction paragraph
+ * - Featured posts section (filtered by featured: true)
+ * - Connect section with social links
+ * - Inline navigation to /writing, /projects, /now
+ */
 import Base from '@layouts/Base.astro';
+import PostList from '@/components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+// Get featured posts, sorted by date (newest first)
+const featuredPosts = (await getCollection('writing', ({ data }) => data.featured && !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Base>
-  <h1>Barry Napier</h1>
-  <p class="text-muted">Site under construction. Check back soon.</p>
+  <section class="intro">
+    <h1>Barry Napier</h1>
+    <p>
+      I'm a software engineer passionate about building great products and exploring the
+      intersection of technology and human experience. I write about software development,
+      AI, and the lessons learned along the way.
+    </p>
+    <nav class="inline-nav">
+      <a href="/writing">Writing</a>
+      <a href="/projects">Projects</a>
+      <a href="/now">Now</a>
+    </nav>
+  </section>
+
+  {featuredPosts.length > 0 && (
+    <section class="featured">
+      <h2>Featured Writing</h2>
+      <PostList posts={featuredPosts} />
+      <p class="more-link">
+        <a href="/writing">View all posts &rarr;</a>
+      </p>
+    </section>
+  )}
+
+  <section class="connect">
+    <h2>Connect</h2>
+    <p>
+      Find me on <a href="https://github.com/bnapier" target="_blank" rel="noopener noreferrer">GitHub</a>,
+      <a href="https://twitter.com/bnapier" target="_blank" rel="noopener noreferrer">Twitter</a>, and
+      <a href="https://linkedin.com/in/barrynapier" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+      Subscribe via <a href="/rss.xml">RSS</a>.
+    </p>
+  </section>
 </Base>
+
+<style>
+  .intro {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .intro h1 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .inline-nav {
+    display: flex;
+    gap: var(--spacing-lg);
+  }
+
+  .inline-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .inline-nav a:hover {
+    color: var(--color-accent);
+  }
+
+  .featured {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .featured h2 {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .more-link {
+    margin-top: var(--spacing-md);
+  }
+
+  .more-link a {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  .more-link a:hover {
+    color: var(--color-accent);
+  }
+
+  .connect {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .connect h2 {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .connect p {
+    color: var(--color-text-muted);
+  }
+
+  .connect a {
+    color: var(--color-text);
+  }
+
+  .connect a:hover {
+    color: var(--color-accent);
+  }
+</style>

@@ -3,7 +3,8 @@ import { test, expect } from '@playwright/test';
 test.describe('Site Navigation', () => {
   test('homepage loads and displays name', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('h1')).toContainText('Barry Napier');
+    // Name appears in header site-name, not as h1 to avoid duplication
+    await expect(page.locator('.site-name')).toContainText('Barry Napier');
   });
 
   test('can navigate from homepage to writing page', async ({ page }) => {

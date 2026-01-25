@@ -47,6 +47,56 @@ bnapier.dev/
 └── package.json
 ```
 
+## Creating Content
+
+Add new blog posts to `src/content/writing/` as Markdown files with frontmatter:
+
+```markdown
+---
+title: "Your Post Title"
+date: 2025-01-25
+description: "A brief description for SEO and post lists."
+featured: false
+draft: false
+---
+
+Your content here...
+```
+
+**Frontmatter fields:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Post title |
+| `date` | date | Yes | Publication date (YYYY-MM-DD) |
+| `description` | string | No | Brief description for SEO |
+| `featured` | boolean | No | Show on homepage (default: false) |
+| `draft` | boolean | No | Hide from production (default: false) |
+
+## Testing
+
+```bash
+# Run unit and integration tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run E2E tests (requires build first)
+npm run build && npm run test:e2e
+```
+
+## Deployment
+
+The site is configured for static deployment on [Vercel](https://vercel.com).
+
+1. Push code to GitHub
+2. Connect the repository to Vercel
+3. Vercel auto-detects Astro and configures the build
+4. Configure custom domain in Vercel dashboard
+
+**Environment:** No environment variables required for static site.
+
 ## Development
 
 See [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) for detailed implementation strategy.

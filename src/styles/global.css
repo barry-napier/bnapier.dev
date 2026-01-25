@@ -69,7 +69,10 @@
   --max-width-content: 640px;
   --max-width-wide: 800px;
 
-  /* Transitions */
+  /* Transitions
+     Philosophy: All UI animations under 300ms, ease-out curves.
+     Micro-interactions use scale(0.97) on :active for tactile feedback.
+     Always respect prefers-reduced-motion. */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -164,7 +167,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   Links - Clean underlined style
+   Links - Clean underlined style with micro-interactions
    -------------------------------------------------------------------------- */
 a {
   color: var(--color-text);
@@ -173,12 +176,18 @@ a {
   text-underline-offset: 3px;
   transition:
     color var(--transition-fast),
-    text-decoration-color var(--transition-fast);
+    text-decoration-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 a:hover {
   color: var(--color-text);
   text-decoration-color: var(--color-text);
+}
+
+/* Subtle scale feedback on press - Emil Kowalski principle */
+a:active {
+  transform: scale(0.97);
 }
 
 /* --------------------------------------------------------------------------
@@ -352,6 +361,21 @@ pre.shiki {
 }
 
 /* --------------------------------------------------------------------------
+   Button Base Styles with Micro-interactions
+   -------------------------------------------------------------------------- */
+button {
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* Subtle scale feedback on press - Emil Kowalski principle */
+button:active {
+  transform: scale(0.97);
+}
+
+/* --------------------------------------------------------------------------
    Focus States (Accessibility)
    -------------------------------------------------------------------------- */
 a:focus-visible,
@@ -461,7 +485,7 @@ button:focus-visible {
   animation-delay: 200ms;
 }
 
-/* Reduce motion for accessibility */
+/* Reduce motion for accessibility - Emil Kowalski principle */
 @media (prefers-reduced-motion: reduce) {
   .animate-in,
   .animate-in-1,
@@ -471,6 +495,20 @@ button:focus-visible {
   .animate-in-5 {
     animation: none;
     opacity: 1;
+    transform: none;
+  }
+
+  /* Disable micro-interaction transforms */
+  a,
+  button,
+  .hover-lift {
+    transition: none;
+  }
+
+  a:active,
+  button:active,
+  .hover-lift:hover,
+  .hover-lift:active {
     transform: none;
   }
 }
@@ -486,6 +524,10 @@ button:focus-visible {
 
 .hover-lift:hover {
   transform: translateY(-2px);
+}
+
+.hover-lift:active {
+  transform: scale(0.97);
 }
 
 /* Glow effect removed for minimal aesthetic */

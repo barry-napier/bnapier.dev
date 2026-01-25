@@ -89,11 +89,13 @@ test.describe('Design System', () => {
     await expect(themeToggle).toHaveAttribute('aria-label', 'Toggle dark mode');
   });
 
-  test('accent line decorative element renders on h1', async ({ page }) => {
-    await page.goto('/');
+  test('page headings render correctly', async ({ page }) => {
+    // Check that page headings render on content pages
+    await page.goto('/writing');
 
-    const accentLine = page.locator('h1.accent-line');
-    await expect(accentLine).toBeVisible();
+    const heading = page.locator('h1');
+    await expect(heading).toBeVisible();
+    await expect(heading).toContainText('Writing');
   });
 });
 
@@ -104,7 +106,7 @@ test.describe('Accessibility', () => {
     await page.goto('/');
 
     // Page should still load and function
-    await expect(page.locator('h1')).toContainText('Barry Napier');
+    await expect(page.locator('.site-name')).toContainText('Barry Napier');
 
     // Check that content is visible (animations should be disabled)
     const header = page.locator('header');

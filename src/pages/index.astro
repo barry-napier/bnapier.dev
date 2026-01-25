@@ -20,7 +20,6 @@ const featuredPosts = (
 
 <Base>
   <section class="intro">
-    <h1 class="accent-line">Barry Napier</h1>
     <p>
       I'm a software engineer passionate about building great products and exploring the
       intersection of technology and human experience. I write about software development, AI, and
@@ -65,16 +64,12 @@ const featuredPosts = (
     margin-bottom: var(--spacing-2xl);
   }
 
-  .intro h1 {
-    margin-bottom: var(--spacing-lg);
-    font-size: var(--text-4xl);
-  }
-
   .intro p {
     color: var(--color-text-muted);
     margin-bottom: var(--spacing-lg);
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     line-height: var(--leading-relaxed);
+    max-width: 28rem;
   }
 
   .inline-nav {
@@ -84,36 +79,15 @@ const featuredPosts = (
 
   .inline-nav a {
     color: var(--color-text);
-    text-decoration: none;
     font-weight: 500;
-    padding: var(--spacing-xs) 0;
-    position: relative;
-    transition:
-      color var(--transition-fast),
-      transform var(--transition-fast);
-  }
-
-  .inline-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(
-      to right in oklch,
-      var(--color-accent),
-      var(--color-accent-secondary)
-    );
-    transition: width var(--transition-normal);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition-fast);
   }
 
   .inline-nav a:hover {
-    color: var(--color-accent);
-  }
-
-  .inline-nav a:hover::after {
-    width: 100%;
+    text-decoration-color: var(--color-text);
   }
 
   .featured {
@@ -123,6 +97,11 @@ const featuredPosts = (
   .featured h2 {
     margin-bottom: var(--spacing-lg);
     margin-top: 0;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
   }
 
   .more-link {
@@ -132,16 +111,14 @@ const featuredPosts = (
   .more-link a {
     color: var(--color-text-muted);
     font-size: var(--text-sm);
-    text-decoration: none;
-    transition:
-      color var(--transition-fast),
-      transform var(--transition-fast);
-    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition-fast);
   }
 
   .more-link a:hover {
-    color: var(--color-accent);
-    transform: translateX(4px);
+    text-decoration-color: var(--color-text-muted);
   }
 
   .connect {
@@ -151,6 +128,11 @@ const featuredPosts = (
   .connect h2 {
     margin-bottom: var(--spacing-md);
     margin-top: 0;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
   }
 
   .connect p {
@@ -159,21 +141,13 @@ const featuredPosts = (
 
   .connect a {
     color: var(--color-text);
-    transition: color var(--transition-fast);
+    text-decoration: underline;
+    text-decoration-color: var(--color-border);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition-fast);
   }
 
   .connect a:hover {
-    color: var(--color-accent);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .inline-nav a:hover,
-    .more-link a:hover {
-      transform: none;
-    }
-
-    .inline-nav a::after {
-      transition: none;
-    }
+    text-decoration-color: var(--color-text);
   }
 </style>

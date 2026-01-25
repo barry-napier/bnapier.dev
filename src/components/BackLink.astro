@@ -42,9 +42,10 @@ const { href, label = 'Back' } = Astro.props;
     font-size: var(--text-sm);
     text-decoration: none;
     margin-bottom: var(--spacing-xl);
+    transition: color var(--transition-fast);
   }
 
   .back-link:hover {
-    color: var(--color-accent);
+    color: var(--color-text);
   }
 </style>

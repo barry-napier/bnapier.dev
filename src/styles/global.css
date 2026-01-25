@@ -5,26 +5,39 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   Tailwind v4 Source Detection
+   -------------------------------------------------------------------------- */
+@source '../content/**/*.md';
+@source '../content/**/*.mdx';
+
+/* --------------------------------------------------------------------------
+   Tailwind v4 Custom Variant for Dark Mode
+   -------------------------------------------------------------------------- */
+@custom-variant dark (&:is(.dark *));
+
+/* --------------------------------------------------------------------------
    Custom Properties via Tailwind 4.x @theme
    -------------------------------------------------------------------------- */
 @theme {
-  /* Colors - Light Mode (default) */
-  --color-text: #1a1a1a;
-  --color-text-muted: #6b6b6b;
-  --color-background: #ffffff;
-  --color-background-subtle: #f5f5f5;
-  --color-accent: #0066cc;
-  --color-accent-hover: #0052a3;
-  --color-border: #e5e5e5;
+  /* Colors - Light Mode (default) - OKLCH for perceptual uniformity */
+  --color-text: oklch(0.15 0.01 250);
+  --color-text-muted: oklch(0.45 0.01 250);
+  --color-background: oklch(0.995 0 0);
+  --color-background-subtle: oklch(0.97 0.005 250);
+  --color-accent: oklch(0.55 0.2 250);
+  --color-accent-hover: oklch(0.45 0.22 250);
+  --color-accent-subtle: oklch(0.95 0.03 250);
+  --color-border: oklch(0.92 0.005 250);
 
-  /* Typography - System Font Stack */
+  /* Secondary accent for visual interest */
+  --color-accent-secondary: oklch(0.65 0.15 30);
+
+  /* Typography - Distinctive Display + Clean Body */
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-sans:
-    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Font Sizes */
   --text-xs: 0.75rem;
@@ -34,9 +47,10 @@
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
 
   /* Line Heights */
-  --leading-tight: 1.25;
+  --leading-tight: 1.2;
   --leading-normal: 1.5;
   --leading-relaxed: 1.625;
 
@@ -54,21 +68,33 @@
   --max-width-wide: 800px;
 
   /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-normal: 200ms ease;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Animation Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+
+  /* Easing Functions */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* --------------------------------------------------------------------------
-   Dark Mode Overrides
+   Dark Mode Overrides - OKLCH for perceptual uniformity
    -------------------------------------------------------------------------- */
 .dark {
-  --color-text: #e5e5e5;
-  --color-text-muted: #a3a3a3;
-  --color-background: #0a0a0a;
-  --color-background-subtle: #171717;
-  --color-accent: #60a5fa;
-  --color-accent-hover: #93c5fd;
-  --color-border: #262626;
+  --color-text: oklch(0.9 0.01 250);
+  --color-text-muted: oklch(0.65 0.02 250);
+  --color-background: oklch(0.1 0.01 250);
+  --color-background-subtle: oklch(0.15 0.015 250);
+  --color-accent: oklch(0.7 0.15 250);
+  --color-accent-hover: oklch(0.8 0.12 250);
+  --color-accent-subtle: oklch(0.2 0.04 250);
+  --color-border: oklch(0.22 0.01 250);
+  --color-accent-secondary: oklch(0.7 0.12 30);
 }
 
 /* --------------------------------------------------------------------------
@@ -100,7 +126,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Typography
+   Typography - Display font for headings
    -------------------------------------------------------------------------- */
 h1,
 h2,
@@ -108,24 +134,25 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 400;
   line-height: var(--leading-tight);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: var(--text-2xl);
+  font-size: var(--text-3xl);
   margin-bottom: var(--spacing-lg);
 }
 
 h2 {
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
   margin-top: var(--spacing-2xl);
   margin-bottom: var(--spacing-md);
 }
 
 h3 {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   margin-top: var(--spacing-xl);
   margin-bottom: var(--spacing-sm);
 }
@@ -338,4 +365,167 @@ button:focus-visible {
 .dark ::selection {
   background-color: var(--color-accent);
   color: var(--color-background);
+}
+
+/* --------------------------------------------------------------------------
+   Animation Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Visual Texture - Subtle noise overlay
+   -------------------------------------------------------------------------- */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.015;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.dark body::before {
+  opacity: 0.03;
+}
+
+/* --------------------------------------------------------------------------
+   Stagger Animation Classes for Page Load
+   -------------------------------------------------------------------------- */
+.animate-in {
+  animation: fade-in-up var(--duration-slow) var(--ease-out) both;
+}
+
+.animate-in-1 {
+  animation: fade-in-up var(--duration-slow) var(--ease-out) both;
+  animation-delay: 0ms;
+}
+
+.animate-in-2 {
+  animation: fade-in-up var(--duration-slow) var(--ease-out) both;
+  animation-delay: 50ms;
+}
+
+.animate-in-3 {
+  animation: fade-in-up var(--duration-slow) var(--ease-out) both;
+  animation-delay: 100ms;
+}
+
+.animate-in-4 {
+  animation: fade-in-up var(--duration-slow) var(--ease-out) both;
+  animation-delay: 150ms;
+}
+
+.animate-in-5 {
+  animation: fade-in-up var(--duration-slow) var(--ease-out) both;
+  animation-delay: 200ms;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-in,
+  .animate-in-1,
+  .animate-in-2,
+  .animate-in-3,
+  .animate-in-4,
+  .animate-in-5 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hover Micro-interactions
+   -------------------------------------------------------------------------- */
+.hover-lift {
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.hover-glow {
+  transition: box-shadow var(--transition-normal);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px -5px var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Accent Decorative Line
+   -------------------------------------------------------------------------- */
+.accent-line {
+  position: relative;
+}
+
+.accent-line::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 2rem;
+  height: 2px;
+  background: linear-gradient(
+    to right in oklch,
+    var(--color-accent),
+    var(--color-accent-secondary)
+  );
+  border-radius: 1px;
 }

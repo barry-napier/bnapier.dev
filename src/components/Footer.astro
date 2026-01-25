@@ -1,0 +1,50 @@
+---
+/**
+ * Footer Component - Site footer with copyright and social links
+ *
+ * Contains:
+ * - Copyright with current year
+ * - Social links (GitHub, Twitter/X, LinkedIn)
+ * - RSS link
+ */
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <p>&copy; {currentYear} Barry Napier</p>
+  <nav class="footer-links">
+    <a href="https://github.com/bnapier" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://twitter.com/bnapier" target="_blank" rel="noopener noreferrer">Twitter</a>
+    <a href="https://linkedin.com/in/barrynapier" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="/rss.xml">RSS</a>
+  </nav>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--spacing-3xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .footer p {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-accent);
+  }
+</style>

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 // These imports will fail until utils.ts is implemented (TDD red phase)
 // import { formatDate, formatDateShort, slugify, getReadingTime } from './utils';
 

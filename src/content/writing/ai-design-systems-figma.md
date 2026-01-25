@@ -1,5 +1,5 @@
 ---
-title: "Do We Still Need Figma?"
+title: 'Do We Still Need Figma?'
 date: 2025-01-25
 description: "AI tools don't generate mockups—they eliminate the need for mockups entirely. As high-fidelity prototypes emerge directly from code, the traditional design workflow faces an existential question."
 featured: true
@@ -16,7 +16,7 @@ This isn't a thought experiment anymore. It's happening.
 
 Design systems were supposed to solve this. We'd maintain a single source of truth—design tokens, component libraries, documentation—and both designers and developers would work from it. In practice, we ended up with two sources of truth: the Figma library and the code implementation. They'd drift apart. Someone would update one and forget the other. Handoff became an exercise in translation, and translation always loses something.
 
-AI collapses this. When you can generate production-ready React components from a description, there's no handoff because there's nothing to hand off. The code *is* the design. The prototype *is* the product.
+AI collapses this. When you can generate production-ready React components from a description, there's no handoff because there's nothing to hand off. The code _is_ the design. The prototype _is_ the product.
 
 ## What AI Actually Does to Design
 
@@ -56,11 +56,11 @@ The pattern emerging at companies like Linear, Vercel, Cursor, and xAI is the **
 
 I'm not here to tell you Figma is dead. That's reductive, and the reality is more nuanced.
 
-Figma still wins at exploration. When you're early in the process and need to think through twenty variations quickly, a visual tool with infinite canvas is hard to beat. AI is fast at generating *a* solution, but exploring possibility space still benefits from the immediacy of visual manipulation.
+Figma still wins at exploration. When you're early in the process and need to think through twenty variations quickly, a visual tool with infinite canvas is hard to beat. AI is fast at generating _a_ solution, but exploring possibility space still benefits from the immediacy of visual manipulation.
 
 Collaboration is another strength. Design systems at scale—like Grammarly's, which saves teams 25% of their work week—depend on shared visual language and review processes that Figma handles well.
 
-And there's the judgment question. AI boosts efficiency, but fewer than half of designers say it makes them *better* at their jobs. Efficiency is useful, but good design still relies on judgment, taste, and context. AI doesn't have taste. It has patterns.
+And there's the judgment question. AI boosts efficiency, but fewer than half of designers say it makes them _better_ at their jobs. Efficiency is useful, but good design still relies on judgment, taste, and context. AI doesn't have taste. It has patterns.
 
 Dylan Field, Figma's CEO, frames it this way: "In a world where software is growing exponentially, design is the differentiator." As execution becomes commoditized, strategic design decisions matter more, not less.
 
@@ -78,7 +78,7 @@ The future isn't Figma vs. code. It's tokens as the source of truth, with both v
 
 "Do we still need Figma?" is the wrong question. The better question: **How does our workflow change when execution is cheap?**
 
-When generating a polished UI takes minutes instead of days, the bottleneck shifts. Exploration becomes cheaper. Iteration becomes faster. But someone still needs to decide *what to build* and *why it matters*.
+When generating a polished UI takes minutes instead of days, the bottleneck shifts. Exploration becomes cheaper. Iteration becomes faster. But someone still needs to decide _what to build_ and _why it matters_.
 
 The value is moving up the stack. Execution is losing its monopoly on worth. Variations are infinite, and polished UI is no longer rare. What's rare is knowing which variation is right.
 

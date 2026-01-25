@@ -1,7 +1,7 @@
 ---
-title: "Research, Plan, Implement: A Framework for Technical Decisions"
+title: 'Research, Plan, Implement: A Framework for Technical Decisions'
 date: 2025-01-10
-description: "A systematic approach to making technical decisions that balances thoroughness with pragmatism."
+description: 'A systematic approach to making technical decisions that balances thoroughness with pragmatism.'
 featured: false
 draft: false
 ---
@@ -34,11 +34,11 @@ Cast a wide net initially. Look at:
 
 Every technical choice involves trade-offs. Make them explicit:
 
-| Option | Pros | Cons | Risk Level |
-|--------|------|------|------------|
-| Option A | Fast to implement | Limited scalability | Low |
-| Option B | Scales well | Learning curve | Medium |
-| Option C | Industry standard | Over-engineered for our needs | Medium |
+| Option   | Pros              | Cons                          | Risk Level |
+| -------- | ----------------- | ----------------------------- | ---------- |
+| Option A | Fast to implement | Limited scalability           | Low        |
+| Option B | Scales well       | Learning curve                | Medium     |
+| Option C | Industry standard | Over-engineered for our needs | Medium     |
 
 ### Prototype When Uncertain
 

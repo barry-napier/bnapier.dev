@@ -14,11 +14,15 @@ import PostList from '@/components/PostList.astro';
 import { getCollection } from 'astro:content';
 
 // Get all published posts, sorted by date (newest first)
-const posts = (await getCollection('writing', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 
-<Base title="Writing" description="Thoughts on software development, AI, and the lessons learned along the way.">
+<Base
+  title="Writing"
+  description="Thoughts on software development, AI, and the lessons learned along the way."
+>
   <BackLink href="/" label="Home" />
 
   <header class="page-header">
@@ -28,11 +32,13 @@ const posts = (await getCollection('writing', ({ data }) => !data.draft))
     </p>
   </header>
 
-  {posts.length > 0 ? (
-    <PostList posts={posts} showDescription />
-  ) : (
-    <p class="no-posts">No posts yet. Check back soon!</p>
-  )}
+  {
+    posts.length > 0 ? (
+      <PostList posts={posts} showDescription />
+    ) : (
+      <p class="no-posts">No posts yet. Check back soon!</p>
+    )
+  }
 </Base>
 
 <style>

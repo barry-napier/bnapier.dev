@@ -34,34 +34,39 @@ const projects: Project[] = [
 
   <header class="page-header">
     <h1>Projects</h1>
-    <p class="description">
-      Things I've built and worked on.
-    </p>
+    <p class="description">Things I've built and worked on.</p>
   </header>
 
   <ul class="project-list">
-    {projects.map((project) => (
-      <li class="project">
-        <h2 class="project-name">
-          {project.link ? (
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-              {project.name}
-            </a>
-          ) : (
-            project.name
-          )}
-        </h2>
-        <p class="project-description">{project.description}</p>
-        <div class="project-meta">
-          <span class="tech-stack">{project.tech.join(' · ')}</span>
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" class="github-link">
-              GitHub
-            </a>
-          )}
-        </div>
-      </li>
-    ))}
+    {
+      projects.map((project) => (
+        <li class="project">
+          <h2 class="project-name">
+            {project.link ? (
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                {project.name}
+              </a>
+            ) : (
+              project.name
+            )}
+          </h2>
+          <p class="project-description">{project.description}</p>
+          <div class="project-meta">
+            <span class="tech-stack">{project.tech.join(' · ')}</span>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="github-link"
+              >
+                GitHub
+              </a>
+            )}
+          </div>
+        </li>
+      ))
+    }
   </ul>
 </Base>
 

@@ -6,9 +6,7 @@ import sanitizeHtml from 'sanitize-html';
 export async function GET(context: APIContext) {
   const posts = await getCollection('writing', ({ data }) => !data.draft);
 
-  const sortedPosts = posts.sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-  );
+  const sortedPosts = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   return rss({
     title: 'Barry Napier',

@@ -1,0 +1,7 @@
+# Default owner
+* @barry-napier
+
+# Critical paths
+/.github/ @barry-napier
+/src/ @barry-napier
+*.config.* @barry-napier

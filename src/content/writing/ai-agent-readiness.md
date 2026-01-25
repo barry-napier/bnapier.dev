@@ -1,5 +1,5 @@
 ---
-title: "Is Your Codebase Ready for AI Agents?"
+title: 'Is Your Codebase Ready for AI Agents?'
 date: 2025-01-15
 description: "A comprehensive framework for evaluating and improving your codebase's readiness for AI agent-assisted development, with detailed criteria across 9 pillars."
 featured: true
@@ -14,12 +14,12 @@ This article presents a comprehensive Agent Readiness Assessment framework—a s
 
 The framework operates across four evaluation phases, examining your codebase against criteria organized into maturity levels:
 
-| Level | Name | Description |
-|-------|------|-------------|
-| 1 | Functional | Basic tooling exists—linting, types, tests, README |
-| 2 | Documented | AGENTS.md, pre-commit hooks, environment templates, issue templates |
-| 3 | Standardized | Strict mode, CI/CD, coverage thresholds, CODEOWNERS, E2E tests |
-| 4 | Optimized | Tracing, health checks, SAST, parallel tests, feature flags |
+| Level | Name         | Description                                                         |
+| ----- | ------------ | ------------------------------------------------------------------- |
+| 1     | Functional   | Basic tooling exists—linting, types, tests, README                  |
+| 2     | Documented   | AGENTS.md, pre-commit hooks, environment templates, issue templates |
+| 3     | Standardized | Strict mode, CI/CD, coverage thresholds, CODEOWNERS, E2E tests      |
+| 4     | Optimized    | Tracing, health checks, SAST, parallel tests, feature flags         |
 
 Each level builds on the previous. You can't achieve Level 3 without passing at least 80% of Level 2 criteria. This gating ensures foundational practices are in place before advancing.
 
@@ -30,15 +30,18 @@ Each level builds on the previous. You can't achieve Level 3 without passing at 
 Consistent code style isn't just aesthetics—it's how AI agents learn to write code that fits your codebase.
 
 **Level 1 Criteria:**
+
 - **L1-SV-01: Linter Configured** — ESLint, Biome, Pylint, RuboCop, or golangci-lint
 - **L1-SV-02: Type Checker Enabled** — TypeScript with strict mode, mypy, or Pyright
 - **L1-SV-03: Code Formatter Configured** — Prettier, Biome, Black, or rustfmt
 
 **Level 2 Criteria:**
+
 - **L2-SV-04: Pre-commit Hooks** — Husky, pre-commit, or lefthook configured
 - **L2-SV-05: Lint Command in Scripts** — `npm run lint` or equivalent documented
 
 **Level 3 Criteria:**
+
 - **L3-SV-06: Strict TypeScript Mode** — All strict flags enabled: `strict`, `noImplicitAny`, `strictNullChecks`, `noImplicitReturns`
 - **L3-SV-07: Framework-Specific Strict Mode** — Angular `strictTemplates`, React strict mode, etc.
 - **L3-SV-08: ESLint Extends Recommended** — Using `eslint:recommended` and framework-specific configs
@@ -63,19 +66,23 @@ Consistent code style isn't just aesthetics—it's how AI agents learn to write 
 A predictable build system is essential for agents to verify their changes work correctly.
 
 **Level 1 Criteria:**
+
 - **L1-BS-01: Build Command Exists** — `npm run build`, `make build`, or implicit `cargo build`
 - **L1-BS-02: Dependencies Pinned** — Lockfile present (package-lock.json, yarn.lock, pnpm-lock.yaml)
 
 **Level 2 Criteria:**
+
 - **L2-BS-03: Build Documented** — README or AGENTS.md explains how to build
 - **L2-BS-04: Dev Command Exists** — `scripts.dev`, `scripts.start`, or `scripts.serve`
 
 **Level 3 Criteria:**
+
 - **L3-BS-05: CI/CD Configured** — GitHub Actions, GitLab CI, Jenkins, or equivalent
 - **L3-BS-06: Build Runs in CI** — Automated build verification on every commit
 - **L3-BS-07: Cache Enabled in CI** — Dependency caching for faster builds
 
 **Level 4 Criteria:**
+
 - **L4-BS-08: Build Budgets Configured** — Size limits and performance budgets enforced
 
 ### Pillar 3: Testing
@@ -83,15 +90,18 @@ A predictable build system is essential for agents to verify their changes work 
 Tests are how agents verify their changes don't break existing functionality. Without them, agents are flying blind.
 
 **Level 1 Criteria:**
+
 - **L1-TS-01: Unit Tests Exist** — At least 5 test files (`.spec.ts`, `.test.ts`, `_test.go`, etc.)
 - **L1-TS-02: Test Runner Configured** — Jest, Vitest, Karma, pytest, or equivalent
 - **L1-TS-03: Test Command Exists** — `npm test` or equivalent documented
 
 **Level 2 Criteria:**
+
 - **L2-TS-04: Tests Documented** — README explains how to run tests
 - **L2-TS-05: Test Watch Available** — `test:watch` script for rapid feedback
 
 **Level 3 Criteria:**
+
 - **L3-TS-06: Integration Tests Exist** — Tests in `integration/` or `e2e/` directories
 - **L3-TS-07: E2E Tests Configured** — Playwright or Cypress with test files
 - **L3-TS-08: Coverage Configured** — Coverage reporting enabled
@@ -99,6 +109,7 @@ Tests are how agents verify their changes don't break existing functionality. Wi
 - **L3-TS-10: Tests Run in CI** — Automated test execution on every PR
 
 **Level 4 Criteria:**
+
 - **L4-TS-11: Parallel Tests Enabled** — Tests run concurrently for faster feedback
 
 ### Pillar 4: Documentation
@@ -106,15 +117,18 @@ Tests are how agents verify their changes don't break existing functionality. Wi
 Documentation serves dual audiences: human developers and AI agents. Both need clear, structured information.
 
 **Level 1 Criteria:**
+
 - **L1-DC-01: README Exists** — README.md present
 - **L1-DC-02: README Has Content** — More than 100 characters of useful information
 
 **Level 2 Criteria:**
+
 - **L2-DC-03: AGENTS.md Exists** — AI agent-specific documentation
 - **L2-DC-04: CONTRIBUTING.md Exists** — Contribution guidelines documented
 - **L2-DC-05: Installation Documented** — Getting started instructions present
 
 **Level 3 Criteria:**
+
 - **L3-DC-06: AGENTS.md Has Commands** — Build, test, and lint commands in code blocks
 - **L3-DC-07: AGENTS.md Has Architecture** — Project structure documented
 - **L3-DC-08: ADRs Exist** — Architecture Decision Records in `docs/adr/`
@@ -126,21 +140,25 @@ The AGENTS.md file is crucial for AI agents. Here's a minimal template:
 # AGENTS.md
 
 ## Build
+
 \`\`\`bash
 npm run build
 \`\`\`
 
 ## Test
+
 \`\`\`bash
 npm test
 \`\`\`
 
 ## Lint
+
 \`\`\`bash
 npm run lint
 \`\`\`
 
 ## Architecture
+
 - `/src/components` - React components
 - `/src/lib` - Utility functions
 - `/src/pages` - Route handlers
@@ -151,13 +169,16 @@ npm run lint
 Reproducible environments mean agents can set up and work in your codebase reliably.
 
 **Level 1 Criteria:**
+
 - **L1-DE-01: Runtime Version Specified** — `.nvmrc`, `.node-version`, `.tool-versions`, or `engines` field
 
 **Level 2 Criteria:**
+
 - **L2-DE-02: Environment Template Exists** — `.env.example` with required variables
 - **L2-DE-03: IDE Settings Shared** — `.vscode/settings.json` or `.editorconfig`
 
 **Level 3 Criteria:**
+
 - **L3-DE-04: Devcontainer Configured** — `.devcontainer/devcontainer.json` present
 - **L3-DE-05: Devcontainer Has Setup** — `postCreateCommand` for automatic setup
 - **L3-DE-06: Docker Support** — Dockerfile or docker-compose.yml present
@@ -168,16 +189,20 @@ Reproducible environments mean agents can set up and work in your codebase relia
 When things go wrong, agents need visibility into what happened and why.
 
 **Level 1 Criteria:**
+
 - **L1-DO-01: Logging Exists** — Basic console logging or logging library used
 
 **Level 2 Criteria:**
+
 - **L2-DO-02: Logging Library Used** — Pino, Winston, Bunyan, or equivalent
 
 **Level 3 Criteria:**
+
 - **L3-DO-03: Structured Logging** — JSON-formatted log output
 - **L3-DO-04: Error Tracking Integration** — Sentry, Bugsnag, or Rollbar configured
 
 **Level 4 Criteria:**
+
 - **L4-DO-05: Distributed Tracing** — OpenTelemetry or equivalent
 - **L4-DO-06: Health Endpoints** — `/health` or `/ready` endpoints present
 
@@ -186,20 +211,24 @@ When things go wrong, agents need visibility into what happened and why.
 Security practices protect against both human and agent-introduced vulnerabilities.
 
 **Level 1 Criteria:**
+
 - **L1-SC-01: No Secrets in Code** — No hardcoded API keys, AWS keys, or private keys
 - **L1-SC-02: Gitignore Configured** — `.env` and `node_modules` excluded
 
 **Level 2 Criteria:**
+
 - **L2-SC-03: SECURITY.md Exists** — Security policy documented
 - **L2-SC-04: License File Exists** — LICENSE file present
 
 **Level 3 Criteria:**
+
 - **L3-SC-05: CODEOWNERS Defined** — CODEOWNERS file present
 - **L3-SC-06: CODEOWNERS Covers Critical Paths** — Source and CI files protected
 - **L3-SC-07: Secret Scanning Configured** — Gitleaks, TruffleHog, or CI scanning
 - **L3-SC-08: Dependency Scanning Configured** — Dependabot, Renovate, or Snyk
 
 **Level 4 Criteria:**
+
 - **L4-SC-09: SAST Enabled** — CodeQL, SonarQube, or Semgrep in CI
 - **L4-SC-10: Container Scanning** — Trivy, Grype, or Snyk container scanning
 
@@ -208,11 +237,13 @@ Security practices protect against both human and agent-introduced vulnerabiliti
 Structured task management helps agents understand what work needs to be done and how to approach it.
 
 **Level 2 Criteria:**
+
 - **L2-TD-01: Issue Templates Exist** — `.github/ISSUE_TEMPLATE/` configured
 - **L2-TD-02: Bug Report Template** — Structured bug reporting
 - **L2-TD-03: Feature Request Template** — Structured feature requests
 
 **Level 3 Criteria:**
+
 - **L3-TD-04: PR Template Exists** — `.github/PULL_REQUEST_TEMPLATE.md`
 - **L3-TD-05: PR Template Has Checklist** — Checkbox items for verification
 
@@ -221,10 +252,12 @@ Structured task management helps agents understand what work needs to be done an
 Advanced teams enable controlled experimentation and data-driven decisions.
 
 **Level 3 Criteria:**
+
 - **L3-PE-01: Analytics Instrumented** — Segment, Amplitude, GA4, Mixpanel, or PostHog
 - **L3-PE-02: Feature Flags Available** — LaunchDarkly, Unleash, Split, or Flagsmith
 
 **Level 4 Criteria:**
+
 - **L4-PE-03: A/B Testing Framework** — Experiment framework configured
 
 ## Scoring Methodology
@@ -238,6 +271,7 @@ Level N Score = (PASS count / (PASS + FAIL count)) × 100
 Framework-specific criteria (like Angular strict templates) are marked N/A for other project types and excluded from calculations.
 
 **Gating rules:**
+
 - Level 2 unlocks when Level 1 ≥ 80%
 - Level 3 unlocks when Level 2 ≥ 80%
 - Level 4 unlocks when Level 3 ≥ 80%
@@ -286,6 +320,7 @@ When you run a full assessment, generate a structured report like this:
 ## Quick Wins for Each Level
 
 ### Reaching Level 1 (Functional)
+
 1. Add ESLint with a recommended config
 2. Enable TypeScript strict mode
 3. Configure Prettier for formatting
@@ -293,6 +328,7 @@ When you run a full assessment, generate a structured report like this:
 5. Create a README with basic instructions
 
 ### Reaching Level 2 (Documented)
+
 1. Create AGENTS.md with build/test/lint commands
 2. Set up Husky for pre-commit hooks
 3. Add `.env.example` for environment variables
@@ -300,6 +336,7 @@ When you run a full assessment, generate a structured report like this:
 5. Document installation steps in README
 
 ### Reaching Level 3 (Standardized)
+
 1. Configure all TypeScript strict flags
 2. Set up GitHub Actions for CI/CD
 3. Add E2E tests with Playwright or Cypress
@@ -307,6 +344,7 @@ When you run a full assessment, generate a structured report like this:
 5. Create CODEOWNERS for critical paths
 
 ### Reaching Level 4 (Optimized)
+
 1. Add OpenTelemetry for distributed tracing
 2. Implement `/health` endpoints
 3. Enable CodeQL or SonarQube scanning
@@ -323,6 +361,7 @@ To evaluate your repository, examine each criterion methodically:
 4. **Phase 4: Generate Report** — Output structured findings and recommendations
 
 For each criterion, provide specific evidence:
+
 - PASS: "Found `.eslintrc.js` at project root"
 - FAIL: "No coverage threshold configured in jest.config.js"
 - N/A: "Angular-specific criterion, project is Node/Express"

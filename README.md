@@ -53,9 +53,9 @@ Add new blog posts to `src/content/writing/` as Markdown files with frontmatter:
 
 ```markdown
 ---
-title: "Your Post Title"
+title: 'Your Post Title'
 date: 2025-01-25
-description: "A brief description for SEO and post lists."
+description: 'A brief description for SEO and post lists.'
 featured: false
 draft: false
 ---
@@ -65,13 +65,13 @@ Your content here...
 
 **Frontmatter fields:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `title` | string | Yes | Post title |
-| `date` | date | Yes | Publication date (YYYY-MM-DD) |
-| `description` | string | No | Brief description for SEO |
-| `featured` | boolean | No | Show on homepage (default: false) |
-| `draft` | boolean | No | Hide from production (default: false) |
+| Field         | Type    | Required | Description                           |
+| ------------- | ------- | -------- | ------------------------------------- |
+| `title`       | string  | Yes      | Post title                            |
+| `date`        | date    | Yes      | Publication date (YYYY-MM-DD)         |
+| `description` | string  | No       | Brief description for SEO             |
+| `featured`    | boolean | No       | Show on homepage (default: false)     |
+| `draft`       | boolean | No       | Hide from production (default: false) |
 
 ## Testing
 

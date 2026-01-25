@@ -1,5 +1,6 @@
 ---
-// Phase 1: Minimal placeholder - will be replaced in Phase 6
+// Phase 2: Now includes global styles
+import '@/styles/global.css';
 ---
 
 <!DOCTYPE html>
@@ -9,6 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Barry Napier</title>
     <meta name="description" content="Personal website and blog for Barry Napier" />
+    <!-- Theme initialization script - prevents flash of incorrect theme -->
+    <script is:inline>
+      const getTheme = () => {
+        const stored = localStorage.getItem('theme');
+        if (stored) return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+      const theme = getTheme();
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    </script>
   </head>
   <body>
     <main>

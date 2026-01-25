@@ -16,17 +16,19 @@
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "astro": "^5.2.0",
-    "@astrojs/sitemap": "^3.2.0",
     "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "astro": "^5.2.0",
     "sanitize-html": "^2.13.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.6",
     "@playwright/test": "^1.50.0",
-    "@tailwindcss/vite": "^4.0.0",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/sanitize-html": "^2.13.0",
     "@vitest/coverage-v8": "^2.1.0",
     "happy-dom": "^16.0.0",
+    "postcss": "^8.5.6",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0",
     "vitest": "^2.1.0"

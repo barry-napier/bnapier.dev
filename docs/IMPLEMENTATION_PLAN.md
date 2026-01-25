@@ -15,19 +15,19 @@ This plan outlines the complete implementation of a minimal, text-focused person
 
 ## Phase Overview
 
-| Phase | Description | Steps | Complexity |
-|-------|-------------|-------|------------|
-| 1 | Project Initialization | 4 | Low-Medium |
-| 1.5 | **Testing Infrastructure** | 3 | Medium |
-| 2 | Design System & Styling | 2 | Medium |
-| 3 | Content Collections | 2 | Medium |
-| 4 | Layout System | 2 | Medium |
-| 5 | Components | 4 | Low-Medium |
-| 6 | Pages | 6 | Low-Medium |
-| 7 | RSS & Utilities | 2 | Low-Medium |
-| 8 | Static Assets | 1 | Low |
-| 9 | Final Polish | 2 | Low |
-| 10 | Deployment | 1 | Low |
+| Phase | Description                | Steps | Complexity |
+| ----- | -------------------------- | ----- | ---------- |
+| 1     | Project Initialization     | 4     | Low-Medium |
+| 1.5   | **Testing Infrastructure** | 3     | Medium     |
+| 2     | Design System & Styling    | 2     | Medium     |
+| 3     | Content Collections        | 2     | Medium     |
+| 4     | Layout System              | 2     | Medium     |
+| 5     | Components                 | 4     | Low-Medium |
+| 6     | Pages                      | 6     | Low-Medium |
+| 7     | RSS & Utilities            | 2     | Low-Medium |
+| 8     | Static Assets              | 1     | Low        |
+| 9     | Final Polish               | 2     | Low        |
+| 10    | Deployment                 | 1     | Low        |
 
 ---
 
@@ -52,27 +52,27 @@ This project follows a **pragmatic TDD approach** - write tests first where they
 
 ### Testing Tools
 
-| Tool | Purpose | Why |
-|------|---------|-----|
-| **Vitest** | Unit & Integration tests | Vite-native, fast, ESM-first, works with Astro's `getViteConfig()` |
-| **Playwright** | E2E tests | Cross-browser, reliable, excellent for testing dark mode & navigation |
-| **Astro Container API** | Component tests | Render Astro components in isolation (experimental but stable) |
-| **happy-dom** | DOM environment | Lightweight DOM implementation for Vitest |
+| Tool                    | Purpose                  | Why                                                                   |
+| ----------------------- | ------------------------ | --------------------------------------------------------------------- |
+| **Vitest**              | Unit & Integration tests | Vite-native, fast, ESM-first, works with Astro's `getViteConfig()`    |
+| **Playwright**          | E2E tests                | Cross-browser, reliable, excellent for testing dark mode & navigation |
+| **Astro Container API** | Component tests          | Render Astro components in isolation (experimental but stable)        |
+| **happy-dom**           | DOM environment          | Lightweight DOM implementation for Vitest                             |
 
 ### What to Test (and What Not To)
 
 #### ✅ DO Test
 
-| Layer | What | Example |
-|-------|------|---------|
-| **Unit** | Utility functions | `formatDate()`, `slugify()`, `getReadingTime()` |
-| **Unit** | Content schema validation | Zod schema rejects invalid frontmatter |
-| **Integration** | Content collection queries | `getCollection()` returns expected posts |
-| **Integration** | RSS feed generation | Valid XML structure, correct items |
-| **Integration** | Component rendering | BackLink renders correct href, PostList renders all posts |
-| **E2E** | Critical user journeys | Homepage → Writing → Post → Back navigation |
-| **E2E** | Dark mode persistence | Toggle, refresh, verify state |
-| **E2E** | SEO meta tags | Correct title, description, OG tags per page |
+| Layer           | What                       | Example                                                   |
+| --------------- | -------------------------- | --------------------------------------------------------- |
+| **Unit**        | Utility functions          | `formatDate()`, `slugify()`, `getReadingTime()`           |
+| **Unit**        | Content schema validation  | Zod schema rejects invalid frontmatter                    |
+| **Integration** | Content collection queries | `getCollection()` returns expected posts                  |
+| **Integration** | RSS feed generation        | Valid XML structure, correct items                        |
+| **Integration** | Component rendering        | BackLink renders correct href, PostList renders all posts |
+| **E2E**         | Critical user journeys     | Homepage → Writing → Post → Back navigation               |
+| **E2E**         | Dark mode persistence      | Toggle, refresh, verify state                             |
+| **E2E**         | SEO meta tags              | Correct title, description, OG tags per page              |
 
 #### ❌ DON'T Test
 
@@ -506,9 +506,7 @@ test.describe('Dark Mode', () => {
     const toggle = page.locator('#theme-toggle');
 
     // Get initial state
-    const initiallyDark = await html.evaluate((el) =>
-      el.classList.contains('dark')
-    );
+    const initiallyDark = await html.evaluate((el) => el.classList.contains('dark'));
 
     // Click toggle
     await toggle.click();
@@ -533,17 +531,13 @@ test.describe('Dark Mode', () => {
     await toggle.click();
 
     // Verify dark class
-    const isDark = await html.evaluate((el) =>
-      el.classList.contains('dark')
-    );
+    const isDark = await html.evaluate((el) => el.classList.contains('dark'));
 
     // Reload page
     await page.reload();
 
     // Verify persistence
-    const stillDark = await html.evaluate((el) =>
-      el.classList.contains('dark')
-    );
+    const stillDark = await html.evaluate((el) => el.classList.contains('dark'));
 
     expect(stillDark).toBe(isDark);
   });
@@ -715,18 +709,18 @@ jobs:
 
 ### TDD by Phase
 
-| Phase | Tests to Write First |
-|-------|---------------------|
+| Phase   | Tests to Write First                                     |
+| ------- | -------------------------------------------------------- |
 | **1.5** | Setup test infrastructure, write utility tests (failing) |
-| **2** | No tests needed (styling) |
-| **3** | Content schema validation tests |
-| **4** | Component render tests for layouts |
-| **5** | Component tests for BackLink, PostList |
-| **6** | E2E navigation tests |
-| **7** | RSS feed integration tests |
-| **8** | No tests needed (static assets) |
-| **9** | Run full test suite |
-| **10** | E2E tests in CI pipeline |
+| **2**   | No tests needed (styling)                                |
+| **3**   | Content schema validation tests                          |
+| **4**   | Component render tests for layouts                       |
+| **5**   | Component tests for BackLink, PostList                   |
+| **6**   | E2E navigation tests                                     |
+| **7**   | RSS feed integration tests                               |
+| **8**   | No tests needed (static assets)                          |
+| **9**   | Run full test suite                                      |
+| **10**  | E2E tests in CI pipeline                                 |
 
 ---
 
@@ -745,11 +739,13 @@ npm create astro@latest . -- --template minimal --typescript strict --no-install
 ```
 
 **Key Configuration Decisions:**
+
 - Use `--template minimal` for a clean starting point
 - Use `--typescript strict` as recommended in Astro 5.x
 - The minimal template provides: `astro.config.mjs`, `tsconfig.json`, `package.json`, and basic structure
 
 **Files Created:**
+
 - `astro.config.mjs`
 - `tsconfig.json`
 - `package.json`
@@ -772,13 +768,13 @@ npm install -D @types/sanitize-html
 
 **Package Breakdown:**
 
-| Package | Purpose |
-|---------|---------|
+| Package             | Purpose                                                          |
+| ------------------- | ---------------------------------------------------------------- |
 | `@tailwindcss/vite` | Tailwind 4.x Vite plugin (replaces deprecated @astrojs/tailwind) |
-| `tailwindcss` | Tailwind CSS 4.x core |
-| `@astrojs/sitemap` | Auto-generate sitemap.xml |
-| `@astrojs/rss` | Generate RSS feed |
-| `sanitize-html` | Sanitize HTML content in RSS feed |
+| `tailwindcss`       | Tailwind CSS 4.x core                                            |
+| `@astrojs/sitemap`  | Auto-generate sitemap.xml                                        |
+| `@astrojs/rss`      | Generate RSS feed                                                |
+| `sanitize-html`     | Sanitize HTML content in RSS feed                                |
 
 ---
 
@@ -797,9 +793,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://bnapier.dev',
 
-  integrations: [
-    sitemap(),
-  ],
+  integrations: [sitemap()],
 
   vite: {
     plugins: [tailwindcss()],
@@ -817,6 +811,7 @@ export default defineConfig({
 ```
 
 **Key Decisions:**
+
 1. **Static output mode** (default): Content-focused blog with no dynamic data
 2. **Dual Shiki themes**: Supports both light and dark mode syntax highlighting
 3. **Tailwind via Vite plugin**: Recommended approach for Tailwind 4.x
@@ -896,6 +891,7 @@ export default getViteConfig({
 ```
 
 **Key Points:**
+
 - Uses `getViteConfig()` from Astro for proper integration
 - `happy-dom` is lighter than jsdom
 - Coverage thresholds enforce quality
@@ -936,6 +932,7 @@ export default defineConfig({
 ```
 
 **Key Points:**
+
 - Tests across 3 desktop browsers + mobile
 - Auto-starts preview server before E2E tests
 - Captures traces on failure for debugging
@@ -952,6 +949,7 @@ export default defineConfig({
 **File: `src/styles/global.css`**
 
 This file establishes:
+
 - CSS custom properties for colors (light/dark modes)
 - Typography settings (system font stacks)
 - Spacing scale (xs through 3xl)
@@ -963,7 +961,7 @@ This file establishes:
 **Critical CSS Patterns:**
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Design tokens registered as Tailwind utilities */
@@ -981,12 +979,14 @@ This file establishes:
 }
 
 /* Shiki dual theme support */
-.shiki, .shiki span {
+.shiki,
+.shiki span {
   color: var(--shiki-light) !important;
   background-color: var(--shiki-light-bg) !important;
 }
 
-.dark .shiki, .dark .shiki span {
+.dark .shiki,
+.dark .shiki span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
 }
@@ -1041,6 +1041,7 @@ export const collections = { writing };
 ```
 
 **Key Astro 5.x Changes:**
+
 1. File location: `src/content.config.ts`
 2. Uses `glob()` loader instead of `type: 'content'`
 3. `z.coerce.date()` handles both string and Date inputs
@@ -1058,9 +1059,9 @@ Create sample posts with proper frontmatter:
 
 ```markdown
 ---
-title: "Post Title"
+title: 'Post Title'
 date: 2025-01-25
-description: "Brief description"
+description: 'Brief description'
 featured: true
 draft: false
 ---
@@ -1069,6 +1070,7 @@ Content here...
 ```
 
 Include the three sample posts from the spec:
+
 - `context-engineering.md`
 - `ai-agent-readiness.md`
 - `research-plan-implement.md`
@@ -1085,6 +1087,7 @@ Include the three sample posts from the spec:
 **File: `src/layouts/Base.astro`**
 
 Responsibilities:
+
 - HTML document shell
 - SEO meta tags (title, description, Open Graph, Twitter)
 - RSS autodiscovery link
@@ -1119,6 +1122,7 @@ The `is:inline` directive ensures this runs immediately before render.
 **File: `src/layouts/Post.astro`**
 
 Extends Base layout with:
+
 - Back link to /writing
 - Post title as h1
 - Formatted publication date
@@ -1137,6 +1141,7 @@ Extends Base layout with:
 **File: `src/components/ThemeToggle.astro`**
 
 Features:
+
 - Sun/Moon icons (swap visibility based on current theme)
 - Click handler toggles `.dark` class on `<html>`
 - Persists preference to localStorage
@@ -1152,6 +1157,7 @@ Features:
 **File: `src/components/BackLink.astro`**
 
 Simple navigational component:
+
 - Arrow icon + label
 - Styled as muted text
 - Props: `href`, `label`
@@ -1166,6 +1172,7 @@ Simple navigational component:
 **File: `src/components/PostList.astro`**
 
 Features:
+
 - Accepts array of posts
 - Displays title and formatted date
 - Optional description display
@@ -1181,6 +1188,7 @@ Features:
 **File: `src/components/Footer.astro`**
 
 Contains:
+
 - Copyright with current year
 - Social links (GitHub, Twitter/X, LinkedIn)
 - RSS link
@@ -1197,6 +1205,7 @@ Contains:
 **File: `src/pages/index.astro`**
 
 Content:
+
 - Personal introduction paragraph
 - Featured posts section (filtered by `featured: true`)
 - Connect section with social links
@@ -1212,6 +1221,7 @@ Content:
 **File: `src/pages/writing/index.astro`**
 
 Features:
+
 - Back link to home
 - Page title and description
 - Full post list sorted by date (newest first)
@@ -1249,6 +1259,7 @@ const { Content } = await render(post);
 ```
 
 **Key Astro 5.x Patterns:**
+
 - `post.id` instead of `post.slug`
 - `render(post)` instead of `post.render()`
 - `[...slug].astro` for clean URLs
@@ -1263,6 +1274,7 @@ const { Content } = await render(post);
 **File: `src/pages/projects.astro`**
 
 Static page with:
+
 - Project list (can be hardcoded or from data file)
 - Each project: name, description, tech stack, links
 - Simple list format (not cards)
@@ -1277,6 +1289,7 @@ Static page with:
 **File: `src/pages/now.astro`**
 
 Static page with:
+
 - Last updated date
 - Current work section
 - Learning section
@@ -1293,6 +1306,7 @@ Static page with:
 **File: `src/pages/404.astro`**
 
 Simple error page with:
+
 - Large 404 heading
 - Brief message
 - Link back to home
@@ -1314,8 +1328,9 @@ import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const posts = (await getCollection('writing', ({ data }) => !data.draft))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
 
   return rss({
     title: "Barry Napier's Blog",
@@ -1343,6 +1358,7 @@ export async function GET(context: APIContext) {
 **File: `src/lib/utils.ts`**
 
 Utilities for:
+
 - `formatDate(date)` - Long format for post pages
 - `formatDateShort(date)` - Short format for lists
 - `getReadingTime(content)` - Optional reading time estimate
@@ -1360,6 +1376,7 @@ Utilities for:
 **Files to create:**
 
 1. **`public/robots.txt`**
+
    ```
    User-agent: *
    Allow: /
@@ -1383,6 +1400,7 @@ Utilities for:
 **Dependencies:** All previous phases
 
 Ensure scripts section includes:
+
 ```json
 {
   "scripts": {
@@ -1402,6 +1420,7 @@ Ensure scripts section includes:
 **Dependencies:** All previous phases
 
 Update README.md with:
+
 - Tech stack overview
 - Getting started commands
 - Project structure
@@ -1418,6 +1437,7 @@ Update README.md with:
 **Dependencies:** None
 
 **Deployment Steps:**
+
 1. Push code to GitHub repository
 2. Connect repository to Vercel
 3. Vercel automatically detects Astro and configures build
@@ -1425,6 +1445,7 @@ Update README.md with:
 5. Enable automatic deployments on push
 
 **Optional: `vercel.json`**
+
 ```json
 {
   "framework": "astro"
@@ -1530,57 +1551,68 @@ Phase 10: Deployment
 ## Testing and Validation Checkpoints
 
 ### After Phase 1 (Project Init)
+
 - [ ] `npm run dev` starts without errors
 - [ ] TypeScript compilation passes (`npm run check`)
 - [ ] Basic Astro page renders at localhost:4321
 
 ### After Phase 1.5 (Testing Infrastructure)
+
 - [ ] `npm run test` runs Vitest without errors
 - [ ] `npm run test:e2e` runs Playwright without errors
 - [ ] Coverage report generates correctly
 - [ ] First failing test written for utilities (TDD red phase)
 
 ### After Phase 2 (Styling)
+
 - [ ] Tailwind classes apply correctly
 - [ ] CSS custom properties work
 - [ ] No build warnings for styles
 
 ### After Phase 3 (Content)
+
 - [ ] Content collection loads without errors
 - [ ] Sample post schema validates
 - [ ] `getCollection('writing')` returns posts
 
 ### After Phase 4 (Layouts)
+
 - [ ] Base layout renders with SEO tags
 - [ ] View page source shows correct meta tags
 - [ ] Dark mode class toggle works
 
 ### After Phase 5 (Components)
+
 - [ ] Theme toggle persists preference to localStorage
 - [ ] BackLink navigates correctly
 - [ ] PostList displays posts with dates
 
 ### After Phase 6 (Pages)
+
 - [ ] All 5 main routes work (/, /writing, /projects, /now, /404)
 - [ ] Dynamic post routes work (/writing/[slug])
 - [ ] Navigation between pages functions
 - [ ] 404 page shows for invalid routes
 
 ### After Phase 7 (RSS & Utils)
+
 - [ ] /rss.xml returns valid XML
 - [ ] RSS validates at https://validator.w3.org/feed/
 - [ ] Utility functions work correctly
 
 ### After Phase 8 (Static Assets)
+
 - [ ] Favicon displays in browser tab
 - [ ] robots.txt accessible at /robots.txt
 
 ### After Phase 9 (Polish)
+
 - [ ] `npm run build` completes successfully
 - [ ] `npm run preview` serves built site
 - [ ] No TypeScript errors
 
 ### After Phase 10 (Deployment)
+
 - [ ] Site deploys to Vercel
 - [ ] Custom domain works
 - [ ] HTTPS enabled
@@ -1652,40 +1684,40 @@ bnapier.dev/
 
 ## Architectural Decisions
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| **Rendering mode** | Static (default) | Content-focused blog with no dynamic data; best performance |
-| **Tailwind integration** | @tailwindcss/vite plugin | Recommended for Tailwind 4.x; @astrojs/tailwind is deprecated |
-| **Dark mode approach** | CSS class + localStorage | Prevents flash; supports both system preference and manual toggle |
-| **Content location** | src/content.config.ts | Astro 5.x convention (not src/content/config.ts) |
-| **Post routing** | [...slug].astro | Rest parameters for clean URLs without .html extensions |
-| **SEO** | Custom meta tags in layout | Simple approach without additional dependencies |
-| **Navigation** | Inline links + back links | Matches minimal design philosophy (no nav bar) |
-| **Syntax highlighting** | Shiki (built-in) | Zero config, dual theme support, ayu-dark + github-light |
-| **Vercel adapter** | None | Static sites don't need adapter; auto-detected |
-| **Unit test framework** | Vitest | Vite-native, fast, integrates with Astro via `getViteConfig()` |
-| **E2E test framework** | Playwright | Cross-browser, reliable, built-in web server management |
-| **DOM environment** | happy-dom | Lighter than jsdom, sufficient for component tests |
-| **Test co-location** | Unit tests alongside source | Easier to maintain, find related tests, TDD workflow |
-| **Component testing** | Astro Container API | Official Astro approach for rendering components in tests |
-| **Coverage threshold** | 80% for utilities | Pragmatic target; don't test trivial markup |
+| Decision                 | Choice                      | Rationale                                                         |
+| ------------------------ | --------------------------- | ----------------------------------------------------------------- |
+| **Rendering mode**       | Static (default)            | Content-focused blog with no dynamic data; best performance       |
+| **Tailwind integration** | @tailwindcss/vite plugin    | Recommended for Tailwind 4.x; @astrojs/tailwind is deprecated     |
+| **Dark mode approach**   | CSS class + localStorage    | Prevents flash; supports both system preference and manual toggle |
+| **Content location**     | src/content.config.ts       | Astro 5.x convention (not src/content/config.ts)                  |
+| **Post routing**         | [...slug].astro             | Rest parameters for clean URLs without .html extensions           |
+| **SEO**                  | Custom meta tags in layout  | Simple approach without additional dependencies                   |
+| **Navigation**           | Inline links + back links   | Matches minimal design philosophy (no nav bar)                    |
+| **Syntax highlighting**  | Shiki (built-in)            | Zero config, dual theme support, ayu-dark + github-light          |
+| **Vercel adapter**       | None                        | Static sites don't need adapter; auto-detected                    |
+| **Unit test framework**  | Vitest                      | Vite-native, fast, integrates with Astro via `getViteConfig()`    |
+| **E2E test framework**   | Playwright                  | Cross-browser, reliable, built-in web server management           |
+| **DOM environment**      | happy-dom                   | Lighter than jsdom, sufficient for component tests                |
+| **Test co-location**     | Unit tests alongside source | Easier to maintain, find related tests, TDD workflow              |
+| **Component testing**    | Astro Container API         | Official Astro approach for rendering components in tests         |
+| **Coverage threshold**   | 80% for utilities           | Pragmatic target; don't test trivial markup                       |
 
 ---
 
 ## Potential Challenges and Mitigations
 
-| Challenge | Mitigation |
-|-----------|------------|
-| Tailwind 4.x breaking changes | Use `@import "tailwindcss"` not `@tailwind` directives |
-| Shiki dual theme CSS | Use provided CSS pattern with `.dark` class selector |
-| Content Layer API changes | Use `post.id` not `post.slug`, `render(post)` not `post.render()` |
-| Flash of incorrect theme | Use inline script in `<head>` with `is:inline` directive |
-| RSS full content rendering | Start with descriptions; add full content later if needed |
-| Astro Container API experimental | API is stable enough for testing; pin Astro version if needed |
-| Vitest + Astro configuration | Use `getViteConfig()` from Astro, not plain `defineConfig` |
-| E2E tests need built site | Playwright `webServer` config auto-runs `npm run preview` |
-| Component tests import issues | Ensure `vitest.config.ts` uses Astro's vite config helper |
-| Flaky dark mode E2E tests | Clear localStorage in `beforeEach`, use explicit waits |
+| Challenge                        | Mitigation                                                        |
+| -------------------------------- | ----------------------------------------------------------------- |
+| Tailwind 4.x breaking changes    | Use `@import "tailwindcss"` not `@tailwind` directives            |
+| Shiki dual theme CSS             | Use provided CSS pattern with `.dark` class selector              |
+| Content Layer API changes        | Use `post.id` not `post.slug`, `render(post)` not `post.render()` |
+| Flash of incorrect theme         | Use inline script in `<head>` with `is:inline` directive          |
+| RSS full content rendering       | Start with descriptions; add full content later if needed         |
+| Astro Container API experimental | API is stable enough for testing; pin Astro version if needed     |
+| Vitest + Astro configuration     | Use `getViteConfig()` from Astro, not plain `defineConfig`        |
+| E2E tests need built site        | Playwright `webServer` config auto-runs `npm run preview`         |
+| Component tests import issues    | Ensure `vitest.config.ts` uses Astro's vite config helper         |
+| Flaky dark mode E2E tests        | Clear localStorage in `beforeEach`, use explicit waits            |
 
 ---
 
@@ -1710,6 +1742,7 @@ These files are the core of the implementation and require careful attention:
 After this plan is approved, implementation should proceed in phase order. Each phase builds on the previous, so completing phases sequentially ensures a stable foundation.
 
 **Recommended implementation approach:**
+
 1. Complete each phase fully before moving to the next
 2. Run validation checkpoints after each phase
 3. Commit after each phase completion

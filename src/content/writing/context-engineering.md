@@ -1,7 +1,7 @@
 ---
-title: "Context Engineering: The New Frontier of AI Development"
+title: 'Context Engineering: The New Frontier of AI Development'
 date: 2025-01-20
-description: "How thoughtful context design is becoming as important as model selection in building effective AI applications."
+description: 'How thoughtful context design is becoming as important as model selection in building effective AI applications.'
 featured: true
 draft: false
 ---
@@ -19,15 +19,19 @@ Think of it like this: the model is the engine, but context is the fuel. A power
 A well-engineered context typically includes several layers:
 
 ### 1. System Prompt
-The foundation that establishes the AI's persona, capabilities, and constraints. This is where you define *what* the AI is and *how* it should behave.
+
+The foundation that establishes the AI's persona, capabilities, and constraints. This is where you define _what_ the AI is and _how_ it should behave.
 
 ### 2. Relevant Knowledge
+
 Information retrieved from databases, documents, or APIs that provides the specific knowledge needed for the current task.
 
 ### 3. Conversation History
+
 The ongoing dialogue that maintains coherence and allows for multi-turn interactions.
 
 ### 4. Task-Specific Instructions
+
 Clear, structured guidance for the specific task at hand.
 
 ## Practical Principles

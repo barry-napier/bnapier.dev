@@ -6,16 +6,17 @@
 
 Based on the [AI Agent Readiness Framework](/writing/ai-agent-readiness), here's the current state:
 
-| Level | Status | Score | Gate Status |
-|-------|--------|-------|-------------|
-| Level 1 (Functional) | Partial | 70% | IN PROGRESS |
-| Level 2 (Documented) | Partial | 50% | BLOCKED |
-| Level 3 (Standardized) | Partial | 60% | BLOCKED |
-| Level 4 (Optimized) | Minimal | 10% | LOCKED |
+| Level                  | Status  | Score | Gate Status |
+| ---------------------- | ------- | ----- | ----------- |
+| Level 1 (Functional)   | Partial | 70%   | IN PROGRESS |
+| Level 2 (Documented)   | Partial | 50%   | BLOCKED     |
+| Level 3 (Standardized) | Partial | 60%   | BLOCKED     |
+| Level 4 (Optimized)    | Minimal | 10%   | LOCKED      |
 
 **Current Level: 1 (Functional)** - Need 80% to unlock Level 2
 
 ### Strengths
+
 - TypeScript strict mode enabled via `astro/tsconfigs/strict`
 - Comprehensive test suite (Unit, Integration, E2E)
 - 80% coverage thresholds configured
@@ -23,6 +24,7 @@ Based on the [AI Agent Readiness Framework](/writing/ai-agent-readiness), here's
 - Good README documentation
 
 ### Critical Gaps
+
 - No linter (ESLint/Biome)
 - No formatter (Prettier/Biome)
 - No pre-commit hooks
@@ -49,6 +51,7 @@ npm install -D prettier prettier-plugin-astro prettier-plugin-tailwindcss
 ```
 
 **Create `eslint.config.js`:**
+
 ```javascript
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
@@ -73,6 +76,7 @@ export default [
 ```
 
 **Create `.prettierrc`:**
+
 ```json
 {
   "semi": true,
@@ -93,6 +97,7 @@ export default [
 ```
 
 **Create `.prettierignore`:**
+
 ```
 dist/
 .astro/
@@ -103,6 +108,7 @@ playwright-report/
 ```
 
 **Add scripts to `package.json`:**
+
 ```json
 {
   "scripts": {
@@ -115,30 +121,37 @@ playwright-report/
 ```
 
 ##### Verify TypeScript Strict Mode (L1-SV-02)
+
 - **Status:** PASS - Already using `astro/tsconfigs/strict`
 
 #### 1.2 Build System (L1-BS-01 to L1-BS-02)
 
 ##### Verify Build Commands (L1-BS-01)
+
 - **Status:** PASS - `npm run build` exists
 
 ##### Verify Dependencies Pinned (L1-BS-02)
+
 - **Status:** PASS - `package-lock.json` present
 
 #### 1.3 Testing (L1-TS-01 to L1-TS-03)
 
 ##### Verify Unit Tests Exist (L1-TS-01)
+
 - **Status:** PASS - 5+ test files present
 
 ##### Verify Test Runner (L1-TS-02)
+
 - **Status:** PASS - Vitest configured
 
 ##### Verify Test Command (L1-TS-03)
+
 - **Status:** PASS - `npm test` exists
 
 #### 1.4 Documentation (L1-DC-01 to L1-DC-02)
 
 ##### Verify README (L1-DC-01, L1-DC-02)
+
 - **Status:** PASS - README.md with comprehensive content
 
 #### 1.5 Development Environment (L1-DE-01)
@@ -146,11 +159,13 @@ playwright-report/
 ##### Add Runtime Version File
 
 **Create `.nvmrc`:**
+
 ```
 20
 ```
 
 **Create `.node-version`:**
+
 ```
 20
 ```
@@ -158,14 +173,17 @@ playwright-report/
 #### 1.6 Debugging & Observability (L1-DO-01)
 
 ##### Basic Logging
+
 - **Status:** PASS - Console logging exists in development
 
 #### 1.7 Security (L1-SC-01 to L1-SC-02)
 
 ##### Verify No Secrets in Code (L1-SC-01)
+
 - **Status:** PASS - No hardcoded secrets detected
 
 ##### Verify .gitignore (L1-SC-02)
+
 - **Status:** PASS - Comprehensive .gitignore
 
 ---
@@ -184,11 +202,13 @@ npx husky init
 ```
 
 **Create `.husky/pre-commit`:**
+
 ```bash
 npx lint-staged
 ```
 
 **Create `.lintstagedrc.json`:**
+
 ```json
 {
   "*.{js,ts,astro}": ["eslint --fix", "prettier --write"],
@@ -197,22 +217,27 @@ npx lint-staged
 ```
 
 ##### Document Lint Command (L2-SV-05)
+
 - **Status:** Will be PASS after adding `npm run lint`
 
 #### 2.2 Build System (L2-BS-03 to L2-BS-04)
 
 ##### Document Build Process (L2-BS-03)
+
 - **Status:** PASS - README documents build
 
 ##### Verify Dev Command (L2-BS-04)
+
 - **Status:** PASS - `npm run dev` exists
 
 #### 2.3 Testing (L2-TS-04 to L2-TS-05)
 
 ##### Document Tests (L2-TS-04)
+
 - **Status:** PASS - README documents testing
 
 ##### Verify Test Watch (L2-TS-05)
+
 - **Status:** PASS - `npm run test:watch` exists
 
 #### 2.4 Documentation (L2-DC-03 to L2-DC-05)
@@ -220,7 +245,8 @@ npx lint-staged
 ##### Create AGENTS.md (L2-DC-03)
 
 **Create `AGENTS.md`:**
-```markdown
+
+````markdown
 # AGENTS.md
 
 This file provides context for AI agents working with this codebase.
@@ -240,18 +266,22 @@ Personal website and blog built with Astro, featuring writing about software eng
 ## Commands
 
 ### Development
+
 ```bash
 npm run dev        # Start dev server at localhost:4321
 npm run preview    # Preview production build
 ```
+````
 
 ### Build
+
 ```bash
 npm run build      # Production build to dist/
 npm run check      # TypeScript type checking
 ```
 
 ### Testing
+
 ```bash
 npm test           # Run unit tests
 npm run test:watch # Run tests in watch mode
@@ -260,6 +290,7 @@ npm run test:e2e   # Run Playwright E2E tests
 ```
 
 ### Code Quality
+
 ```bash
 npm run lint       # Run ESLint
 npm run lint:fix   # Fix ESLint issues
@@ -304,29 +335,32 @@ Blog posts in `src/content/writing/` use this frontmatter:
 
 ```yaml
 ---
-title: "Post Title"           # Required
-date: 2025-01-15              # Required, YYYY-MM-DD
-description: "Short summary"   # Required, for SEO
-featured: false               # Optional, highlights on homepage
-draft: false                  # Optional, excludes from production
+title: 'Post Title' # Required
+date: 2025-01-15 # Required, YYYY-MM-DD
+description: 'Short summary' # Required, for SEO
+featured: false # Optional, highlights on homepage
+draft: false # Optional, excludes from production
 ---
 ```
 
 ## Key Patterns
 
 ### Adding a New Blog Post
+
 1. Create `src/content/writing/your-post-slug.md`
 2. Add required frontmatter (title, date, description)
 3. Write content in Markdown
 4. Run `npm run build` to verify
 
 ### Adding a New Component
+
 1. Create in `src/components/`
 2. Use `.astro` extension
 3. Import in layouts/pages as needed
 4. Add tests if component has logic
 
 ### Modifying Styles
+
 - Global tokens in `src/styles/global.css`
 - Use Tailwind classes inline
 - Dark mode: use `dark:` prefix or CSS variables
@@ -342,6 +376,7 @@ Coverage target: 80% for `src/lib/**/*.ts`
 ## CI/CD
 
 GitHub Actions runs on every PR:
+
 1. Type checking (`astro check`)
 2. Unit tests with coverage
 3. E2E tests on Chromium
@@ -350,16 +385,20 @@ GitHub Actions runs on every PR:
 ## Common Issues
 
 ### Build Fails
+
 - Run `npm run check` to see TypeScript errors
 - Check for missing frontmatter in content files
 
 ### Tests Fail
+
 - Run `npm run test:watch` to debug
 - E2E tests need `npm run build` first
 
 ### Style Issues
+
 - Run `npm run lint:fix && npm run format`
-```
+
+````
 
 ##### Create CONTRIBUTING.md (L2-DC-04)
 
@@ -381,9 +420,10 @@ Thank you for your interest in contributing!
 ### Before Making Changes
 ```bash
 git checkout -b feature/your-feature
-```
+````
 
 ### Code Quality
+
 ```bash
 npm run lint        # Check for issues
 npm run format      # Format code
@@ -391,12 +431,14 @@ npm run check       # TypeScript check
 ```
 
 ### Testing
+
 ```bash
 npm test            # Unit tests
 npm run test:e2e    # E2E tests (requires build)
 ```
 
 ### Commit Guidelines
+
 - Use clear, descriptive commit messages
 - Reference issues when applicable
 - Keep commits focused and atomic
@@ -418,7 +460,8 @@ npm run test:e2e    # E2E tests (requires build)
 ## Questions?
 
 Open an issue or reach out directly.
-```
+
+````
 
 ##### Verify Installation Documented (L2-DC-05)
 - **Status:** PASS - README has getting started
@@ -437,11 +480,12 @@ Open an issue or reach out directly.
 
 # Optional: Contact form (not currently used)
 # PUBLIC_CONTACT_FORM_ENDPOINT=https://...
-```
+````
 
 ##### Create IDE Settings (L2-DE-03)
 
 **Create `.vscode/settings.json`:**
+
 ```json
 {
   "editor.formatOnSave": true,
@@ -458,6 +502,7 @@ Open an issue or reach out directly.
 ```
 
 **Create `.vscode/extensions.json`:**
+
 ```json
 {
   "recommendations": [
@@ -470,6 +515,7 @@ Open an issue or reach out directly.
 ```
 
 **Create `.editorconfig`:**
+
 ```ini
 root = true
 
@@ -490,6 +536,7 @@ trim_trailing_whitespace = false
 ##### Create SECURITY.md (L2-SC-03)
 
 **Create `SECURITY.md`:**
+
 ```markdown
 # Security Policy
 
@@ -505,6 +552,7 @@ If you discover a security vulnerability, please report it responsibly:
 ## Security Measures
 
 This site implements:
+
 - Content Security Policy headers
 - HTML sanitization for RSS feeds
 - No user authentication or data storage
@@ -513,6 +561,7 @@ This site implements:
 ## Dependencies
 
 Dependencies are reviewed regularly. We use:
+
 - `npm audit` for vulnerability scanning
 - Dependabot for automated updates (coming soon)
 ```
@@ -520,6 +569,7 @@ Dependencies are reviewed regularly. We use:
 ##### Add LICENSE (L2-SC-04)
 
 **Create `LICENSE`:**
+
 ```
 MIT License
 
@@ -549,6 +599,7 @@ SOFTWARE.
 ##### Create Issue Templates (L2-TD-01 to L2-TD-03)
 
 **Create `.github/ISSUE_TEMPLATE/bug_report.md`:**
+
 ```markdown
 ---
 name: Bug Report
@@ -559,31 +610,39 @@ assignees: ''
 ---
 
 ## Description
+
 A clear description of the bug.
 
 ## Steps to Reproduce
+
 1. Go to '...'
 2. Click on '...'
 3. See error
 
 ## Expected Behavior
+
 What you expected to happen.
 
 ## Actual Behavior
+
 What actually happened.
 
 ## Environment
+
 - Browser: [e.g., Chrome 120]
 - OS: [e.g., macOS 14]
 
 ## Screenshots
+
 If applicable, add screenshots.
 
 ## Additional Context
+
 Any other context about the problem.
 ```
 
 **Create `.github/ISSUE_TEMPLATE/feature_request.md`:**
+
 ```markdown
 ---
 name: Feature Request
@@ -594,19 +653,24 @@ assignees: ''
 ---
 
 ## Problem Statement
+
 What problem does this solve?
 
 ## Proposed Solution
+
 How would you like this to work?
 
 ## Alternatives Considered
+
 Other approaches you've thought about.
 
 ## Additional Context
+
 Any other information or mockups.
 ```
 
 **Create `.github/ISSUE_TEMPLATE/config.yml`:**
+
 ```yaml
 blank_issues_enabled: true
 contact_links:
@@ -624,17 +688,21 @@ contact_links:
 #### 3.1 Style & Validation (L3-SV-06 to L3-SV-10)
 
 ##### Verify Strict TypeScript (L3-SV-06)
+
 - **Status:** PASS - Using `astro/tsconfigs/strict`
 
 ##### Framework Strict Mode (L3-SV-07)
+
 - **Status:** N/A - Astro doesn't have additional strict modes
 
 ##### ESLint Recommended (L3-SV-08)
+
 - **Status:** Will be PASS after ESLint setup
 
 ##### Lint in CI (L3-SV-09)
 
 **Update `.github/workflows/ci.yml`** to add lint job:
+
 ```yaml
 lint:
   runs-on: ubuntu-latest
@@ -652,59 +720,75 @@ lint:
 #### 3.2 Build System (L3-BS-05 to L3-BS-07)
 
 ##### CI/CD Configured (L3-BS-05)
+
 - **Status:** PASS - GitHub Actions configured
 
 ##### Build in CI (L3-BS-06)
+
 - **Status:** PASS - Build job exists
 
 ##### Cache in CI (L3-BS-07)
+
 - **Status:** PASS - npm cache enabled
 
 #### 3.3 Testing (L3-TS-06 to L3-TS-10)
 
 ##### Integration Tests (L3-TS-06)
+
 - **Status:** PASS - `tests/integration/` exists
 
 ##### E2E Tests (L3-TS-07)
+
 - **Status:** PASS - Playwright configured
 
 ##### Coverage Configured (L3-TS-08)
+
 - **Status:** PASS - v8 coverage enabled
 
 ##### Coverage Threshold (L3-TS-09)
+
 - **Status:** PASS - 80% threshold set
 
 ##### Tests in CI (L3-TS-10)
+
 - **Status:** PASS - Tests run in workflow
 
 #### 3.4 Documentation (L3-DC-06 to L3-DC-09)
 
 ##### AGENTS.md Has Commands (L3-DC-06)
+
 - **Status:** Will be PASS after creating AGENTS.md
 
 ##### AGENTS.md Has Architecture (L3-DC-07)
+
 - **Status:** Will be PASS after creating AGENTS.md
 
 ##### ADRs Exist (L3-DC-08)
 
 **Create `docs/adr/0001-use-astro-for-static-site.md`:**
+
 ```markdown
 # ADR 0001: Use Astro for Static Site Generation
 
 ## Status
+
 Accepted
 
 ## Context
+
 Need a framework for a personal website/blog that:
+
 - Supports Markdown content
 - Has excellent performance
 - Minimal JavaScript by default
 - Good developer experience
 
 ## Decision
+
 Use Astro 5.x as the static site generator.
 
 ## Consequences
+
 - **Positive:** Zero JS by default, content collections, great DX
 - **Positive:** Excellent build performance
 - **Negative:** Smaller ecosystem than Next.js
@@ -712,22 +796,27 @@ Use Astro 5.x as the static site generator.
 ```
 
 **Create `docs/adr/0002-testing-strategy.md`:**
+
 ```markdown
 # ADR 0002: Testing Strategy
 
 ## Status
+
 Accepted
 
 ## Context
+
 Need a testing strategy that provides confidence without over-engineering.
 
 ## Decision
+
 - **Unit tests:** Vitest for utility functions
 - **Integration tests:** Vitest for content processing
 - **E2E tests:** Playwright for user flows
 - **Coverage target:** 80% for src/lib/
 
 ## Consequences
+
 - **Positive:** Fast unit tests, realistic E2E tests
 - **Positive:** Catches regressions effectively
 - **Negative:** E2E tests slower to run
@@ -736,6 +825,7 @@ Need a testing strategy that provides confidence without over-engineering.
 ##### Create CHANGELOG.md (L3-DC-09)
 
 **Create `CHANGELOG.md`:**
+
 ```markdown
 # Changelog
 
@@ -746,11 +836,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+
 - AI Agent Readiness implementation plan
 
 ## [1.0.0] - 2025-01-15
 
 ### Added
+
 - Initial website launch
 - Blog with AI readiness, Figma, and context engineering articles
 - Dark mode support with system preference detection
@@ -766,6 +858,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ##### Create Devcontainer (L3-DE-04, L3-DE-05)
 
 **Create `.devcontainer/devcontainer.json`:**
+
 ```json
 {
   "name": "bnapier.dev",
@@ -795,6 +888,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ##### Docker Support (L3-DE-06) - Optional for static site
 
 **Create `Dockerfile`:**
+
 ```dockerfile
 FROM node:20-alpine AS builder
 WORKDIR /app
@@ -812,6 +906,7 @@ CMD ["nginx", "-g", "daemon off;"]
 ##### Setup Script (L3-DE-07)
 
 **Create `scripts/setup.sh`:**
+
 ```bash
 #!/usr/bin/env bash
 set -e
@@ -843,6 +938,7 @@ echo "Setup complete! Run 'npm run dev' to start."
 ```
 
 #### 3.6 Debugging & Observability (L3-DO-03, L3-DO-04)
+
 - **Status:** N/A for static site - no server-side logging needed
 
 #### 3.7 Security (L3-SC-05 to L3-SC-08)
@@ -850,6 +946,7 @@ echo "Setup complete! Run 'npm run dev' to start."
 ##### Create CODEOWNERS (L3-SC-05, L3-SC-06)
 
 **Create `.github/CODEOWNERS`:**
+
 ```
 # Default owner
 * @barry-napier
@@ -865,18 +962,19 @@ echo "Setup complete! Run 'npm run dev' to start."
 ##### Dependency Scanning (L3-SC-08)
 
 **Create `.github/dependabot.yml`:**
+
 ```yaml
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     open-pull-requests-limit: 10
     labels:
-      - "dependencies"
+      - 'dependencies'
     commit-message:
-      prefix: "deps"
+      prefix: 'deps'
 ```
 
 #### 3.8 Task Discovery (L3-TD-04, L3-TD-05)
@@ -884,11 +982,14 @@ updates:
 ##### Create PR Template (L3-TD-04, L3-TD-05)
 
 **Create `.github/PULL_REQUEST_TEMPLATE.md`:**
+
 ```markdown
 ## Summary
+
 Brief description of changes.
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation
@@ -896,11 +997,13 @@ Brief description of changes.
 - [ ] Other
 
 ## Testing
+
 - [ ] Unit tests pass (`npm test`)
 - [ ] E2E tests pass (`npm run test:e2e`)
 - [ ] Tested locally
 
 ## Checklist
+
 - [ ] Code follows project style
 - [ ] Self-reviewed changes
 - [ ] Updated documentation if needed
@@ -914,14 +1017,17 @@ Brief description of changes.
 **Goal:** Implement advanced practices for optimal AI agent collaboration
 
 #### 4.1 Build System (L4-BS-08)
+
 - **Bundle Budgets:** Not applicable for Astro static site (already optimized)
 
 #### 4.2 Testing (L4-TS-11)
+
 - **Status:** PASS - Playwright runs parallel by default
 
 #### 4.3 Debugging & Observability (L4-DO-05, L4-DO-06)
 
 ##### Health Endpoints (L4-DO-06)
+
 For static sites, this is N/A. If deploying to a platform with edge functions:
 
 ```typescript
@@ -938,6 +1044,7 @@ export async function GET() {
 ##### Enable CodeQL Scanning (L4-SC-09)
 
 **Create `.github/workflows/codeql.yml`:**
+
 ```yaml
 name: CodeQL
 
@@ -963,6 +1070,7 @@ jobs:
 ```
 
 #### 4.5 Product & Experimentation (L4-PE-03)
+
 - **Status:** Optional for personal blog
 
 ---
@@ -970,6 +1078,7 @@ jobs:
 ## Implementation Priority
 
 ### Immediate (Week 1) - Unlock Level 2
+
 1. [ ] Install ESLint + Prettier
 2. [ ] Create `.nvmrc` and `.node-version`
 3. [ ] Create `AGENTS.md`
@@ -977,6 +1086,7 @@ jobs:
 5. [ ] Create `.vscode/settings.json` and `.editorconfig`
 
 ### Short-term (Week 2) - Complete Level 2
+
 6. [ ] Set up Husky + lint-staged
 7. [ ] Create `CONTRIBUTING.md`
 8. [ ] Create `SECURITY.md` and `LICENSE`
@@ -984,6 +1094,7 @@ jobs:
 10. [ ] Create PR template
 
 ### Medium-term (Week 3) - Achieve Level 3
+
 11. [ ] Add lint job to CI
 12. [ ] Create ADR documents
 13. [ ] Create `CHANGELOG.md`
@@ -992,6 +1103,7 @@ jobs:
 16. [ ] Configure Dependabot
 
 ### Long-term (Week 4+) - Reach Level 4
+
 17. [ ] Add CodeQL scanning
 18. [ ] Review and optimize
 
@@ -999,35 +1111,35 @@ jobs:
 
 ## Files to Create Summary
 
-| File | Purpose | Level |
-|------|---------|-------|
-| `eslint.config.js` | Linting configuration | L1 |
-| `.prettierrc` | Formatting configuration | L1 |
-| `.prettierignore` | Formatting exclusions | L1 |
-| `.nvmrc` | Node version | L1 |
-| `.node-version` | Node version (alt) | L1 |
-| `AGENTS.md` | AI agent documentation | L2 |
-| `CONTRIBUTING.md` | Contribution guide | L2 |
-| `.env.example` | Environment template | L2 |
-| `.vscode/settings.json` | IDE settings | L2 |
-| `.vscode/extensions.json` | IDE extensions | L2 |
-| `.editorconfig` | Editor config | L2 |
-| `.lintstagedrc.json` | Pre-commit config | L2 |
-| `SECURITY.md` | Security policy | L2 |
-| `LICENSE` | MIT license | L2 |
-| `.github/ISSUE_TEMPLATE/bug_report.md` | Bug template | L2 |
-| `.github/ISSUE_TEMPLATE/feature_request.md` | Feature template | L2 |
-| `.github/ISSUE_TEMPLATE/config.yml` | Template config | L2 |
-| `.github/PULL_REQUEST_TEMPLATE.md` | PR template | L3 |
-| `.github/CODEOWNERS` | Code ownership | L3 |
-| `.github/dependabot.yml` | Dependency updates | L3 |
-| `docs/adr/0001-use-astro-for-static-site.md` | Architecture decision | L3 |
-| `docs/adr/0002-testing-strategy.md` | Testing decision | L3 |
-| `CHANGELOG.md` | Version history | L3 |
-| `.devcontainer/devcontainer.json` | Dev container | L3 |
-| `Dockerfile` | Container build | L3 |
-| `scripts/setup.sh` | Setup automation | L3 |
-| `.github/workflows/codeql.yml` | Security scanning | L4 |
+| File                                         | Purpose                  | Level |
+| -------------------------------------------- | ------------------------ | ----- |
+| `eslint.config.js`                           | Linting configuration    | L1    |
+| `.prettierrc`                                | Formatting configuration | L1    |
+| `.prettierignore`                            | Formatting exclusions    | L1    |
+| `.nvmrc`                                     | Node version             | L1    |
+| `.node-version`                              | Node version (alt)       | L1    |
+| `AGENTS.md`                                  | AI agent documentation   | L2    |
+| `CONTRIBUTING.md`                            | Contribution guide       | L2    |
+| `.env.example`                               | Environment template     | L2    |
+| `.vscode/settings.json`                      | IDE settings             | L2    |
+| `.vscode/extensions.json`                    | IDE extensions           | L2    |
+| `.editorconfig`                              | Editor config            | L2    |
+| `.lintstagedrc.json`                         | Pre-commit config        | L2    |
+| `SECURITY.md`                                | Security policy          | L2    |
+| `LICENSE`                                    | MIT license              | L2    |
+| `.github/ISSUE_TEMPLATE/bug_report.md`       | Bug template             | L2    |
+| `.github/ISSUE_TEMPLATE/feature_request.md`  | Feature template         | L2    |
+| `.github/ISSUE_TEMPLATE/config.yml`          | Template config          | L2    |
+| `.github/PULL_REQUEST_TEMPLATE.md`           | PR template              | L3    |
+| `.github/CODEOWNERS`                         | Code ownership           | L3    |
+| `.github/dependabot.yml`                     | Dependency updates       | L3    |
+| `docs/adr/0001-use-astro-for-static-site.md` | Architecture decision    | L3    |
+| `docs/adr/0002-testing-strategy.md`          | Testing decision         | L3    |
+| `CHANGELOG.md`                               | Version history          | L3    |
+| `.devcontainer/devcontainer.json`            | Dev container            | L3    |
+| `Dockerfile`                                 | Container build          | L3    |
+| `scripts/setup.sh`                           | Setup automation         | L3    |
+| `.github/workflows/codeql.yml`               | Security scanning        | L4    |
 
 ---
 
@@ -1035,12 +1147,12 @@ jobs:
 
 After implementing this plan:
 
-| Level | Before | After |
-|-------|--------|-------|
-| Level 1 | 70% | 100% |
-| Level 2 | 50% | 100% |
-| Level 3 | 60% | 95% |
-| Level 4 | 10% | 70% |
+| Level   | Before | After |
+| ------- | ------ | ----- |
+| Level 1 | 70%    | 100%  |
+| Level 2 | 50%    | 100%  |
+| Level 3 | 60%    | 95%   |
+| Level 4 | 10%    | 70%   |
 
 **Final Assessment: Level 3 (Standardized)** with strong progress toward Level 4.
 

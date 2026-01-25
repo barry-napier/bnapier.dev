@@ -26,7 +26,9 @@ describe('RSS Feed', () => {
 
   it('includes correct channel metadata', () => {
     expect(rssContent).toContain('<title>Barry Napier</title>');
-    expect(rssContent).toContain('<description>Writing about software engineering, AI, and technology.</description>');
+    expect(rssContent).toContain(
+      '<description>Writing about software engineering, AI, and technology.</description>'
+    );
     expect(rssContent).toContain('<link>https://bnapier.dev/</link>');
     expect(rssContent).toContain('<language>en-us</language>');
   });

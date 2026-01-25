@@ -13,8 +13,9 @@ import PostList from '@/components/PostList.astro';
 import { getCollection } from 'astro:content';
 
 // Get featured posts, sorted by date (newest first)
-const featuredPosts = (await getCollection('writing', ({ data }) => data.featured && !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const featuredPosts = (
+  await getCollection('writing', ({ data }) => data.featured && !data.draft)
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Base>
@@ -22,8 +23,8 @@ const featuredPosts = (await getCollection('writing', ({ data }) => data.feature
     <h1>Barry Napier</h1>
     <p>
       I'm a software engineer passionate about building great products and exploring the
-      intersection of technology and human experience. I write about software development,
-      AI, and the lessons learned along the way.
+      intersection of technology and human experience. I write about software development, AI, and
+      the lessons learned along the way.
     </p>
     <nav class="inline-nav">
       <a href="/writing">Writing</a>
@@ -32,23 +33,29 @@ const featuredPosts = (await getCollection('writing', ({ data }) => data.feature
     </nav>
   </section>
 
-  {featuredPosts.length > 0 && (
-    <section class="featured">
-      <h2>Featured Writing</h2>
-      <PostList posts={featuredPosts} />
-      <p class="more-link">
-        <a href="/writing">View all posts &rarr;</a>
-      </p>
-    </section>
-  )}
+  {
+    featuredPosts.length > 0 && (
+      <section class="featured">
+        <h2>Featured Writing</h2>
+        <PostList posts={featuredPosts} />
+        <p class="more-link">
+          <a href="/writing">View all posts &rarr;</a>
+        </p>
+      </section>
+    )
+  }
 
   <section class="connect">
     <h2>Connect</h2>
     <p>
-      Find me on <a href="https://github.com/bnapier" target="_blank" rel="noopener noreferrer">GitHub</a>,
-      <a href="https://twitter.com/bnapier" target="_blank" rel="noopener noreferrer">Twitter</a>, and
-      <a href="https://linkedin.com/in/barrynapier" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
-      Subscribe via <a href="/rss.xml">RSS</a>.
+      Find me on <a href="https://github.com/bnapier" target="_blank" rel="noopener noreferrer"
+        >GitHub</a
+      >,
+      <a href="https://twitter.com/bnapier" target="_blank" rel="noopener noreferrer">Twitter</a>,
+      and
+      <a href="https://linkedin.com/in/barrynapier" target="_blank" rel="noopener noreferrer"
+        >LinkedIn</a
+      >. Subscribe via <a href="/rss.xml">RSS</a>.
     </p>
   </section>
 </Base>

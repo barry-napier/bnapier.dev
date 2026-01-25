@@ -90,13 +90,16 @@ const ogImageURL = new URL(ogImage, Astro.site);
 
     <!-- Theme Initialization Script - MUST be inline to prevent flash -->
     <script is:inline>
-      const getTheme = () => {
+      function applyTheme() {
         const stored = localStorage.getItem('theme');
-        if (stored) return stored;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      };
-      const theme = getTheme();
-      document.documentElement.classList.toggle('dark', theme === 'dark');
+        const theme =
+          stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      }
+      // Apply on initial load
+      applyTheme();
+      // Re-apply after View Transitions swap (prevents theme flash on navigation)
+      document.addEventListener('astro:after-swap', applyTheme);
     </script>
 
     <!-- View Transitions for smooth navigation between pages -->

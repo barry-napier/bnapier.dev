@@ -1,0 +1,88 @@
+---
+/**
+ * Post Layout - Layout for individual blog posts
+ *
+ * Extends Base layout with:
+ * - Back link to /writing
+ * - Post title as h1
+ * - Formatted publication date
+ * - Prose container for markdown content
+ * - Article semantic markup
+ */
+import Base from './Base.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'writing'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date } = post.data;
+
+// Format the date for display
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base
+  title={title}
+  description={description}
+  ogType="article"
+  publishedTime={date}
+>
+  <a href="/writing" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    Back to writing
+  </a>
+
+  <article>
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+      <time datetime={date.toISOString()} class="post-date text-muted text-sm">
+        {formattedDate}
+      </time>
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  .post-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .post-title {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .post-date {
+    display: block;
+  }
+
+  article {
+    margin-bottom: var(--spacing-2xl);
+  }
+</style>

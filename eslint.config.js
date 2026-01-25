@@ -7,7 +7,7 @@ export default [
   ...tseslint.configs.recommended,
   ...eslintPluginAstro.configs.recommended,
   {
-    ignores: ['dist/', '.astro/', 'node_modules/', 'coverage/', 'playwright-report/'],
+    ignores: ['dist/', '.astro/', 'node_modules/', 'coverage/', 'playwright-report/', '.agents/'],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.astro'],

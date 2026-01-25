@@ -32,27 +32,30 @@ describe('RSS Feed', () => {
   });
 
   it('includes all published posts', () => {
-    // We have 3 published posts
+    // We have 4 published posts
+    expect(rssContent).toContain('Do We Still Need Figma?');
     expect(rssContent).toContain('Context Engineering: The New Frontier of AI Development');
     expect(rssContent).toContain('Is Your Codebase Ready for AI Agents?');
     expect(rssContent).toContain('Research, Plan, Implement: A Framework for Technical Decisions');
   });
 
   it('excludes draft posts', () => {
-    // Extract all items - count should match published posts (3)
+    // Extract all items - count should match published posts (4)
     const itemMatches = rssContent.match(/<item>/g);
-    expect(itemMatches).toHaveLength(3);
+    expect(itemMatches).toHaveLength(4);
   });
 
   it('orders items by date descending', () => {
     // Find the positions of each post title in the RSS feed
-    const post1Pos = rssContent.indexOf('Context Engineering'); // Jan 20
-    const post2Pos = rssContent.indexOf('Is Your Codebase Ready for AI Agents'); // Jan 15
-    const post3Pos = rssContent.indexOf('Research, Plan, Implement'); // Jan 10
+    const post1Pos = rssContent.indexOf('Do We Still Need Figma'); // Jan 25
+    const post2Pos = rssContent.indexOf('Context Engineering'); // Jan 20
+    const post3Pos = rssContent.indexOf('Is Your Codebase Ready for AI Agents'); // Jan 15
+    const post4Pos = rssContent.indexOf('Research, Plan, Implement'); // Jan 10
 
     // Most recent should appear first
     expect(post1Pos).toBeLessThan(post2Pos);
     expect(post2Pos).toBeLessThan(post3Pos);
+    expect(post3Pos).toBeLessThan(post4Pos);
   });
 
   it('sanitizes HTML content', () => {
@@ -65,6 +68,7 @@ describe('RSS Feed', () => {
   });
 
   it('includes correct post links', () => {
+    expect(rssContent).toContain('/writing/ai-design-systems-figma/');
     expect(rssContent).toContain('/writing/context-engineering/');
     expect(rssContent).toContain('/writing/ai-agent-readiness/');
     expect(rssContent).toContain('/writing/research-plan-implement/');

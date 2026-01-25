@@ -1,0 +1,25 @@
+{
+  "name": "bnapier-dev",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Personal website and blog for Barry Napier",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.2.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/rss": "^4.0.0",
+    "sanitize-html": "^2.13.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/sanitize-html": "^2.13.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0"
+  }
+}

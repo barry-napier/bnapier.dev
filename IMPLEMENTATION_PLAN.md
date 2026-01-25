@@ -18,6 +18,7 @@ This plan outlines the complete implementation of a minimal, text-focused person
 | Phase | Description | Steps | Complexity |
 |-------|-------------|-------|------------|
 | 1 | Project Initialization | 4 | Low-Medium |
+| 1.5 | **Testing Infrastructure** | 3 | Medium |
 | 2 | Design System & Styling | 2 | Medium |
 | 3 | Content Collections | 2 | Medium |
 | 4 | Layout System | 2 | Medium |
@@ -27,6 +28,705 @@ This plan outlines the complete implementation of a minimal, text-focused person
 | 8 | Static Assets | 1 | Low |
 | 9 | Final Polish | 2 | Low |
 | 10 | Deployment | 1 | Low |
+
+---
+
+## Test-Driven Development (TDD) Strategy
+
+### Philosophy
+
+This project follows a **pragmatic TDD approach** - write tests first where they provide clear value, but don't over-test static content or trivial markup. The testing pyramid guides our effort allocation:
+
+```
+        ┌─────────────┐
+        │    E2E      │  ← Few, critical user journeys
+        │  (Playwright)│
+       ┌┴─────────────┴┐
+       │  Integration   │  ← Component rendering, content collections
+       │   (Vitest)     │
+      ┌┴───────────────┴┐
+      │      Unit        │  ← Utilities, pure functions, schemas
+      │    (Vitest)      │
+      └──────────────────┘
+```
+
+### Testing Tools
+
+| Tool | Purpose | Why |
+|------|---------|-----|
+| **Vitest** | Unit & Integration tests | Vite-native, fast, ESM-first, works with Astro's `getViteConfig()` |
+| **Playwright** | E2E tests | Cross-browser, reliable, excellent for testing dark mode & navigation |
+| **Astro Container API** | Component tests | Render Astro components in isolation (experimental but stable) |
+| **happy-dom** | DOM environment | Lightweight DOM implementation for Vitest |
+
+### What to Test (and What Not To)
+
+#### ✅ DO Test
+
+| Layer | What | Example |
+|-------|------|---------|
+| **Unit** | Utility functions | `formatDate()`, `slugify()`, `getReadingTime()` |
+| **Unit** | Content schema validation | Zod schema rejects invalid frontmatter |
+| **Integration** | Content collection queries | `getCollection()` returns expected posts |
+| **Integration** | RSS feed generation | Valid XML structure, correct items |
+| **Integration** | Component rendering | BackLink renders correct href, PostList renders all posts |
+| **E2E** | Critical user journeys | Homepage → Writing → Post → Back navigation |
+| **E2E** | Dark mode persistence | Toggle, refresh, verify state |
+| **E2E** | SEO meta tags | Correct title, description, OG tags per page |
+
+#### ❌ DON'T Test
+
+- Static prose content (the "Now" page text)
+- Tailwind class names (trust the framework)
+- Third-party integrations (sitemap generation)
+- Visual styling (that's what eyes are for)
+
+### TDD Workflow
+
+For each feature, follow this cycle:
+
+```
+1. Write failing test (Red)
+   └─→ Test describes expected behavior
+
+2. Write minimal code (Green)
+   └─→ Just enough to pass the test
+
+3. Refactor (Refactor)
+   └─→ Clean up while tests stay green
+
+4. Commit
+   └─→ Atomic commits: "test: add X" then "feat: implement X"
+```
+
+**Example: Adding `formatDate` utility**
+
+```bash
+# 1. Write the test first
+# src/lib/utils.test.ts
+test('formatDate returns formatted date string', () => {
+  const date = new Date('2025-01-25');
+  expect(formatDate(date)).toBe('January 25, 2025');
+});
+
+# 2. Run test (fails - function doesn't exist)
+npm run test
+
+# 3. Implement the function
+# src/lib/utils.ts
+export function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+# 4. Run test (passes)
+npm run test
+
+# 5. Commit
+git commit -m "test: add formatDate test"
+git commit -m "feat: implement formatDate utility"
+```
+
+### Test File Structure
+
+```
+bnapier.dev/
+├── src/
+│   ├── lib/
+│   │   ├── utils.ts
+│   │   └── utils.test.ts          # Unit tests co-located
+│   ├── components/
+│   │   ├── BackLink.astro
+│   │   └── BackLink.test.ts       # Component tests co-located
+│   └── pages/
+│       └── rss.xml.ts
+├── tests/
+│   ├── integration/
+│   │   ├── content.test.ts        # Content collection tests
+│   │   └── rss.test.ts            # RSS feed tests
+│   └── e2e/
+│       ├── navigation.spec.ts     # User journey tests
+│       ├── dark-mode.spec.ts      # Theme persistence tests
+│       └── seo.spec.ts            # Meta tag verification
+├── vitest.config.ts
+└── playwright.config.ts
+```
+
+### Configuration Files
+
+#### Vitest Configuration
+
+**File: `vitest.config.ts`**
+
+```typescript
+import { getViteConfig } from 'astro/config';
+
+export default getViteConfig({
+  test: {
+    // Use happy-dom for faster tests (lighter than jsdom)
+    environment: 'happy-dom',
+
+    // Include test files
+    include: ['src/**/*.test.ts', 'tests/integration/**/*.test.ts'],
+
+    // Coverage configuration
+    coverage: {
+      provider: 'v8',
+      include: ['src/lib/**/*.ts'],
+      exclude: ['**/*.test.ts', '**/*.d.ts'],
+      thresholds: {
+        statements: 80,
+        branches: 80,
+        functions: 80,
+        lines: 80,
+      },
+    },
+
+    // Global test utilities
+    globals: true,
+  },
+});
+```
+
+#### Playwright Configuration
+
+**File: `playwright.config.ts`**
+
+```typescript
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests/e2e',
+
+  // Run tests in parallel
+  fullyParallel: true,
+
+  // Fail the build on CI if you accidentally left test.only
+  forbidOnly: !!process.env.CI,
+
+  // Retry on CI only
+  retries: process.env.CI ? 2 : 0,
+
+  // Reporter
+  reporter: process.env.CI ? 'github' : 'list',
+
+  // Shared settings
+  use: {
+    baseURL: 'http://localhost:4321',
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+  },
+
+  // Browser projects
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+    // Mobile viewport
+    {
+      name: 'mobile-chrome',
+      use: { ...devices['Pixel 5'] },
+    },
+  ],
+
+  // Start dev server before tests
+  webServer: {
+    command: 'npm run preview',
+    url: 'http://localhost:4321',
+    reuseExistingServer: !process.env.CI,
+  },
+});
+```
+
+### Sample Tests
+
+#### Unit Test: Utilities
+
+**File: `src/lib/utils.test.ts`**
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { formatDate, formatDateShort, slugify, getReadingTime } from './utils';
+
+describe('formatDate', () => {
+  it('formats date in long format', () => {
+    const date = new Date('2025-01-25');
+    expect(formatDate(date)).toBe('January 25, 2025');
+  });
+
+  it('handles different months correctly', () => {
+    const date = new Date('2025-12-01');
+    expect(formatDate(date)).toBe('December 1, 2025');
+  });
+});
+
+describe('formatDateShort', () => {
+  it('formats date in short format', () => {
+    const date = new Date('2025-01-25');
+    expect(formatDateShort(date)).toBe('Jan 25, 2025');
+  });
+});
+
+describe('slugify', () => {
+  it('converts text to URL-safe slug', () => {
+    expect(slugify('Hello World')).toBe('hello-world');
+  });
+
+  it('removes special characters', () => {
+    expect(slugify("What's New?")).toBe('whats-new');
+  });
+
+  it('handles multiple spaces', () => {
+    expect(slugify('Too   Many   Spaces')).toBe('too-many-spaces');
+  });
+});
+
+describe('getReadingTime', () => {
+  it('calculates reading time for short content', () => {
+    const content = 'word '.repeat(200); // 200 words = 1 min
+    expect(getReadingTime(content)).toBe('1 min read');
+  });
+
+  it('calculates reading time for longer content', () => {
+    const content = 'word '.repeat(600); // 600 words = 3 min
+    expect(getReadingTime(content)).toBe('3 min read');
+  });
+});
+```
+
+#### Integration Test: Content Collections
+
+**File: `tests/integration/content.test.ts`**
+
+```typescript
+import { describe, it, expect, beforeAll } from 'vitest';
+import { getCollection } from 'astro:content';
+
+describe('Content Collections', () => {
+  let posts: Awaited<ReturnType<typeof getCollection>>;
+
+  beforeAll(async () => {
+    posts = await getCollection('writing');
+  });
+
+  it('loads writing collection', () => {
+    expect(posts).toBeDefined();
+    expect(Array.isArray(posts)).toBe(true);
+  });
+
+  it('each post has required frontmatter', () => {
+    for (const post of posts) {
+      expect(post.data.title).toBeDefined();
+      expect(post.data.date).toBeInstanceOf(Date);
+    }
+  });
+
+  it('filters out draft posts when requested', async () => {
+    const published = await getCollection('writing', ({ data }) => !data.draft);
+    const drafts = posts.filter((p) => p.data.draft);
+
+    expect(published.length).toBe(posts.length - drafts.length);
+  });
+
+  it('featured posts are a subset of all posts', async () => {
+    const featured = await getCollection('writing', ({ data }) => data.featured);
+
+    expect(featured.length).toBeLessThanOrEqual(posts.length);
+    featured.forEach((post) => {
+      expect(post.data.featured).toBe(true);
+    });
+  });
+});
+```
+
+#### Integration Test: RSS Feed
+
+**File: `tests/integration/rss.test.ts`**
+
+```typescript
+import { describe, it, expect } from 'vitest';
+
+describe('RSS Feed', () => {
+  it('generates valid RSS XML', async () => {
+    // Import the RSS handler
+    const { GET } = await import('../../src/pages/rss.xml');
+
+    const response = await GET({
+      site: new URL('https://bnapier.dev'),
+    } as any);
+
+    const xml = await response.text();
+
+    // Check XML structure
+    expect(xml).toContain('<?xml version="1.0" encoding="UTF-8"?>');
+    expect(xml).toContain('<rss version="2.0"');
+    expect(xml).toContain('<channel>');
+    expect(xml).toContain("<title>Barry Napier's Blog</title>");
+  });
+
+  it('includes all published posts', async () => {
+    const { GET } = await import('../../src/pages/rss.xml');
+    const { getCollection } = await import('astro:content');
+
+    const response = await GET({
+      site: new URL('https://bnapier.dev'),
+    } as any);
+
+    const xml = await response.text();
+    const posts = await getCollection('writing', ({ data }) => !data.draft);
+
+    // Each post title should appear in the feed
+    for (const post of posts) {
+      expect(xml).toContain(`<title>${post.data.title}</title>`);
+    }
+  });
+});
+```
+
+#### Component Test: BackLink
+
+**File: `src/components/BackLink.test.ts`**
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import BackLink from './BackLink.astro';
+
+describe('BackLink Component', () => {
+  it('renders with correct href and label', async () => {
+    const container = await AstroContainer.create();
+    const result = await container.renderToString(BackLink, {
+      props: { href: '/writing', label: 'Writing' },
+    });
+
+    expect(result).toContain('href="/writing"');
+    expect(result).toContain('Writing');
+  });
+
+  it('includes arrow icon', async () => {
+    const container = await AstroContainer.create();
+    const result = await container.renderToString(BackLink, {
+      props: { href: '/', label: 'Home' },
+    });
+
+    // SVG arrow should be present
+    expect(result).toContain('<svg');
+    expect(result).toContain('</svg>');
+  });
+});
+```
+
+#### E2E Test: Navigation Journey
+
+**File: `tests/e2e/navigation.spec.ts`**
+
+```typescript
+import { test, expect } from '@playwright/test';
+
+test.describe('Navigation', () => {
+  test('homepage to writing to post and back', async ({ page }) => {
+    // Start at homepage
+    await page.goto('/');
+    await expect(page).toHaveTitle(/Barry Napier/);
+
+    // Navigate to writing
+    await page.click('a[href="/writing"]');
+    await expect(page).toHaveURL('/writing');
+    await expect(page.locator('h1')).toContainText('Writing');
+
+    // Click first post
+    const firstPost = page.locator('article a').first();
+    const postTitle = await firstPost.textContent();
+    await firstPost.click();
+
+    // Verify on post page
+    await expect(page.locator('h1')).toContainText(postTitle!);
+
+    // Navigate back
+    await page.click('a:has-text("Writing")');
+    await expect(page).toHaveURL('/writing');
+  });
+
+  test('all main navigation links work', async ({ page }) => {
+    const routes = ['/', '/writing', '/projects', '/now'];
+
+    for (const route of routes) {
+      await page.goto(route);
+      const response = await page.goto(route);
+      expect(response?.status()).toBe(200);
+    }
+  });
+
+  test('404 page displays for invalid routes', async ({ page }) => {
+    await page.goto('/this-page-does-not-exist');
+    await expect(page.locator('h1')).toContainText('404');
+  });
+});
+```
+
+#### E2E Test: Dark Mode
+
+**File: `tests/e2e/dark-mode.spec.ts`**
+
+```typescript
+import { test, expect } from '@playwright/test';
+
+test.describe('Dark Mode', () => {
+  test.beforeEach(async ({ page }) => {
+    // Clear localStorage before each test
+    await page.goto('/');
+    await page.evaluate(() => localStorage.clear());
+  });
+
+  test('defaults to system preference', async ({ page }) => {
+    // Emulate dark mode preference
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await page.goto('/');
+
+    const html = page.locator('html');
+    await expect(html).toHaveClass(/dark/);
+  });
+
+  test('toggle switches theme', async ({ page }) => {
+    await page.goto('/');
+
+    const html = page.locator('html');
+    const toggle = page.locator('#theme-toggle');
+
+    // Get initial state
+    const initiallyDark = await html.evaluate((el) =>
+      el.classList.contains('dark')
+    );
+
+    // Click toggle
+    await toggle.click();
+
+    // Verify theme changed
+    if (initiallyDark) {
+      await expect(html).not.toHaveClass(/dark/);
+    } else {
+      await expect(html).toHaveClass(/dark/);
+    }
+  });
+
+  test('persists preference across page reload', async ({ page }) => {
+    await page.goto('/');
+
+    const toggle = page.locator('#theme-toggle');
+    const html = page.locator('html');
+
+    // Toggle to dark mode
+    await page.evaluate(() => localStorage.clear());
+    await page.goto('/');
+    await toggle.click();
+
+    // Verify dark class
+    const isDark = await html.evaluate((el) =>
+      el.classList.contains('dark')
+    );
+
+    // Reload page
+    await page.reload();
+
+    // Verify persistence
+    const stillDark = await html.evaluate((el) =>
+      el.classList.contains('dark')
+    );
+
+    expect(stillDark).toBe(isDark);
+  });
+
+  test('persists preference across navigation', async ({ page }) => {
+    await page.goto('/');
+
+    // Set to dark
+    await page.evaluate(() => localStorage.setItem('theme', 'dark'));
+    await page.goto('/');
+
+    // Navigate to another page
+    await page.click('a[href="/writing"]');
+
+    // Verify still dark
+    const html = page.locator('html');
+    await expect(html).toHaveClass(/dark/);
+  });
+});
+```
+
+#### E2E Test: SEO
+
+**File: `tests/e2e/seo.spec.ts`**
+
+```typescript
+import { test, expect } from '@playwright/test';
+
+test.describe('SEO Meta Tags', () => {
+  test('homepage has correct meta tags', async ({ page }) => {
+    await page.goto('/');
+
+    // Title
+    await expect(page).toHaveTitle('Barry Napier');
+
+    // Meta description
+    const description = page.locator('meta[name="description"]');
+    await expect(description).toHaveAttribute('content', /personal website/i);
+
+    // Open Graph
+    const ogTitle = page.locator('meta[property="og:title"]');
+    await expect(ogTitle).toHaveAttribute('content', 'Barry Napier');
+
+    const ogType = page.locator('meta[property="og:type"]');
+    await expect(ogType).toHaveAttribute('content', 'website');
+  });
+
+  test('blog post has article meta tags', async ({ page }) => {
+    // Navigate to a post
+    await page.goto('/writing');
+    await page.locator('article a').first().click();
+
+    // Should have article type
+    const ogType = page.locator('meta[property="og:type"]');
+    await expect(ogType).toHaveAttribute('content', 'article');
+
+    // Should have published time
+    const publishedTime = page.locator('meta[property="article:published_time"]');
+    await expect(publishedTime).toBeAttached();
+  });
+
+  test('canonical URLs are correct', async ({ page }) => {
+    const routes = ['/', '/writing', '/projects', '/now'];
+
+    for (const route of routes) {
+      await page.goto(route);
+
+      const canonical = page.locator('link[rel="canonical"]');
+      const href = await canonical.getAttribute('href');
+
+      expect(href).toContain('bnapier.dev');
+      expect(href).toContain(route === '/' ? '' : route);
+    }
+  });
+
+  test('RSS autodiscovery link exists', async ({ page }) => {
+    await page.goto('/');
+
+    const rssLink = page.locator('link[type="application/rss+xml"]');
+    await expect(rssLink).toHaveAttribute('href', '/rss.xml');
+  });
+});
+```
+
+### Package.json Test Scripts
+
+```json
+{
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest",
+    "test:unit": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:all": "npm run test:unit && npm run build && npm run test:e2e"
+  }
+}
+```
+
+### Test Dependencies to Install
+
+```bash
+# Vitest and utilities
+npm install -D vitest happy-dom @vitest/coverage-v8
+
+# Playwright
+npm install -D @playwright/test
+npx playwright install
+
+# Type definitions
+npm install -D @types/node
+```
+
+### CI/CD Integration
+
+**File: `.github/workflows/test.yml`**
+
+```yaml
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run check
+
+      - name: Unit & Integration tests
+        run: npm run test:unit
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E tests
+        run: npm run test:e2e --project=chromium
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+```
+
+### TDD by Phase
+
+| Phase | Tests to Write First |
+|-------|---------------------|
+| **1.5** | Setup test infrastructure, write utility tests (failing) |
+| **2** | No tests needed (styling) |
+| **3** | Content schema validation tests |
+| **4** | Component render tests for layouts |
+| **5** | Component tests for BackLink, PostList |
+| **6** | E2E navigation tests |
+| **7** | RSS feed integration tests |
+| **8** | No tests needed (static assets) |
+| **9** | Run full test suite |
+| **10** | E2E tests in CI pipeline |
 
 ---
 
@@ -145,6 +845,100 @@ export default defineConfig({
   }
 }
 ```
+
+---
+
+## Phase 1.5: Testing Infrastructure
+
+### Step 1.5.1: Install Testing Dependencies
+
+**Complexity:** Low
+**Dependencies:** Step 1.2
+
+```bash
+# Vitest and utilities
+npm install -D vitest happy-dom @vitest/coverage-v8
+
+# Playwright
+npm install -D @playwright/test
+npx playwright install
+```
+
+---
+
+### Step 1.5.2: Configure Vitest
+
+**Complexity:** Medium
+**Dependencies:** Step 1.5.1
+
+**File: `vitest.config.ts`**
+
+```typescript
+import { getViteConfig } from 'astro/config';
+
+export default getViteConfig({
+  test: {
+    environment: 'happy-dom',
+    include: ['src/**/*.test.ts', 'tests/integration/**/*.test.ts'],
+    globals: true,
+    coverage: {
+      provider: 'v8',
+      include: ['src/lib/**/*.ts'],
+      thresholds: {
+        statements: 80,
+        branches: 80,
+        functions: 80,
+        lines: 80,
+      },
+    },
+  },
+});
+```
+
+**Key Points:**
+- Uses `getViteConfig()` from Astro for proper integration
+- `happy-dom` is lighter than jsdom
+- Coverage thresholds enforce quality
+
+---
+
+### Step 1.5.3: Configure Playwright
+
+**Complexity:** Medium
+**Dependencies:** Step 1.5.1
+
+**File: `playwright.config.ts`**
+
+```typescript
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  use: {
+    baseURL: 'http://localhost:4321',
+    trace: 'on-first-retry',
+  },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+    { name: 'mobile-chrome', use: { ...devices['Pixel 5'] } },
+  ],
+  webServer: {
+    command: 'npm run preview',
+    url: 'http://localhost:4321',
+    reuseExistingServer: !process.env.CI,
+  },
+});
+```
+
+**Key Points:**
+- Tests across 3 desktop browsers + mobile
+- Auto-starts preview server before E2E tests
+- Captures traces on failure for debugging
 
 ---
 
@@ -656,6 +1450,17 @@ Phase 1: Project Init
     └── 1.4 Configure TypeScript                        │
             │                                           │
             v                                           │
+Phase 1.5: Testing Infrastructure                       │
+    │                                                   │
+    ├── 1.5.1 Install Test Dependencies                 │
+    │       │                                           │
+    │       v                                           │
+    ├── 1.5.2 Configure Vitest                          │
+    │       │                                           │
+    │       v                                           │
+    └── 1.5.3 Configure Playwright                      │
+            │                                           │
+            v                                           │
 Phase 2: Styling ───────────────────────────────────────┤
     │                                                   │
     ├── 2.1 Global Styles                               │
@@ -729,6 +1534,12 @@ Phase 10: Deployment
 - [ ] TypeScript compilation passes (`npm run check`)
 - [ ] Basic Astro page renders at localhost:4321
 
+### After Phase 1.5 (Testing Infrastructure)
+- [ ] `npm run test` runs Vitest without errors
+- [ ] `npm run test:e2e` runs Playwright without errors
+- [ ] Coverage report generates correctly
+- [ ] First failing test written for utilities (TDD red phase)
+
 ### After Phase 2 (Styling)
 - [ ] Tailwind classes apply correctly
 - [ ] CSS custom properties work
@@ -788,8 +1599,10 @@ bnapier.dev/
 ├── src/
 │   ├── components/
 │   │   ├── BackLink.astro
+│   │   ├── BackLink.test.ts       # Component test
 │   │   ├── Footer.astro
 │   │   ├── PostList.astro
+│   │   ├── PostList.test.ts       # Component test
 │   │   └── ThemeToggle.astro
 │   ├── content/
 │   │   └── writing/
@@ -800,7 +1613,8 @@ bnapier.dev/
 │   │   ├── Base.astro
 │   │   └── Post.astro
 │   ├── lib/
-│   │   └── utils.ts
+│   │   ├── utils.ts
+│   │   └── utils.test.ts          # Unit tests
 │   ├── pages/
 │   │   ├── 404.astro
 │   │   ├── index.astro
@@ -812,10 +1626,23 @@ bnapier.dev/
 │   │       └── [...slug].astro
 │   └── styles/
 │       └── global.css
+├── tests/
+│   ├── integration/
+│   │   ├── content.test.ts        # Content collection tests
+│   │   └── rss.test.ts            # RSS feed tests
+│   └── e2e/
+│       ├── navigation.spec.ts     # User journey tests
+│       ├── dark-mode.spec.ts      # Theme persistence tests
+│       └── seo.spec.ts            # Meta tag verification
+├── .github/
+│   └── workflows/
+│       └── test.yml               # CI pipeline
 ├── astro.config.mjs
 ├── content.config.ts
 ├── tailwind.config.mjs
 ├── tsconfig.json
+├── vitest.config.ts               # Unit/integration test config
+├── playwright.config.ts           # E2E test config
 ├── package.json
 ├── vercel.json (optional)
 └── README.md
@@ -836,6 +1663,12 @@ bnapier.dev/
 | **Navigation** | Inline links + back links | Matches minimal design philosophy (no nav bar) |
 | **Syntax highlighting** | Shiki (built-in) | Zero config, dual theme support, ayu-dark + github-light |
 | **Vercel adapter** | None | Static sites don't need adapter; auto-detected |
+| **Unit test framework** | Vitest | Vite-native, fast, integrates with Astro via `getViteConfig()` |
+| **E2E test framework** | Playwright | Cross-browser, reliable, built-in web server management |
+| **DOM environment** | happy-dom | Lighter than jsdom, sufficient for component tests |
+| **Test co-location** | Unit tests alongside source | Easier to maintain, find related tests, TDD workflow |
+| **Component testing** | Astro Container API | Official Astro approach for rendering components in tests |
+| **Coverage threshold** | 80% for utilities | Pragmatic target; don't test trivial markup |
 
 ---
 
@@ -848,6 +1681,11 @@ bnapier.dev/
 | Content Layer API changes | Use `post.id` not `post.slug`, `render(post)` not `post.render()` |
 | Flash of incorrect theme | Use inline script in `<head>` with `is:inline` directive |
 | RSS full content rendering | Start with descriptions; add full content later if needed |
+| Astro Container API experimental | API is stable enough for testing; pin Astro version if needed |
+| Vitest + Astro configuration | Use `getViteConfig()` from Astro, not plain `defineConfig` |
+| E2E tests need built site | Playwright `webServer` config auto-runs `npm run preview` |
+| Component tests import issues | Ensure `vitest.config.ts` uses Astro's vite config helper |
+| Flaky dark mode E2E tests | Clear localStorage in `beforeEach`, use explicit waits |
 
 ---
 

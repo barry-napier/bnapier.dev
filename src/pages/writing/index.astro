@@ -1,0 +1,54 @@
+---
+/**
+ * Writing Index Page - List of all blog posts
+ *
+ * Features:
+ * - Back link to home
+ * - Page title and description
+ * - Full post list sorted by date (newest first)
+ * - Filters out drafts
+ */
+import Base from '@layouts/Base.astro';
+import BackLink from '@/components/BackLink.astro';
+import PostList from '@/components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+// Get all published posts, sorted by date (newest first)
+const posts = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Writing" description="Thoughts on software development, AI, and the lessons learned along the way.">
+  <BackLink href="/" label="Home" />
+
+  <header class="page-header">
+    <h1>Writing</h1>
+    <p class="description">
+      Thoughts on software development, AI, and the lessons learned along the way.
+    </p>
+  </header>
+
+  {posts.length > 0 ? (
+    <PostList posts={posts} showDescription />
+  ) : (
+    <p class="no-posts">No posts yet. Check back soon!</p>
+  )}
+</Base>
+
+<style>
+  .page-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .description {
+    color: var(--color-text-muted);
+  }
+
+  .no-posts {
+    color: var(--color-text-muted);
+  }
+</style>

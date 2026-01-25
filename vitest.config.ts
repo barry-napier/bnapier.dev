@@ -1,10 +1,7 @@
-import { getViteConfig } from 'astro/config';
+import { defineConfig } from 'vitest/config';
 
-export default getViteConfig({
+export default defineConfig({
   test: {
-    // Use happy-dom for faster tests (lighter than jsdom)
-    environment: 'happy-dom',
-
     // Include test files
     include: ['src/**/*.test.ts', 'tests/integration/**/*.test.ts'],
 

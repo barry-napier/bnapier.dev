@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design System - bnapier.dev
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Custom Properties via Tailwind 4.x @theme
+   -------------------------------------------------------------------------- */
+@theme {
+  /* Colors - Light Mode (default) */
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b6b6b;
+  --color-background: #ffffff;
+  --color-background-subtle: #f5f5f5;
+  --color-accent: #0066cc;
+  --color-accent-hover: #0052a3;
+  --color-border: #e5e5e5;
+
+  /* Typography - System Font Stack */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Layout Constraints */
+  --max-width-content: 640px;
+  --max-width-wide: 800px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode Overrides
+   -------------------------------------------------------------------------- */
+.dark {
+  --color-text: #e5e5e5;
+  --color-text-muted: #a3a3a3;
+  --color-background: #0a0a0a;
+  --color-background-subtle: #171717;
+  --color-accent: #60a5fa;
+  --color-accent-hover: #93c5fd;
+  --color-border: #262626;
+}
+
+/* --------------------------------------------------------------------------
+   Base Element Styles
+   -------------------------------------------------------------------------- */
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+/* Smooth color transitions for theme switching */
+html,
+body {
+  transition: background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+h2 {
+  font-size: var(--text-xl);
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-md);
+}
+
+h3 {
+  font-size: var(--text-lg);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+}
+
+/* --------------------------------------------------------------------------
+   Links
+   -------------------------------------------------------------------------- */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Prose Content (Markdown Rendered Content)
+   -------------------------------------------------------------------------- */
+.prose {
+  color: var(--color-text);
+  line-height: var(--leading-relaxed);
+}
+
+.prose > * + * {
+  margin-top: var(--spacing-md);
+}
+
+.prose h2 {
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.prose h3 {
+  margin-top: var(--spacing-xl);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: var(--spacing-lg);
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.prose li::marker {
+  color: var(--color-text-muted);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: var(--spacing-md);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--spacing-2xl) 0;
+}
+
+/* Inline code */
+.prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--color-background-subtle);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Code Blocks (Shiki Dual Theme Support)
+   -------------------------------------------------------------------------- */
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  padding: var(--spacing-md);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: var(--spacing-lg) 0;
+}
+
+/* Shiki dual theme - Light mode */
+.shiki,
+.shiki span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+}
+
+/* Shiki dual theme - Dark mode */
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+/* Code block background */
+pre.shiki {
+  background-color: var(--color-background-subtle) !important;
+}
+
+.dark pre.shiki {
+  background-color: var(--color-background-subtle) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Tables
+   -------------------------------------------------------------------------- */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-lg) 0;
+}
+
+.prose th,
+.prose td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.prose th {
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Images
+   -------------------------------------------------------------------------- */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: var(--spacing-lg) 0;
+}
+
+/* --------------------------------------------------------------------------
+   Utility Classes
+   -------------------------------------------------------------------------- */
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Focus States (Accessibility)
+   -------------------------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Selection
+   -------------------------------------------------------------------------- */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.dark ::selection {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+}

@@ -78,6 +78,14 @@ const ogImageURL = new URL(ogImage, Astro.site);
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
+    <!-- Google Fonts - Distinctive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Theme Initialization Script - MUST be inline to prevent flash -->
     <script is:inline>
       const getTheme = () => {
@@ -91,13 +99,13 @@ const ogImageURL = new URL(ogImage, Astro.site);
   </head>
   <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header animate-in-1">
       <a href="/" class="site-name">Barry Napier</a>
       <ThemeToggle />
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main class="animate-in-2">
       <slot />
     </main>
 
@@ -117,14 +125,19 @@ const ogImageURL = new URL(ogImage, Astro.site);
   }
 
   .site-name {
-    font-weight: 600;
-    font-size: var(--text-lg);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--text-xl);
     color: var(--color-text);
     text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      transform var(--transition-fast);
   }
 
   .site-name:hover {
     color: var(--color-accent);
     text-decoration: none;
+    transform: translateX(2px);
   }
 </style>

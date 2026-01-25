@@ -167,7 +167,9 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   Links - Clean underlined style with micro-interactions
+   Links - Clean underlined style
+   Note: Text links don't need scale feedback - only buttons and controls do.
+   This follows Emil Kowalski's "purpose" principle.
    -------------------------------------------------------------------------- */
 a {
   color: var(--color-text);
@@ -176,18 +178,12 @@ a {
   text-underline-offset: 3px;
   transition:
     color var(--transition-fast),
-    text-decoration-color var(--transition-fast),
-    transform var(--transition-fast);
+    text-decoration-color var(--transition-fast);
 }
 
 a:hover {
   color: var(--color-text);
   text-decoration-color: var(--color-text);
-}
-
-/* Subtle scale feedback on press - Emil Kowalski principle */
-a:active {
-  transform: scale(0.97);
 }
 
 /* --------------------------------------------------------------------------
@@ -362,15 +358,17 @@ pre.shiki {
 
 /* --------------------------------------------------------------------------
    Button Base Styles with Micro-interactions
+   Buttons ARE interactive controls - they get tactile feedback.
+   Using spring easing for organic feel.
    -------------------------------------------------------------------------- */
 button {
   transition:
     color var(--transition-fast),
     background-color var(--transition-fast),
-    transform var(--transition-fast);
+    transform var(--duration-fast) var(--ease-spring);
 }
 
-/* Subtle scale feedback on press - Emil Kowalski principle */
+/* Subtle scale feedback on press */
 button:active {
   transform: scale(0.97);
 }
@@ -499,13 +497,11 @@ button:focus-visible {
   }
 
   /* Disable micro-interaction transforms */
-  a,
   button,
   .hover-lift {
     transition: none;
   }
 
-  a:active,
   button:active,
   .hover-lift:hover,
   .hover-lift:active {
@@ -526,8 +522,9 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
+/* On press, return to baseline - feels like pressing down */
 .hover-lift:active {
-  transform: scale(0.97);
+  transform: translateY(0);
 }
 
 /* Glow effect removed for minimal aesthetic */

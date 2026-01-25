@@ -42,26 +42,10 @@ const { href, label = 'Back' } = Astro.props;
     font-size: var(--text-sm);
     text-decoration: none;
     margin-bottom: var(--spacing-xl);
-    transition:
-      color var(--transition-fast),
-      transform var(--transition-fast);
+    transition: color var(--transition-fast);
   }
 
   .back-link:hover {
     color: var(--color-text);
-  }
-
-  .back-link:active {
-    transform: scale(0.97);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .back-link {
-      transition: none;
-    }
-
-    .back-link:active {
-      transform: none;
-    }
   }
 </style>

@@ -10,7 +10,9 @@
  * - Inline theme initialization script (prevents flash)
  * - Header with site name and theme toggle
  * - Footer
+ * - View Transitions for smooth navigation
  */
+import { ViewTransitions } from 'astro:transitions';
 import '@/styles/global.css';
 import ThemeToggle from '@/components/ThemeToggle.astro';
 import Footer from '@/components/Footer.astro';
@@ -96,16 +98,19 @@ const ogImageURL = new URL(ogImage, Astro.site);
       const theme = getTheme();
       document.documentElement.classList.toggle('dark', theme === 'dark');
     </script>
+
+    <!-- View Transitions for smooth navigation between pages -->
+    <ViewTransitions />
   </head>
   <body>
     <!-- Header -->
-    <header class="header animate-in-1">
+    <header class="header">
       <a href="/" class="site-name">Barry Napier</a>
       <ThemeToggle />
     </header>
 
     <!-- Main Content -->
-    <main class="animate-in-2">
+    <main>
       <slot />
     </main>
 

@@ -10,7 +10,7 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="footer animate-in-5">
+<footer class="footer">
   <p>&copy; {currentYear} Barry Napier</p>
   <nav class="footer-links">
     <a href="https://github.com/bnapier" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -46,26 +46,10 @@ const currentYear = new Date().getFullYear();
     text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 3px;
-    transition:
-      text-decoration-color var(--transition-fast),
-      transform var(--transition-fast);
+    transition: text-decoration-color var(--transition-fast);
   }
 
   .footer-links a:hover {
     text-decoration-color: var(--color-text-muted);
-  }
-
-  .footer-links a:active {
-    transform: scale(0.97);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .footer-links a {
-      transition: none;
-    }
-
-    .footer-links a:active {
-      transform: none;
-    }
   }
 </style>

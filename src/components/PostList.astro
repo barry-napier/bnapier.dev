@@ -81,17 +81,11 @@ const { posts, showDescription = false } = Astro.props;
     text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 3px;
-    transition:
-      text-decoration-color var(--transition-fast),
-      transform var(--transition-fast);
+    transition: text-decoration-color var(--transition-fast);
   }
 
   .post-link:hover .post-title {
     text-decoration-color: var(--color-text);
-  }
-
-  .post-link:active .post-title {
-    transform: scale(0.97);
   }
 
   .post-date {
@@ -133,15 +127,5 @@ const { posts, showDescription = false } = Astro.props;
   }
   .post-item:nth-child(n + 6) {
     animation-delay: 250ms;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .post-title {
-      transition: none;
-    }
-
-    .post-link:active .post-title {
-      transform: none;
-    }
   }
 </style>

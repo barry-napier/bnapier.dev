@@ -59,15 +59,15 @@ test.describe('Content Rendering', () => {
 });
 
 test.describe('Design System', () => {
-  test('animation classes are applied on page load', async ({ page }) => {
+  test('page structure loads correctly', async ({ page }) => {
     await page.goto('/');
 
-    // Check that animation classes exist
-    const animatedHeader = page.locator('header.animate-in-1');
-    await expect(animatedHeader).toBeVisible();
+    // Check that header and main exist (animations removed per Emil Kowalski philosophy)
+    const header = page.locator('header');
+    await expect(header).toBeVisible();
 
-    const animatedMain = page.locator('main.animate-in-2');
-    await expect(animatedMain).toBeVisible();
+    const main = page.locator('main');
+    await expect(main).toBeVisible();
   });
 
   test('navigation links have hover underline effect', async ({ page }) => {

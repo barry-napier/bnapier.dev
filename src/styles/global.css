@@ -69,7 +69,10 @@
   --max-width-content: 640px;
   --max-width-wide: 800px;
 
-  /* Transitions */
+  /* Transitions
+     Philosophy: All UI animations under 300ms, ease-out curves.
+     Micro-interactions use scale(0.97) on :active for tactile feedback.
+     Always respect prefers-reduced-motion. */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -165,6 +168,8 @@ p {
 
 /* --------------------------------------------------------------------------
    Links - Clean underlined style
+   Note: Text links don't need scale feedback - only buttons and controls do.
+   This follows Emil Kowalski's "purpose" principle.
    -------------------------------------------------------------------------- */
 a {
   color: var(--color-text);
@@ -352,6 +357,23 @@ pre.shiki {
 }
 
 /* --------------------------------------------------------------------------
+   Button Base Styles with Micro-interactions
+   Buttons ARE interactive controls - they get tactile feedback.
+   Using spring easing for organic feel.
+   -------------------------------------------------------------------------- */
+button {
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    transform var(--duration-fast) var(--ease-spring);
+}
+
+/* Subtle scale feedback on press */
+button:active {
+  transform: scale(0.97);
+}
+
+/* --------------------------------------------------------------------------
    Focus States (Accessibility)
    -------------------------------------------------------------------------- */
 a:focus-visible,
@@ -461,7 +483,7 @@ button:focus-visible {
   animation-delay: 200ms;
 }
 
-/* Reduce motion for accessibility */
+/* Reduce motion for accessibility - Emil Kowalski principle */
 @media (prefers-reduced-motion: reduce) {
   .animate-in,
   .animate-in-1,
@@ -471,6 +493,18 @@ button:focus-visible {
   .animate-in-5 {
     animation: none;
     opacity: 1;
+    transform: none;
+  }
+
+  /* Disable micro-interaction transforms */
+  button,
+  .hover-lift {
+    transition: none;
+  }
+
+  button:active,
+  .hover-lift:hover,
+  .hover-lift:active {
     transform: none;
   }
 }
@@ -486,6 +520,11 @@ button:focus-visible {
 
 .hover-lift:hover {
   transform: translateY(-2px);
+}
+
+/* On press, return to baseline - feels like pressing down */
+.hover-lift:active {
+  transform: translateY(0);
 }
 
 /* Glow effect removed for minimal aesthetic */

@@ -15,6 +15,7 @@
  */
 import { ViewTransitions } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import '@/styles/global.css';
 import Spotlight from '@/components/Spotlight.astro';
 import ThemeToggle from '@/components/ThemeToggle.astro';
@@ -124,6 +125,10 @@ const navItems = [
 
     <!-- View Transitions for smooth navigation between pages -->
     <ViewTransitions />
+
+    <!-- Vercel Analytics and Speed Insights -->
+    <Analytics />
+    <SpeedInsights />
   </head>
   <body class="font-sans antialiased">
     <!-- Spotlight Effect -->
@@ -168,7 +173,6 @@ const navItems = [
       <!-- Footer -->
       <Footer />
     </div>
-    <Analytics />
   </body>
 </html>
 

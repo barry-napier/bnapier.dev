@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, date } = post.data;
+const { title, description, date, tags } = post.data;
 
 // Format the date for display
 const formattedDate = date.toLocaleDateString('en-US', {
@@ -29,14 +29,23 @@ const formattedDate = date.toLocaleDateString('en-US', {
 ---
 
 <Base title={title} description={description} ogType="article" publishedTime={date}>
-  <BackLink href="/writing" label="Back to writing" />
+  <BackLink href="/writing" label="Writing" />
 
-  <article>
+  <article class="article">
     <header class="post-header">
       <h1 class="post-title">{title}</h1>
-      <time datetime={date.toISOString()} class="post-date text-muted text-sm">
+      <time datetime={date.toISOString()} class="post-date">
         {formattedDate}
       </time>
+      {
+        tags && tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )
+      }
     </header>
 
     <div class="prose">
@@ -46,19 +55,47 @@ const formattedDate = date.toLocaleDateString('en-US', {
 </Base>
 
 <style>
+  .article {
+    margin-bottom: var(--spacing-2xl);
+  }
+
   .post-header {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
   }
 
   .post-title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
     margin-bottom: var(--spacing-sm);
+  }
+
+  @media (min-width: 640px) {
+    .post-title {
+      font-size: var(--text-4xl);
+    }
   }
 
   .post-date {
     display: block;
+    font-size: var(--text-sm);
+    color: var(--muted-foreground);
+    margin-bottom: var(--spacing-md);
   }
 
-  article {
-    margin-bottom: var(--spacing-2xl);
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.125rem 0.625rem;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
   }
 </style>

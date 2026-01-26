@@ -2,13 +2,12 @@
 /**
  * Projects Page - List of projects and work
  *
- * Static page with:
- * - Project list (hardcoded)
- * - Each project: name, description, tech stack, links
- * - Simple list format
+ * Features:
+ * - Project cards with hover effects
+ * - Tech stack tags
+ * - External link indicator
  */
 import Base from '@layouts/Base.astro';
-import BackLink from '@/components/BackLink.astro';
 
 interface Project {
   name: string;
@@ -21,8 +20,9 @@ interface Project {
 const projects: Project[] = [
   {
     name: 'bnapier.dev',
-    description: 'This personal website and blog, built with Astro 5 and Tailwind CSS 4.',
-    tech: ['Astro', 'TypeScript', 'Tailwind CSS'],
+    description:
+      'This personal website. Built with Astro, Tailwind CSS, and the Geist design system.',
+    tech: ['Astro', 'Tailwind', 'TypeScript'],
     github: 'https://github.com/bnapier/bnapier.dev',
   },
   // Add more projects as needed
@@ -30,112 +30,148 @@ const projects: Project[] = [
 ---
 
 <Base title="Projects" description="Things I've built and worked on.">
-  <BackLink href="/" label="Home" />
-
   <header class="page-header">
-    <h1>Projects</h1>
-    <p class="description">Things I've built and worked on.</p>
+    <h1 class="page-title">Projects</h1>
+    <p class="page-description">Things I've built and worked on.</p>
   </header>
 
-  <ul class="project-list">
+  <div class="projects-grid">
     {
       projects.map((project) => (
-        <li class="project">
-          <h2 class="project-name">
-            {project.link ? (
-              <a href={project.link} target="_blank" rel="noopener noreferrer">
-                {project.name}
-              </a>
-            ) : (
-              project.name
-            )}
-          </h2>
-          <p class="project-description">{project.description}</p>
-          <div class="project-meta">
-            <span class="tech-stack">{project.tech.join(' · ')}</span>
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="github-link"
-              >
-                GitHub
-              </a>
-            )}
+        <a
+          href={project.github || project.link || '#'}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-card"
+        >
+          <div class="project-header">
+            <h3 class="project-name">{project.name}</h3>
+            <svg
+              class="arrow-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M7 7h10v10" />
+              <path d="M7 17 17 7" />
+            </svg>
           </div>
-        </li>
+          <p class="project-description">{project.description}</p>
+          <div class="project-tech">
+            {project.tech.map((t) => (
+              <span class="tech-tag">{t}</span>
+            ))}
+          </div>
+        </a>
       ))
     }
-  </ul>
+  </div>
 </Base>
 
 <style>
   .page-header {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: 3rem;
   }
 
-  .page-header h1 {
-    margin-bottom: var(--spacing-sm);
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin-bottom: var(--spacing-md);
   }
 
-  .description {
-    color: var(--color-text-muted);
+  @media (min-width: 640px) {
+    .page-title {
+      font-size: var(--text-4xl);
+    }
   }
 
-  .project-list {
-    list-style: none;
-    padding: 0;
+  .page-description {
+    font-size: var(--text-base);
+    line-height: 1.75;
+    color: var(--muted-foreground);
     margin: 0;
   }
 
-  .project {
-    margin-bottom: var(--spacing-xl);
-    padding-bottom: var(--spacing-lg);
-    border-bottom: 1px solid var(--color-border);
+  .projects-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 3rem;
   }
 
-  .project:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
+  .project-card {
+    display: block;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background-color: var(--card);
+    text-decoration: none;
+    transition:
+      border-color 200ms ease,
+      background-color 200ms ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--muted-foreground);
+    text-decoration: none;
+  }
+
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .project-name {
-    font-size: var(--text-lg);
-    margin-bottom: var(--spacing-sm);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--foreground);
+    margin: 0;
   }
 
-  .project-name a {
-    color: var(--color-text);
-    text-decoration: none;
+  .arrow-icon {
+    flex-shrink: 0;
+    color: var(--muted-foreground);
+    opacity: 0;
+    transform: translate(2px, -2px);
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease;
   }
 
-  .project-name a:hover {
-    color: var(--color-accent);
+  .project-card:hover .arrow-icon {
+    opacity: 1;
+    transform: translate(0, 0);
   }
 
   .project-description {
-    color: var(--color-text-muted);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .project-meta {
-    display: flex;
-    gap: var(--spacing-md);
+    margin-top: 0.75rem;
+    margin-bottom: 0;
     font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--muted-foreground);
   }
 
-  .tech-stack {
-    color: var(--color-text-muted);
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 
-  .github-link {
-    color: var(--color-text-muted);
-    text-decoration: none;
-  }
-
-  .github-link:hover {
-    color: var(--color-accent);
+  .tech-tag {
+    padding: 0.125rem 0.625rem;
+    font-size: var(--text-xs);
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
   }
 </style>

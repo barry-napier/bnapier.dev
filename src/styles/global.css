@@ -1,7 +1,9 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
 /* ==========================================================================
    Design System - bnapier.dev
+   Geist-inspired dark theme with high contrast
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -16,31 +18,101 @@
 @custom-variant dark (&:is(.dark *));
 
 /* --------------------------------------------------------------------------
-   Custom Properties via Tailwind 4.x @theme
+   CSS Custom Properties - Geist Design System
+   Dark mode by default with pure neutral grays
    -------------------------------------------------------------------------- */
-@theme {
-  /* Colors - Light Mode (default) - Minimal, neutral palette */
-  --color-text: oklch(0.13 0 0);
-  --color-text-muted: oklch(0.5 0 0);
-  --color-background: oklch(0.995 0 0);
-  --color-background-subtle: oklch(0.97 0 0);
-  --color-accent: oklch(0.13 0 0);
-  --color-accent-hover: oklch(0.35 0 0);
-  --color-accent-subtle: oklch(0.95 0 0);
-  --color-border: oklch(0.9 0 0);
+:root {
+  /* Geist Design System - Pure neutral grays, high contrast */
+  --background: #000000;
+  --foreground: #ededed;
+  --card: #0a0a0a;
+  --card-foreground: #ededed;
+  --popover: #0a0a0a;
+  --popover-foreground: #ededed;
+  --primary: #ededed;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ededed;
+  --muted: #1a1a1a;
+  --muted-foreground: #a1a1a1;
+  --accent: #1a1a1a;
+  --accent-foreground: #ededed;
+  --destructive: #ff4444;
+  --destructive-foreground: #ededed;
+  --border: #2e2e2e;
+  --input: #1a1a1a;
+  --ring: #ededed;
+  --radius: 0.5rem;
 
-  /* Secondary accent - subtle warm tone for occasional highlights */
-  --color-accent-secondary: oklch(0.6 0.12 30);
+  /* Legacy mappings for existing components */
+  --color-text: var(--foreground);
+  --color-text-muted: var(--muted-foreground);
+  --color-background: var(--background);
+  --color-background-subtle: var(--card);
+  --color-accent: var(--foreground);
+  --color-accent-hover: var(--muted-foreground);
+  --color-accent-subtle: var(--secondary);
+  --color-border: var(--border);
+}
 
-  /* Typography - Clean Sans-Serif Throughout */
-  --font-display:
-    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  --font-sans:
-    'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+/* Light mode (when .dark class is NOT present and user prefers light) */
+.light {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #0a0a0a;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #0a0a0a;
+}
 
+/* --------------------------------------------------------------------------
+   Tailwind v4 @theme Configuration
+   -------------------------------------------------------------------------- */
+@theme inline {
+  --font-sans: 'Geist Sans', 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* --------------------------------------------------------------------------
+   Typography Tokens
+   -------------------------------------------------------------------------- */
+:root {
   /* Font Sizes */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -66,13 +138,10 @@
   --spacing-3xl: 4rem;
 
   /* Layout Constraints */
-  --max-width-content: 640px;
+  --max-width-content: 42rem;
   --max-width-wide: 800px;
 
-  /* Transitions
-     Philosophy: All UI animations under 300ms, ease-out curves.
-     Micro-interactions use scale(0.97) on :active for tactile feedback.
-     Always respect prefers-reduced-motion. */
+  /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -88,50 +157,29 @@
 }
 
 /* --------------------------------------------------------------------------
-   Dark Mode Overrides - OKLCH for perceptual uniformity
+   Base Styles
    -------------------------------------------------------------------------- */
-.dark {
-  --color-text: oklch(0.92 0 0);
-  --color-text-muted: oklch(0.6 0 0);
-  --color-background: oklch(0.12 0 0);
-  --color-background-subtle: oklch(0.16 0 0);
-  --color-accent: oklch(0.92 0 0);
-  --color-accent-hover: oklch(0.75 0 0);
-  --color-accent-subtle: oklch(0.2 0 0);
-  --color-border: oklch(0.22 0 0);
-  --color-accent-secondary: oklch(0.65 0.1 30);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100vh;
+  }
 }
 
 /* --------------------------------------------------------------------------
-   Base Element Styles
-   -------------------------------------------------------------------------- */
-html {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: var(--leading-normal);
-  color: var(--color-text);
-  background-color: var(--color-background);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  min-height: 100vh;
-  max-width: var(--max-width-content);
-  margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
-}
-
-/* Smooth color transitions for theme switching */
-html,
-body {
-  transition:
-    background-color var(--transition-normal),
-    color var(--transition-normal);
-}
-
-/* --------------------------------------------------------------------------
-   Typography - Clean sans-serif headings
+   Typography
    -------------------------------------------------------------------------- */
 h1,
 h2,
@@ -139,10 +187,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display);
   font-weight: 600;
   line-height: var(--leading-tight);
   letter-spacing: -0.02em;
+  color: var(--foreground);
 }
 
 h1 {
@@ -167,30 +215,27 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   Links - Clean underlined style
-   Note: Text links don't need scale feedback - only buttons and controls do.
-   This follows Emil Kowalski's "purpose" principle.
+   Links - Geist-style underlined links
    -------------------------------------------------------------------------- */
 a {
-  color: var(--color-text);
+  color: var(--foreground);
   text-decoration: underline;
-  text-decoration-color: var(--color-border);
-  text-underline-offset: 3px;
+  text-decoration-color: var(--border);
+  text-underline-offset: 4px;
   transition:
     color var(--transition-fast),
     text-decoration-color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-text);
-  text-decoration-color: var(--color-text);
+  text-decoration-color: var(--foreground);
 }
 
 /* --------------------------------------------------------------------------
    Prose Content (Markdown Rendered Content)
    -------------------------------------------------------------------------- */
 .prose {
-  color: var(--color-text);
+  color: var(--foreground);
   line-height: var(--leading-relaxed);
 }
 
@@ -201,7 +246,7 @@ a:hover {
 .prose h2 {
   margin-top: var(--spacing-2xl);
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
 }
 
 .prose h3 {
@@ -226,13 +271,13 @@ a:hover {
 }
 
 .prose li::marker {
-  color: var(--color-text-muted);
+  color: var(--muted-foreground);
 }
 
 .prose blockquote {
-  border-left: 3px solid var(--color-border);
+  border-left: 3px solid var(--border);
   padding-left: var(--spacing-md);
-  color: var(--color-text-muted);
+  color: var(--muted-foreground);
   font-style: italic;
 }
 
@@ -246,7 +291,7 @@ a:hover {
 
 .prose hr {
   border: none;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--border);
   margin: var(--spacing-2xl) 0;
 }
 
@@ -254,7 +299,7 @@ a:hover {
 .prose code:not(pre code) {
   font-family: var(--font-mono);
   font-size: 0.875em;
-  background-color: var(--color-background-subtle);
+  background-color: var(--secondary);
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
 }
@@ -267,32 +312,25 @@ pre {
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
   padding: var(--spacing-md);
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   overflow-x: auto;
   margin: var(--spacing-lg) 0;
+  background-color: var(--card) !important;
 }
 
-/* Shiki dual theme - Light mode */
+/* Shiki dual theme */
 .shiki,
 .shiki span {
   color: var(--shiki-light) !important;
   background-color: var(--shiki-light-bg) !important;
 }
 
-/* Shiki dual theme - Dark mode */
 .dark .shiki,
-.dark .shiki span {
+.dark .shiki span,
+:root .shiki,
+:root .shiki span {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
-}
-
-/* Code block background */
-pre.shiki {
-  background-color: var(--color-background-subtle) !important;
-}
-
-.dark pre.shiki {
-  background-color: var(--color-background-subtle) !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -308,7 +346,7 @@ pre.shiki {
 .prose td {
   padding: var(--spacing-sm) var(--spacing-md);
   text-align: left;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .prose th {
@@ -321,7 +359,7 @@ pre.shiki {
 .prose img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: var(--radius);
   margin: var(--spacing-lg) 0;
 }
 
@@ -329,7 +367,7 @@ pre.shiki {
    Utility Classes
    -------------------------------------------------------------------------- */
 .text-muted {
-  color: var(--color-text-muted);
+  color: var(--muted-foreground);
 }
 
 .text-sm {
@@ -358,8 +396,6 @@ pre.shiki {
 
 /* --------------------------------------------------------------------------
    Button Base Styles with Micro-interactions
-   Buttons ARE interactive controls - they get tactile feedback.
-   Using spring easing for organic feel.
    -------------------------------------------------------------------------- */
 button {
   transition:
@@ -368,7 +404,6 @@ button {
     transform var(--duration-fast) var(--ease-spring);
 }
 
-/* Subtle scale feedback on press */
 button:active {
   transform: scale(0.97);
 }
@@ -378,7 +413,7 @@ button:active {
    -------------------------------------------------------------------------- */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
 
@@ -386,13 +421,8 @@ button:focus-visible {
    Selection
    -------------------------------------------------------------------------- */
 ::selection {
-  background-color: var(--color-accent);
-  color: white;
-}
-
-.dark ::selection {
-  background-color: var(--color-accent);
-  color: var(--color-background);
+  background-color: var(--foreground);
+  color: var(--background);
 }
 
 /* --------------------------------------------------------------------------
@@ -449,10 +479,8 @@ button:focus-visible {
   }
 }
 
-/* Visual texture removed for clean minimal aesthetic */
-
 /* --------------------------------------------------------------------------
-   Stagger Animation Classes for Page Load
+   Stagger Animation Classes
    -------------------------------------------------------------------------- */
 .animate-in {
   animation: fade-in-up var(--duration-slow) var(--ease-out) both;
@@ -483,7 +511,7 @@ button:focus-visible {
   animation-delay: 200ms;
 }
 
-/* Reduce motion for accessibility - Emil Kowalski principle */
+/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .animate-in,
   .animate-in-1,
@@ -496,7 +524,6 @@ button:focus-visible {
     transform: none;
   }
 
-  /* Disable micro-interaction transforms */
   button,
   .hover-lift {
     transition: none;
@@ -522,27 +549,6 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
-/* On press, return to baseline - feels like pressing down */
 .hover-lift:active {
   transform: translateY(0);
-}
-
-/* Glow effect removed for minimal aesthetic */
-
-/* --------------------------------------------------------------------------
-   Accent Decorative Line - Simple minimal underline
-   -------------------------------------------------------------------------- */
-.accent-line {
-  position: relative;
-}
-
-.accent-line::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 2rem;
-  height: 2px;
-  background: var(--color-text);
-  border-radius: 1px;
 }

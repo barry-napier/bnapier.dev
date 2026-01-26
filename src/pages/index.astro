@@ -19,12 +19,15 @@ const featuredPosts = (
 ---
 
 <Base>
+  <!-- Intro Section -->
   <section class="intro">
-    <p>
+    <p class="intro-text">
       I'm a software engineer passionate about building great products and exploring the
-      intersection of technology and human experience. I write about software development, AI, and
-      the lessons learned along the way.
+      intersection of technology and human experience. I write about
+      <span class="highlight">software development</span>,
+      <span class="highlight">AI</span>, and the lessons learned along the way.
     </p>
+
     <nav class="inline-nav">
       <a href="/writing">Writing</a>
       <a href="/projects">Projects</a>
@@ -32,24 +35,39 @@ const featuredPosts = (
     </nav>
   </section>
 
+  <!-- Featured Writing Section -->
   {
     featuredPosts.length > 0 && (
       <section class="featured">
-        <h2>Featured Writing</h2>
-        <PostList posts={featuredPosts} />
-        <p class="more-link">
-          <a href="/writing">View all posts &rarr;</a>
-        </p>
+        <h2 class="section-title">Featured Writing</h2>
+        <PostList posts={featuredPosts} showDescription />
+        <a href="/writing" class="view-all">
+          View all posts
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
       </section>
     )
   }
 
+  <!-- Connect Section -->
   <section class="connect">
-    <h2>Connect</h2>
-    <p>
-      Find me on <a href="https://github.com/bnapier" target="_blank" rel="noopener noreferrer"
-        >GitHub</a
-      >,
+    <h2 class="section-title">Connect</h2>
+    <p class="connect-text">
+      Find me on
+      <a href="https://github.com/bnapier" target="_blank" rel="noopener noreferrer">GitHub</a>,
       <a href="https://twitter.com/bnapier" target="_blank" rel="noopener noreferrer">Twitter</a>,
       and
       <a href="https://linkedin.com/in/barrynapier" target="_blank" rel="noopener noreferrer"
@@ -61,15 +79,24 @@ const featuredPosts = (
 
 <style>
   .intro {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: 4rem;
   }
 
-  .intro p {
-    color: var(--color-text-muted);
-    margin-bottom: var(--spacing-lg);
+  @media (min-width: 640px) {
+    .intro {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .intro-text {
     font-size: var(--text-base);
-    line-height: var(--leading-relaxed);
-    max-width: 28rem;
+    line-height: 1.75;
+    color: var(--muted-foreground);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .highlight {
+    color: var(--foreground);
   }
 
   .inline-nav {
@@ -78,76 +105,84 @@ const featuredPosts = (
   }
 
   .inline-nav a {
-    color: var(--color-text);
+    color: var(--foreground);
     font-weight: 500;
     text-decoration: underline;
-    text-decoration-color: var(--color-border);
-    text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+    text-underline-offset: 4px;
     transition: text-decoration-color var(--transition-fast);
   }
 
   .inline-nav a:hover {
-    text-decoration-color: var(--color-text);
+    text-decoration-color: var(--foreground);
   }
 
   .featured {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: 4rem;
   }
 
-  .featured h2 {
+  @media (min-width: 640px) {
+    .featured {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .section-title {
     margin-bottom: var(--spacing-lg);
     margin-top: 0;
     font-size: var(--text-sm);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-text-muted);
+    color: var(--muted-foreground);
   }
 
-  .more-link {
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-top: var(--spacing-lg);
-  }
-
-  .more-link a {
-    color: var(--color-text-muted);
+    padding: 0.5rem 0;
     font-size: var(--text-sm);
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-underline-offset: 3px;
-    transition: text-decoration-color var(--transition-fast);
+    font-weight: 500;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color var(--transition-fast);
   }
 
-  .more-link a:hover {
-    text-decoration-color: var(--color-text-muted);
+  .view-all:hover {
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  .view-all svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .view-all:hover svg {
+    transform: translateX(2px);
   }
 
   .connect {
     margin-bottom: var(--spacing-xl);
   }
 
-  .connect h2 {
-    margin-bottom: var(--spacing-md);
-    margin-top: 0;
-    font-size: var(--text-sm);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-muted);
+  .connect-text {
+    color: var(--muted-foreground);
+    line-height: 1.75;
   }
 
-  .connect p {
-    color: var(--color-text-muted);
-  }
-
-  .connect a {
-    color: var(--color-text);
+  .connect-text a {
+    display: inline-block;
+    padding: 0.125rem 0;
+    color: var(--foreground);
     text-decoration: underline;
-    text-decoration-color: var(--color-border);
-    text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+    text-underline-offset: 4px;
     transition: text-decoration-color var(--transition-fast);
   }
 
-  .connect a:hover {
-    text-decoration-color: var(--color-text);
+  .connect-text a:hover {
+    text-decoration-color: var(--foreground);
   }
 </style>

@@ -3,13 +3,11 @@
  * Writing Index Page - List of all blog posts
  *
  * Features:
- * - Back link to home
  * - Page title and description
  * - Full post list sorted by date (newest first)
  * - Filters out drafts
  */
 import Base from '@layouts/Base.astro';
-import BackLink from '@/components/BackLink.astro';
 import PostList from '@/components/PostList.astro';
 import { getCollection } from 'astro:content';
 
@@ -23,38 +21,55 @@ const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
   title="Writing"
   description="Thoughts on software development, AI, and the lessons learned along the way."
 >
-  <BackLink href="/" label="Home" />
-
   <header class="page-header">
-    <h1>Writing</h1>
-    <p class="description">
+    <h1 class="page-title">Writing</h1>
+    <p class="page-description">
       Thoughts on software development, AI, and the lessons learned along the way.
     </p>
   </header>
 
-  {
-    posts.length > 0 ? (
-      <PostList posts={posts} showDescription />
-    ) : (
-      <p class="no-posts">No posts yet. Check back soon!</p>
-    )
-  }
+  <div class="posts-container">
+    {
+      posts.length > 0 ? (
+        <PostList posts={posts} showDescription />
+      ) : (
+        <p class="no-posts">No posts yet. Check back soon!</p>
+      )
+    }
+  </div>
 </Base>
 
 <style>
   .page-header {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: 3rem;
   }
 
-  .page-header h1 {
-    margin-bottom: var(--spacing-sm);
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin-bottom: var(--spacing-md);
   }
 
-  .description {
-    color: var(--color-text-muted);
+  @media (min-width: 640px) {
+    .page-title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .page-description {
+    font-size: var(--text-base);
+    line-height: 1.75;
+    color: var(--muted-foreground);
+    margin: 0;
+  }
+
+  .posts-container {
+    margin-top: 3rem;
   }
 
   .no-posts {
-    color: var(--color-text-muted);
+    color: var(--muted-foreground);
   }
 </style>

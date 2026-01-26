@@ -2,7 +2,7 @@
 /**
  * Now Page - What I'm currently up to
  *
- * Static page with:
+ * Features:
  * - Last updated date
  * - Current work section
  * - Learning section
@@ -10,30 +10,27 @@
  * - Link to nownownow.com explanation
  */
 import Base from '@layouts/Base.astro';
-import BackLink from '@/components/BackLink.astro';
 
 const lastUpdated = 'January 2026';
 ---
 
 <Base title="Now" description="What I'm currently working on and focused on.">
-  <BackLink href="/" label="Home" />
-
   <header class="page-header">
-    <h1>Now</h1>
+    <h1 class="page-title">Now</h1>
     <p class="last-updated">Last updated: {lastUpdated}</p>
   </header>
 
   <section class="now-section">
-    <h2>Work</h2>
-    <p>
+    <h2 class="section-title">Work</h2>
+    <p class="section-text">
       Building software and exploring the possibilities of AI-assisted development. Focused on
       creating tools and systems that help developers be more productive.
     </p>
   </section>
 
   <section class="now-section">
-    <h2>Learning</h2>
-    <ul>
+    <h2 class="section-title">Learning</h2>
+    <ul class="learning-list">
       <li>Diving deeper into AI/ML fundamentals and their practical applications</li>
       <li>Exploring modern web frameworks and their patterns</li>
       <li>Understanding context engineering and prompt design</li>
@@ -41,17 +38,20 @@ const lastUpdated = 'January 2026';
   </section>
 
   <section class="now-section">
-    <h2>Life</h2>
-    <p>
+    <h2 class="section-title">Life</h2>
+    <p class="section-text">
       Based in the UK. Enjoying time with family, reading, and the occasional side project that may
       or may not see the light of day.
     </p>
   </section>
 
-  <section class="now-section now-explanation">
-    <p>
-      This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer"
-        >now page</a
+  <section class="now-footer">
+    <p class="footer-text">
+      This is a <a
+        href="https://nownownow.com/about"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-link">now page</a
       >. It's a snapshot of what I'm focused on at this point in my life.
     </p>
   </section>
@@ -59,58 +59,83 @@ const lastUpdated = 'January 2026';
 
 <style>
   .page-header {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: 3rem;
   }
 
-  .page-header h1 {
+  .page-title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
     margin-bottom: var(--spacing-sm);
+  }
+
+  @media (min-width: 640px) {
+    .page-title {
+      font-size: var(--text-4xl);
+    }
   }
 
   .last-updated {
-    color: var(--color-text-muted);
     font-size: var(--text-sm);
-  }
-
-  .now-section {
-    margin-bottom: var(--spacing-xl);
-  }
-
-  .now-section h2 {
-    margin-bottom: var(--spacing-md);
-  }
-
-  .now-section p {
-    color: var(--color-text-muted);
-  }
-
-  .now-section ul {
-    color: var(--color-text-muted);
-    padding-left: var(--spacing-lg);
+    color: var(--muted-foreground);
     margin: 0;
   }
 
-  .now-section li {
+  .now-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--foreground);
+    margin-bottom: var(--spacing-md);
+    margin-top: 0;
+  }
+
+  .section-text {
+    font-size: var(--text-base);
+    line-height: 1.75;
+    color: var(--muted-foreground);
+    margin: 0;
+  }
+
+  .learning-list {
+    padding-left: var(--spacing-lg);
+    margin: 0;
+    color: var(--muted-foreground);
+    line-height: 1.75;
+  }
+
+  .learning-list li {
     margin-bottom: var(--spacing-sm);
   }
 
-  .now-section li:last-child {
+  .learning-list li:last-child {
     margin-bottom: 0;
   }
 
-  .now-explanation {
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--color-border);
+  .now-footer {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
   }
 
-  .now-explanation p {
+  .footer-text {
     font-size: var(--text-sm);
+    color: var(--muted-foreground);
+    margin: 0;
   }
 
-  .now-explanation a {
-    color: var(--color-text);
+  .footer-link {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--transition-fast);
   }
 
-  .now-explanation a:hover {
-    color: var(--color-accent);
+  .footer-link:hover {
+    text-decoration-color: var(--foreground);
   }
 </style>

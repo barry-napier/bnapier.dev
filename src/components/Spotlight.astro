@@ -1,0 +1,85 @@
+---
+/**
+ * Spotlight Component - Mouse-following spotlight effect
+ *
+ * Creates a subtle radial gradient that follows the cursor
+ * for a polished, interactive background effect.
+ */
+---
+
+<div id="spotlight-container" class="spotlight-container">
+  <div id="spotlight" class="spotlight"></div>
+</div>
+
+<script>
+  function initSpotlight() {
+    const container = document.getElementById('spotlight-container');
+    const spotlight = document.getElementById('spotlight');
+
+    if (!container || !spotlight) return;
+
+    let isVisible = false;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isVisible) {
+        container.style.opacity = '1';
+        isVisible = true;
+      }
+      spotlight.style.left = `${e.clientX - 300}px`;
+      spotlight.style.top = `${e.clientY - 300}px`;
+    };
+
+    const handleMouseLeave = () => {
+      container.style.opacity = '0';
+      isVisible = false;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
+    // Cleanup for View Transitions
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+    });
+  }
+
+  // Initialize on load and after View Transitions
+  initSpotlight();
+  document.addEventListener('astro:after-swap', initSpotlight);
+</script>
+
+<style>
+  .spotlight-container {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .spotlight {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 40%,
+      transparent 70%
+    );
+  }
+
+  /* Disable spotlight in light mode */
+  :global(.light) .spotlight-container {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spotlight-container {
+      display: none;
+    }
+  }
+</style>

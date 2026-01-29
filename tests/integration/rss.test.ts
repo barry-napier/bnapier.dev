@@ -34,7 +34,8 @@ describe('RSS Feed', () => {
   });
 
   it('includes all published posts', () => {
-    // We have 4 published posts
+    // We have 5 published posts
+    expect(rssContent).toContain('Prompting Techniques: A Practical Guide');
     expect(rssContent).toContain('Do We Still Need Figma?');
     expect(rssContent).toContain('Context Engineering: The New Frontier of AI Development');
     expect(rssContent).toContain('Is Your Codebase Ready for AI Agents?');
@@ -42,19 +43,21 @@ describe('RSS Feed', () => {
   });
 
   it('excludes draft posts', () => {
-    // Extract all items - count should match published posts (4)
+    // Extract all items - count should match published posts (5)
     const itemMatches = rssContent.match(/<item>/g);
-    expect(itemMatches).toHaveLength(4);
+    expect(itemMatches).toHaveLength(5);
   });
 
   it('orders items by date descending', () => {
     // Find the positions of each post title in the RSS feed
+    const post0Pos = rssContent.indexOf('Prompting Techniques'); // Jan 27
     const post1Pos = rssContent.indexOf('Do We Still Need Figma'); // Jan 25
     const post2Pos = rssContent.indexOf('Context Engineering'); // Jan 20
     const post3Pos = rssContent.indexOf('Is Your Codebase Ready for AI Agents'); // Jan 15
     const post4Pos = rssContent.indexOf('Research, Plan, Implement'); // Jan 10
 
     // Most recent should appear first
+    expect(post0Pos).toBeLessThan(post1Pos);
     expect(post1Pos).toBeLessThan(post2Pos);
     expect(post2Pos).toBeLessThan(post3Pos);
     expect(post3Pos).toBeLessThan(post4Pos);

@@ -1,7 +1,7 @@
 ---
 title: 'Prompting Techniques Guide'
 date: 2026-01-27
-description: 'A practical guide to getting better results from AI assistants. Whether you're new to AI or already using it daily, these techniques will help you work smarter.'
+description: "A practical guide to getting better results from AI assistants. Whether you're new to AI or already using it daily, these techniques will help you work smarter."
 featured: true
 draft: false
 ---
@@ -14,17 +14,17 @@ Whether you're new to AI or already using it daily, these techniques will help y
 - **Already prompting?** Skip to Intermediate or Advanced techniques
 - **Looking for something specific?** Use the quick reference table below
 
-| I want to... | Try this technique |
-|--------------|-------------------|
-| Get a quick answer | Basic prompting |
-| Explore a problem I don't fully understand | Interview |
-| Get high-quality creative output | Rubric |
-| Explore multiple options before deciding | Multi-draft Synthesis |
-| Break down something complex | Decomposition |
-| Get consistent, repeatable output | Templating |
-| Condense lots of information | Summarisation |
-| Just get the work done | Execution mode |
-| Challenge my own thinking | Adversarial |
+| I want to...                               | Try this technique    |
+| ------------------------------------------ | --------------------- |
+| Get a quick answer                         | Basic prompting       |
+| Explore a problem I don't fully understand | Interview             |
+| Get high-quality creative output           | Rubric                |
+| Explore multiple options before deciding   | Multi-draft Synthesis |
+| Break down something complex               | Decomposition         |
+| Get consistent, repeatable output          | Templating            |
+| Condense lots of information               | Summarisation         |
+| Just get the work done                     | Execution mode        |
+| Challenge my own thinking                  | Adversarial           |
 
 ---
 
@@ -46,11 +46,13 @@ Before diving into techniques, a well-structured prompt makes everything work be
 ```
 
 **Example — basic:**
+
 ```
 Write a project update email.
 ```
 
 **Example — structured:**
+
 ```
 You are a project manager writing to senior stakeholders.
 
@@ -66,6 +68,7 @@ Tone: Professional but direct. No jargon.
 ```
 
 **Where this helps:**
+
 - Drafting emails and documents
 - Preparing presentations
 - Writing reports
@@ -80,11 +83,13 @@ Tone: Professional but direct. No jargon.
 **What it is:** Instead of trying to write the perfect prompt yourself, get the AI to ask you questions until it understands what you need.
 
 **When to use it:**
+
 - You have a vague idea but can't articulate it fully
 - The task is complex with lots of variables
 - You want to uncover requirements you haven't thought of
 
 **The prompt:**
+
 ```
 Interview me about this project until you fully understand the requirements.
 
@@ -96,6 +101,7 @@ Interview me about this project until you fully understand the requirements.
 ```
 
 **Where this helps:**
+
 - Scoping new projects
 - Writing briefs or specifications
 - Preparing for presentations
@@ -111,11 +117,13 @@ Interview me about this project until you fully understand the requirements.
 **What it is:** Ask the AI to define what "excellent" looks like, then iterate until it meets that standard.
 
 **When to use it:**
+
 - You want high-quality output, not just "good enough"
 - Creative or subjective tasks where quality matters
 - One-shot deliverables (presentations, proposals, designs)
 
 **The prompt:**
+
 ```
 Before you begin:
 1. Think deeply about what makes an excellent [output type]
@@ -128,6 +136,7 @@ Only show me the final output.
 ```
 
 **Where this helps:**
+
 - Creating presentations
 - Writing proposals or pitches
 - Designing processes
@@ -144,17 +153,18 @@ Only show me the final output.
 
 **Choose your approach:**
 
-| Technique | Prompt | Best for |
-|-----------|--------|----------|
-| TL;DR | "Summarise in one sentence" | Quick overview |
-| Bullet extraction | "Extract key points as bullets" | Scanning documents |
-| BLUF | "Lead with the conclusion, then supporting points" | Executive summaries |
-| Action-focused | "What decisions or actions are needed?" | Meeting notes |
-| Audience-specific | "Summarise for [role/level]" | Tailoring communication |
-| Progressive | "Summarise in 1 sentence, then 1 paragraph, then 1 page" | Layered understanding |
-| Delta | "What's new or changed compared to [X]?" | Tracking updates |
+| Technique         | Prompt                                                   | Best for                |
+| ----------------- | -------------------------------------------------------- | ----------------------- |
+| TL;DR             | "Summarise in one sentence"                              | Quick overview          |
+| Bullet extraction | "Extract key points as bullets"                          | Scanning documents      |
+| BLUF              | "Lead with the conclusion, then supporting points"       | Executive summaries     |
+| Action-focused    | "What decisions or actions are needed?"                  | Meeting notes           |
+| Audience-specific | "Summarise for [role/level]"                             | Tailoring communication |
+| Progressive       | "Summarise in 1 sentence, then 1 paragraph, then 1 page" | Layered understanding   |
+| Delta             | "What's new or changed compared to [X]?"                 | Tracking updates        |
 
 **Example — BLUF format:**
+
 ```
 Summarise this document using BLUF format:
 
@@ -169,6 +179,7 @@ Summarise this document using BLUF format:
 ```
 
 **Where this helps:**
+
 - Processing long documents or reports
 - Preparing for meetings
 - Briefing colleagues or leadership
@@ -184,6 +195,7 @@ Summarise this document using BLUF format:
 **What it is:** Define the exact structure you want, so outputs are consistent and ready to use.
 
 **When to use it:**
+
 - You need repeatable, consistent outputs
 - The output needs to fit a specific format
 - You want to minimise editing
@@ -191,6 +203,7 @@ Summarise this document using BLUF format:
 **Approaches:**
 
 **Fill-in-the-blank:**
+
 ```
 Use this template:
 
@@ -210,6 +223,7 @@ Blockers: [None / Description]
 ```
 
 **Mimic:**
+
 ```
 Match this format exactly:
 
@@ -219,6 +233,7 @@ Now create one for [your topic].
 ```
 
 **Schema enforcement:**
+
 ```
 Return your response as JSON:
 
@@ -231,6 +246,7 @@ Return your response as JSON:
 ```
 
 **Where this helps:**
+
 - Status reports and updates
 - Meeting notes
 - Documentation
@@ -246,11 +262,13 @@ Return your response as JSON:
 **What it is:** When you need the AI to just get work done without constant back-and-forth.
 
 **When to use it:**
+
 - The task is clear and well-defined
 - You trust the AI to make reasonable decisions
 - You want output, not conversation
 
 **The prompt:**
+
 ```
 Complete this task fully without asking for clarification.
 
@@ -260,6 +278,7 @@ Complete this task fully without asking for clarification.
 ```
 
 **More autonomous version:**
+
 ```
 Act autonomously until the task is complete.
 
@@ -269,6 +288,7 @@ Act autonomously until the task is complete.
 ```
 
 **Where this helps:**
+
 - Drafting first versions of documents
 - Research and compilation tasks
 - Repetitive or well-defined work
@@ -285,11 +305,13 @@ Act autonomously until the task is complete.
 **What it is:** Generate multiple solutions, compare them, then combine the best elements into a superior final answer.
 
 **When to use it:**
+
 - There's no single "right" answer
 - You want to avoid settling on the first idea
 - Quality matters and you have time to explore options
 
 **The prompt:**
+
 ```
 Approach this problem three different ways:
 
@@ -299,11 +321,13 @@ Approach this problem three different ways:
 ```
 
 Or shorter:
+
 ```
 Give me three different approaches to this. Compare them. Then combine the best parts into a final recommendation.
 ```
 
 **Where this helps:**
+
 - Strategy and planning
 - Creative work (messaging, naming, design)
 - Problem-solving with no clear answer
@@ -319,16 +343,19 @@ Give me three different approaches to this. Compare them. Then combine the best 
 **What it is:** Ask the AI to show its reasoning step by step.
 
 **When to use it:**
+
 - Complex problems with multiple factors
 - You want to understand the logic, not just the answer
 - Debugging or analysis tasks
 
 **The prompt:**
+
 ```
 Think through this step by step before giving your answer.
 ```
 
 Or more structured:
+
 ```
 Work through this problem:
 
@@ -341,6 +368,7 @@ Show your thinking at each step.
 ```
 
 **Where this helps:**
+
 - Problem-solving and troubleshooting
 - Decision-making
 - Analysis and evaluation
@@ -353,11 +381,13 @@ Show your thinking at each step.
 **What it is:** Break a big task into smaller, manageable pieces.
 
 **When to use it:**
+
 - The task feels overwhelming
 - You need to delegate or distribute work
 - You want to track progress incrementally
 
 **The prompt:**
+
 ```
 Break this task into subtasks:
 
@@ -370,6 +400,7 @@ Then work through them one by one.
 ```
 
 **Where this helps:**
+
 - Project planning
 - Writing long documents
 - Process design
@@ -383,11 +414,13 @@ Then work through them one by one.
 **What it is:** Show the AI examples of what you want before asking it to produce something.
 
 **When to use it:**
+
 - The style or format is hard to describe
 - You have good examples to work from
 - Consistency matters
 
 **The prompt:**
+
 ```
 Here are two examples of the style I want:
 
@@ -401,6 +434,7 @@ Now write one for [your topic] in the same style.
 ```
 
 **Where this helps:**
+
 - Matching brand voice or tone
 - Creating consistent documentation
 - Training others on a format
@@ -415,11 +449,13 @@ Now write one for [your topic] in the same style.
 **What it is:** Ask the AI to take on a specific role or perspective.
 
 **When to use it:**
+
 - You want a specific expertise or viewpoint
 - The tone or approach matters
 - You want to simulate a conversation with a particular type of person
 
 **The prompt:**
+
 ```
 You are a [role] with [X years] of experience in [domain].
 
@@ -427,11 +463,13 @@ Approach this as you would in your professional context.
 ```
 
 **Examples:**
+
 - "You are a sceptical CFO reviewing this proposal"
 - "You are a customer who has never used our product"
 - "You are a junior team member asking clarifying questions"
 
 **Where this helps:**
+
 - Testing how different audiences might react
 - Getting specialised perspectives
 - Role-playing difficult conversations
@@ -446,11 +484,13 @@ Approach this as you would in your professional context.
 **What it is:** Ask the AI to review and improve its own output.
 
 **When to use it:**
+
 - Quality matters more than speed
 - You want to catch errors or gaps
 - The first output was okay but not great
 
 **The prompt:**
+
 ```
 Review your response:
 
@@ -462,6 +502,7 @@ Then provide an improved version.
 ```
 
 **Where this helps:**
+
 - Important documents or communications
 - Analysis where accuracy matters
 - Any output that will be widely shared
@@ -473,11 +514,13 @@ Then provide an improved version.
 **What it is:** Ask the AI to find problems, holes, or weaknesses.
 
 **When to use it:**
+
 - You want to stress-test an idea
 - Preparing for tough questions
 - Risk assessment
 
 **The prompt:**
+
 ```
 Act as a critical reviewer. Find the weaknesses in this:
 
@@ -490,6 +533,7 @@ Be direct and specific.
 ```
 
 **Where this helps:**
+
 - Preparing proposals or pitches
 - Risk planning
 - Pre-mortems
@@ -503,11 +547,13 @@ Be direct and specific.
 **What it is:** Explore multiple sides of an issue before concluding.
 
 **When to use it:**
+
 - Complex decisions with valid arguments on both sides
 - You want to avoid confirmation bias
 - Stakeholders have different views
 
 **The prompt:**
+
 ```
 Before giving a recommendation:
 
@@ -518,6 +564,7 @@ Before giving a recommendation:
 ```
 
 **Where this helps:**
+
 - Strategic decisions
 - Policy changes
 - Investment or resource allocation
@@ -530,11 +577,13 @@ Before giving a recommendation:
 **What it is:** Instead of giving answers, the AI asks questions to help you think through something.
 
 **When to use it:**
+
 - You want to develop your own thinking
 - Coaching or mentoring situations
 - You're not sure what you actually need
 
 **The prompt:**
+
 ```
 Don't give me answers. Instead, ask me questions that will help me think through this problem myself.
 
@@ -542,6 +591,7 @@ Ask one question at a time. Go deeper based on my responses.
 ```
 
 **Where this helps:**
+
 - Personal development
 - Working through difficult decisions
 - Coaching conversations
@@ -554,12 +604,14 @@ Ask one question at a time. Go deeper based on my responses.
 The real power comes from combining techniques. Here are some effective combinations:
 
 **Discovery + Execution:**
+
 ```
 1. Interview me about this project (Interview)
 2. Then complete it without further input (Execution)
 ```
 
 **Quality-focused delivery:**
+
 ```
 1. Break this into components (Decomposition)
 2. For each, define what excellent looks like (Rubric)
@@ -567,6 +619,7 @@ The real power comes from combining techniques. Here are some effective combinat
 ```
 
 **Decision support:**
+
 ```
 1. Summarise the situation (BLUF)
 2. Present both sides (Debate)
@@ -578,16 +631,16 @@ The real power comes from combining techniques. Here are some effective combinat
 
 ## Quick Reference: Job Function Examples
 
-| Function | Useful techniques | Example use |
-|----------|------------------|-------------|
-| **Project Management** | Decomposition, Templating, Summarisation | Break down project plans, consistent status updates, meeting summaries |
-| **Sales** | Persona, Adversarial, Few-shot | Anticipate objections, match successful email styles |
-| **Marketing** | Rubric, Interview, Templating | High-quality content, campaign briefs, consistent brand voice |
-| **Finance** | Chain-of-thought, Summarisation, Adversarial | Analysis with clear logic, digest long reports, stress-test assumptions |
-| **HR** | Interview, Templating, Persona | Job descriptions, consistent documentation, simulate candidate perspective |
-| **Engineering** | Decomposition, Reflection, Execution | Break down tasks, review code/designs, generate documentation |
-| **Leadership** | BLUF, Debate, Socratic | Executive summaries, balanced decision-making, coaching |
-| **Operations** | Templating, Execution, Decomposition | Standard procedures, process documentation, workflow design |
+| Function               | Useful techniques                            | Example use                                                                |
+| ---------------------- | -------------------------------------------- | -------------------------------------------------------------------------- |
+| **Project Management** | Decomposition, Templating, Summarisation     | Break down project plans, consistent status updates, meeting summaries     |
+| **Sales**              | Persona, Adversarial, Few-shot               | Anticipate objections, match successful email styles                       |
+| **Marketing**          | Rubric, Interview, Templating                | High-quality content, campaign briefs, consistent brand voice              |
+| **Finance**            | Chain-of-thought, Summarisation, Adversarial | Analysis with clear logic, digest long reports, stress-test assumptions    |
+| **HR**                 | Interview, Templating, Persona               | Job descriptions, consistent documentation, simulate candidate perspective |
+| **Engineering**        | Decomposition, Reflection, Execution         | Break down tasks, review code/designs, generate documentation              |
+| **Leadership**         | BLUF, Debate, Socratic                       | Executive summaries, balanced decision-making, coaching                    |
+| **Operations**         | Templating, Execution, Decomposition         | Standard procedures, process documentation, workflow design                |
 
 ---
 

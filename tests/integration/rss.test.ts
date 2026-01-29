@@ -42,9 +42,9 @@ describe('RSS Feed', () => {
   });
 
   it('excludes draft posts', () => {
-    // Extract all items - count should match published posts (4)
+    // Extract all items - count should match published posts (5)
     const itemMatches = rssContent.match(/<item>/g);
-    expect(itemMatches).toHaveLength(4);
+    expect(itemMatches).toHaveLength(5);
   });
 
   it('orders items by date descending', () => {

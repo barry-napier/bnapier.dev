@@ -40,12 +40,13 @@ describe('RSS Feed', () => {
     expect(rssContent).toContain('Is Your Codebase Ready for AI Agents?');
     expect(rssContent).toContain('Research, Plan, Implement: A Framework for Technical Decisions');
     expect(rssContent).toContain('The AI Code Review Loop');
+    expect(rssContent).toContain('Requirements Are the Hard Part Now');
   });
 
   it('excludes draft posts', () => {
-    // Extract all items - count should match published posts (8)
+    // Extract all items - count should match published posts (9)
     const itemMatches = rssContent.match(/<item>/g);
-    expect(itemMatches).toHaveLength(8);
+    expect(itemMatches).toHaveLength(9);
   });
 
   it('orders items by date descending', () => {

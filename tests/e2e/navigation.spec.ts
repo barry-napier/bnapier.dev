@@ -18,14 +18,14 @@ test.describe('Site Navigation', () => {
     await page.goto('/writing');
 
     // Click the first post link
-    const firstPostLink = page.locator('.post-link').first();
+    const firstPostLink = page.locator('.post-card').first();
     await firstPostLink.click();
 
     // Verify we're on a post page (URL contains /writing/)
     await expect(page).toHaveURL(/\/writing\/.+/);
 
     // Click back link to return to writing list
-    await page.click('a:has-text("Back to writing")');
+    await page.click('.back-link');
     await expect(page).toHaveURL('/writing');
   });
 

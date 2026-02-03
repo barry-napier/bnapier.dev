@@ -10,7 +10,7 @@ test.describe('Content Rendering', () => {
     await expect(featuredSection).toBeVisible();
 
     // Check for at least one post in the list
-    const posts = page.locator('.post-list .post-item');
+    const posts = page.locator('.post-list li');
     await expect(posts.first()).toBeVisible();
   });
 
@@ -23,7 +23,7 @@ test.describe('Content Rendering', () => {
     await expect(postList).toBeVisible();
 
     // Should have multiple posts
-    const posts = page.locator('.post-list .post-item');
+    const posts = page.locator('.post-list li');
     const count = await posts.count();
     expect(count).toBeGreaterThan(0);
   });
@@ -34,7 +34,7 @@ test.describe('Content Rendering', () => {
     await page.waitForLoadState('networkidle');
 
     // Click the first post
-    await page.locator('.post-link').first().click();
+    await page.locator('.post-card').first().click();
     await page.waitForLoadState('networkidle');
 
     // Check for prose content
@@ -86,7 +86,7 @@ test.describe('Design System', () => {
     await page.goto('/');
 
     const themeToggle = page.locator('#theme-toggle');
-    await expect(themeToggle).toHaveAttribute('aria-label', 'Toggle dark mode');
+    await expect(themeToggle).toHaveAttribute('aria-label', 'Toggle theme');
   });
 
   test('page headings render correctly', async ({ page }) => {
@@ -113,14 +113,15 @@ test.describe('Accessibility', () => {
     await expect(header).toBeVisible();
   });
 
-  test('footer links are accessible', async ({ page }) => {
+  test('social links are accessible', async ({ page }) => {
     await page.goto('/');
 
-    const footer = page.locator('footer');
-    await expect(footer).toBeVisible();
+    // Social links are in the connect section, not footer
+    const connectSection = page.locator('section.connect');
+    await expect(connectSection).toBeVisible();
 
     // Check social links
-    const githubLink = footer.locator('a[href*="github.com"]');
+    const githubLink = connectSection.locator('a[href*="github.com"]');
     await expect(githubLink).toBeVisible();
 
     // External links should have rel="noopener noreferrer"

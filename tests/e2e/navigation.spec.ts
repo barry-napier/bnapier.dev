@@ -25,7 +25,7 @@ test.describe('Site Navigation', () => {
     await expect(page).toHaveURL(/\/writing\/.+/);
 
     // Click back link to return to writing list
-    await page.click('a:has-text("Back to writing")');
+    await page.click('.back-link');
     await expect(page).toHaveURL('/writing');
   });
 

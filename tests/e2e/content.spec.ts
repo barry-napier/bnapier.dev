@@ -113,14 +113,15 @@ test.describe('Accessibility', () => {
     await expect(header).toBeVisible();
   });
 
-  test('footer links are accessible', async ({ page }) => {
+  test('social links are accessible', async ({ page }) => {
     await page.goto('/');
 
-    const footer = page.locator('footer');
-    await expect(footer).toBeVisible();
+    // Social links are in the connect section, not footer
+    const connectSection = page.locator('section.connect');
+    await expect(connectSection).toBeVisible();
 
     // Check social links
-    const githubLink = footer.locator('a[href*="github.com"]');
+    const githubLink = connectSection.locator('a[href*="github.com"]');
     await expect(githubLink).toBeVisible();
 
     // External links should have rel="noopener noreferrer"

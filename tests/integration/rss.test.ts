@@ -34,17 +34,18 @@ describe('RSS Feed', () => {
   });
 
   it('includes all published posts', () => {
-    // We have 4 published posts
+    // Check key posts are included
     expect(rssContent).toContain('Do We Still Need Figma?');
     expect(rssContent).toContain('Context Engineering: The New Frontier of AI Development');
     expect(rssContent).toContain('Is Your Codebase Ready for AI Agents?');
     expect(rssContent).toContain('Research, Plan, Implement: A Framework for Technical Decisions');
+    expect(rssContent).toContain('The AI Code Review Loop');
   });
 
   it('excludes draft posts', () => {
-    // Extract all items - count should match published posts (5)
+    // Extract all items - count should match published posts (8)
     const itemMatches = rssContent.match(/<item>/g);
-    expect(itemMatches).toHaveLength(5);
+    expect(itemMatches).toHaveLength(8);
   });
 
   it('orders items by date descending', () => {

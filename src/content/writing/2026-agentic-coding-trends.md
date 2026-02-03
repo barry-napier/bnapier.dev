@@ -1,7 +1,7 @@
 ---
 title: 'Eight Trends Reshaping Software Development in 2026'
 date: 2026-01-29
-description: 'A deep dive into Anthropic''s 2026 Agentic Coding Trends Report and what it means for engineering teams, organizations, and the future of how software gets built.'
+description: "A deep dive into Anthropic's 2026 Agentic Coding Trends Report and what it means for engineering teams, organizations, and the future of how software gets built."
 featured: true
 draft: false
 ---
@@ -24,9 +24,9 @@ This isn't a speculative forecast. It's grounded in observed patterns from compa
 
 The headline shift is that engineers are moving from writing code to coordinating agents that write code. The role is evolving toward architecture, system design, and strategic decision-making.
 
-But the nuance matters. While AI shows up in roughly 60% of developers' work, engineers report being able to *fully delegate* only 0–20% of tasks. The rest requires active supervision, validation, and human judgment. This isn't a "let the AI handle it" story — it's a collaboration story where engineers develop intuitions over time about what to delegate and what to steer directly.
+But the nuance matters. While AI shows up in roughly 60% of developers' work, engineers report being able to _fully delegate_ only 0–20% of tasks. The rest requires active supervision, validation, and human judgment. This isn't a "let the AI handle it" story — it's a collaboration story where engineers develop intuitions over time about what to delegate and what to steer directly.
 
-The Stack Overflow 2025 Developer Survey reinforces this: 84% of developers use AI tools, but trust in AI output has actually *declined*, with 46% of developers saying they don't trust the accuracy of AI output (up from 31% the previous year). The biggest frustration, cited by 66% of developers, is dealing with "AI solutions that are almost right, but not quite."
+The Stack Overflow 2025 Developer Survey reinforces this: 84% of developers use AI tools, but trust in AI output has actually _declined_, with 46% of developers saying they don't trust the accuracy of AI output (up from 31% the previous year). The biggest frustration, cited by 66% of developers, is dealing with "AI solutions that are almost right, but not quite."
 
 The practical implication: the skill gap is shifting from "can you write this code" to "can you effectively decompose problems, orchestrate agents, and validate their output."
 

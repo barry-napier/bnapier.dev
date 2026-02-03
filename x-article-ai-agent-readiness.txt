@@ -1,0 +1,237 @@
+Is Your Codebase Ready for AI Agents?
+
+AI agents are no longer a distant future—they're here, writing code, executing tasks, and interacting with our systems. But most codebases weren't designed with AI agents in mind. As these tools become more prevalent, the question isn't whether to prepare for them, but how to systematically evaluate and improve your readiness.
+
+This article presents a comprehensive Agent Readiness Assessment framework—a structured approach to evaluating your codebase across nine pillars of engineering excellence.
+
+---
+
+The Assessment Framework
+
+The framework operates across four maturity levels:
+
+• Level 1 — Functional: Basic tooling exists (linting, types, tests, README)
+• Level 2 — Documented: AGENTS.md, pre-commit hooks, environment templates, issue templates
+• Level 3 — Standardized: Strict mode, CI/CD, coverage thresholds, CODEOWNERS, E2E tests
+• Level 4 — Optimized: Tracing, health checks, SAST, parallel tests, feature flags
+
+Each level builds on the previous. You can't achieve Level 3 without passing at least 80% of Level 2 criteria.
+
+---
+
+The Nine Pillars
+
+1. Style & Validation
+
+Consistent code style isn't just aesthetics—it's how AI agents learn to write code that fits your codebase.
+
+Level 1:
+• Linter configured (ESLint, Biome, Pylint, RuboCop)
+• Type checker enabled (TypeScript strict, mypy, Pyright)
+• Code formatter configured (Prettier, Black, rustfmt)
+
+Level 2:
+• Pre-commit hooks (Husky, pre-commit, lefthook)
+• Lint command in scripts
+
+Level 3:
+• Strict TypeScript mode (all strict flags enabled)
+• Framework-specific strict mode
+• ESLint extends recommended
+• Lint runs in CI
+
+2. Build System
+
+A predictable build system is essential for agents to verify their changes work correctly.
+
+Level 1:
+• Build command exists
+• Dependencies pinned (lockfile present)
+
+Level 2:
+• Build documented
+• Dev command exists
+
+Level 3:
+• CI/CD configured
+• Build runs in CI
+• Cache enabled in CI
+
+Level 4:
+• Build budgets configured
+
+3. Testing
+
+Tests are how agents verify their changes don't break existing functionality. Without them, agents are flying blind.
+
+Level 1:
+• Unit tests exist (at least 5 test files)
+• Test runner configured
+• Test command exists
+
+Level 2:
+• Tests documented
+• Test watch available
+
+Level 3:
+• Integration tests exist
+• E2E tests configured (Playwright or Cypress)
+• Coverage configured
+• Coverage threshold ≥ 70%
+• Tests run in CI
+
+Level 4:
+• Parallel tests enabled
+
+4. Documentation
+
+Documentation serves dual audiences: human developers and AI agents. Both need clear, structured information.
+
+Level 1:
+• README exists
+• README has content (100+ characters)
+
+Level 2:
+• AGENTS.md exists
+• CONTRIBUTING.md exists
+• Installation documented
+
+Level 3:
+• AGENTS.md has commands
+• AGENTS.md has architecture
+• ADRs exist
+• Changelog maintained
+
+The AGENTS.md file is crucial for AI agents. Include: build commands, test commands, lint commands, and project architecture.
+
+5. Development Environment
+
+Reproducible environments mean agents can set up and work in your codebase reliably.
+
+Level 1:
+• Runtime version specified (.nvmrc, .tool-versions)
+
+Level 2:
+• Environment template exists (.env.example)
+• IDE settings shared
+
+Level 3:
+• Devcontainer configured
+• Docker support
+• Setup script exists
+
+6. Debugging & Observability
+
+When things go wrong, agents need visibility into what happened and why.
+
+Level 1:
+• Logging exists
+
+Level 2:
+• Logging library used (Pino, Winston)
+
+Level 3:
+• Structured logging (JSON)
+• Error tracking integration (Sentry)
+
+Level 4:
+• Distributed tracing (OpenTelemetry)
+• Health endpoints (/health, /ready)
+
+7. Security
+
+Security practices protect against both human and agent-introduced vulnerabilities.
+
+Level 1:
+• No secrets in code
+• Gitignore configured
+
+Level 2:
+• SECURITY.md exists
+• License file exists
+
+Level 3:
+• CODEOWNERS defined
+• Secret scanning configured
+• Dependency scanning configured
+
+Level 4:
+• SAST enabled (CodeQL, SonarQube)
+• Container scanning
+
+8. Task Discovery
+
+Structured task management helps agents understand what work needs to be done.
+
+Level 2:
+• Issue templates exist
+• Bug report template
+• Feature request template
+
+Level 3:
+• PR template exists
+• PR template has checklist
+
+9. Product & Experimentation
+
+Level 3:
+• Analytics instrumented
+• Feature flags available
+
+Level 4:
+• A/B testing framework
+
+---
+
+Scoring Methodology
+
+Calculate your score: Level N Score = (PASS count / total) × 100
+
+Gating rules:
+• Level 2 unlocks when Level 1 ≥ 80%
+• Level 3 unlocks when Level 2 ≥ 80%
+• Level 4 unlocks when Level 3 ≥ 80%
+
+Your current level is the highest unlocked level where you achieve ≥ 80% pass rate.
+
+---
+
+Quick Wins for Each Level
+
+Reaching Level 1 (Functional):
+1. Add ESLint with recommended config
+2. Enable TypeScript strict mode
+3. Configure Prettier
+4. Write at least 5 unit tests
+5. Create a README
+
+Reaching Level 2 (Documented):
+1. Create AGENTS.md with commands
+2. Set up Husky pre-commit hooks
+3. Add .env.example
+4. Create issue templates
+5. Document installation steps
+
+Reaching Level 3 (Standardized):
+1. Configure all TypeScript strict flags
+2. Set up GitHub Actions CI/CD
+3. Add E2E tests with Playwright
+4. Configure 70%+ coverage thresholds
+5. Create CODEOWNERS
+
+Reaching Level 4 (Optimized):
+1. Add OpenTelemetry tracing
+2. Implement /health endpoints
+3. Enable CodeQL scanning
+4. Configure parallel tests
+5. Integrate feature flags
+
+---
+
+Looking Ahead
+
+The shift toward agent-ready codebases isn't just about accommodating AI tools—it's about good engineering practice. The same qualities that make code accessible to AI agents make it more maintainable, testable, and understandable for human developers too.
+
+Start with Level 1 fundamentals. They're quick wins that immediately improve your development workflow. Then work through Level 2 documentation—especially AGENTS.md—to give AI agents the context they need.
+
+The teams that invest in agent readiness now will find themselves working more effectively with AI tools as they continue to evolve.

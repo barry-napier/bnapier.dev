@@ -43,17 +43,17 @@ describe('RSS Feed', () => {
   });
 
   it('excludes draft posts', () => {
-    // Extract all items - count should match published posts (8)
+    // Extract all items - count should match published posts (9)
     const itemMatches = rssContent.match(/<item>/g);
-    expect(itemMatches).toHaveLength(8);
+    expect(itemMatches).toHaveLength(9);
   });
 
   it('orders items by date descending', () => {
     // Find the positions of each post title in the RSS feed
-    const post1Pos = rssContent.indexOf('Do We Still Need Figma'); // Jan 25
-    const post2Pos = rssContent.indexOf('Context Engineering'); // Jan 20
-    const post3Pos = rssContent.indexOf('Is Your Codebase Ready for AI Agents'); // Jan 15
-    const post4Pos = rssContent.indexOf('Research, Plan, Implement'); // Jan 10
+    const post1Pos = rssContent.indexOf('One Million Tokens'); // Feb 6
+    const post2Pos = rssContent.indexOf('Do We Still Need Figma'); // Jan 25
+    const post3Pos = rssContent.indexOf('Context Engineering: The New Frontier'); // Jan 20
+    const post4Pos = rssContent.indexOf('Is Your Codebase Ready for AI Agents'); // Jan 15
 
     // Most recent should appear first
     expect(post1Pos).toBeLessThan(post2Pos);

@@ -40,6 +40,7 @@ describe('RSS Feed', () => {
     expect(rssContent).toContain('Is Your Codebase Ready for AI Agents?');
     expect(rssContent).toContain('Research, Plan, Implement: A Framework for Technical Decisions');
     expect(rssContent).toContain('The AI Code Review Loop');
+    expect(rssContent).toContain('Requirements Are the Hard Part Now');
   });
 
   it('excludes draft posts', () => {

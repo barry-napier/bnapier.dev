@@ -4,6 +4,7 @@ date: 2026-01-29
 description: "A concise, fun summary of Matt Pocock's AI Hero roadmap — everything you need to know about becoming an AI Engineer, from LLM basics to building agents with the Vercel AI SDK."
 featured: true
 draft: false
+tags: ['ai', 'ai-engineering', 'vercel', 'learning']
 ---
 
 Matt Pocock's [AI Hero](https://www.aihero.dev/ai-engineer-roadmap) site lays out a clear path from "what even is an LLM?" to "I just built an agent that does my job." Here's the whole thing distilled down so you can sound smart at your next standup.

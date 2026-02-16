@@ -4,6 +4,7 @@ date: 2026-01-27
 description: "A practical guide to getting better results from AI assistants. Whether you're new to AI or already using it daily, these techniques will help you work smarter."
 featured: true
 draft: false
+tags: ['ai', 'prompting', 'context-engineering', 'guide']
 ---
 
 Whether you're new to AI or already using it daily, these techniques will help you work smarter.

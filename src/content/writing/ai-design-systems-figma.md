@@ -4,6 +4,7 @@ date: 2025-01-25
 description: "AI tools don't generate mockups—they eliminate the need for mockups entirely. As high-fidelity prototypes emerge directly from code, the traditional design workflow faces an existential question."
 featured: true
 draft: false
+tags: ['ai', 'design', 'figma', 'developer-experience']
 ---
 
 Here's a question that would have been heresy two years ago: what if we stopped designing in Figma altogether?

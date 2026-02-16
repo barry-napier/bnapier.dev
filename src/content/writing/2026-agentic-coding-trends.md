@@ -4,6 +4,7 @@ date: 2026-01-29
 description: "A deep dive into Anthropic's 2026 Agentic Coding Trends Report and what it means for engineering teams, organizations, and the future of how software gets built."
 featured: true
 draft: false
+tags: ['ai', 'agentic-coding', 'software-engineering', 'multi-agent']
 ---
 
 Anthropic released their [2026 Agentic Coding Trends Report](https://claude.com/blog/eight-trends-defining-how-software-gets-built-in-2026) on January 21, calling out eight trends that define how software gets built this year. The thesis is bold: software development is undergoing its most significant transformation since the graphical user interface.

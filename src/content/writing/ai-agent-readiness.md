@@ -4,6 +4,7 @@ date: 2025-01-15
 description: "A comprehensive framework for evaluating and improving your codebase's readiness for AI agent-assisted development, with detailed criteria across 9 pillars."
 featured: true
 draft: false
+tags: ['ai', 'agentic-coding', 'software-engineering', 'developer-experience']
 ---
 
 AI agents are no longer a distant future—they're here, writing code, executing tasks, and interacting with our systems. But most codebases weren't designed with AI agents in mind. As these tools become more prevalent, the question isn't whether to prepare for them, but how to systematically evaluate and improve your readiness.

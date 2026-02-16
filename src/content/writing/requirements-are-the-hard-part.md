@@ -4,6 +4,7 @@ date: 2026-02-03
 description: "Code generation is solved. The bottleneck has moved upstream. The teams winning with AI aren't better at prompting—they're better at knowing what to build."
 featured: true
 draft: false
+tags: ['ai', 'context-engineering', 'requirements', 'software-engineering']
 ---
 
 Chamath Palihapitiya [dropped a truth bomb](https://x.com/chamath/status/2018532243497783365) this week:

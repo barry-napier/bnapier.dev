@@ -4,6 +4,7 @@ date: 2025-01-10
 description: 'A systematic approach to making technical decisions that balances thoroughness with pragmatism.'
 featured: false
 draft: false
+tags: ['software-engineering', 'frameworks', 'decision-making']
 ---
 
 Technical decisions compound. A choice made early in a project echoes through every subsequent line of code. Yet we often make these decisions too quickly, relying on familiarity or trends rather than systematic analysis.

@@ -4,6 +4,7 @@ date: 2026-02-03
 description: 'A new workflow is emerging: AI reviewing AI-generated code before humans ever see it. This changes everything about how we think about code review.'
 featured: true
 draft: false
+tags: ['ai', 'code-review', 'agentic-coding', 'developer-experience']
 ---
 
 We spent years optimising code review. Smaller PRs. Better tooling. Clearer guidelines. Review checklists. The goal was always the same: reduce the cognitive load on human reviewers so they could focus on what matters—architecture, logic, edge cases.

@@ -4,6 +4,7 @@ date: 2025-01-20
 description: 'How thoughtful context design is becoming as important as model selection in building effective AI applications.'
 featured: true
 draft: false
+tags: ['ai', 'context-engineering', 'software-engineering']
 ---
 
 The rise of large language models has introduced a new discipline that sits at the intersection of software engineering and AI: context engineering. While much attention focuses on model capabilities, the art of crafting effective context windows is often the difference between a mediocre AI application and a transformative one.

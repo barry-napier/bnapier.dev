@@ -25,9 +25,9 @@ It's also wrong — and the proof has been playing out for years in a profession
 
 Professional translation was one of the first knowledge work categories to get hit. Not gradually — suddenly. The cost of translating text between languages collapsed so fast that the entire profession restructured within a few years. Google Translate, then DeepL, then LLMs made baseline translation essentially free.
 
-But here's what actually happened to translators: the ones who survived weren't the fastest at translating. They were the ones who could specify what a *good* translation looked like — the tone, the audience, the cultural context, the domain-specific terminology that machines consistently get wrong. They shifted from production to specification. From doing the work to defining what the work should be.
+But here's what actually happened to translators: the ones who survived weren't the fastest at translating. They were the ones who could specify what a _good_ translation looked like — the tone, the audience, the cultural context, the domain-specific terminology that machines consistently get wrong. They shifted from production to specification. From doing the work to defining what the work should be.
 
-François Chollet — the French AI researcher who created Keras and the [ARC-AGI benchmark](https://arcprize.org/) — watched this happen to an entire profession in his native language. His [framework for measuring intelligence](https://arxiv.org/abs/1911.01547) focuses on *skill-acquisition efficiency*: not how good a system is at a task, but how quickly it can learn new tasks from minimal information. It's a useful lens, but it misses something crucial about what's happening right now.
+François Chollet — the French AI researcher who created Keras and the [ARC-AGI benchmark](https://arcprize.org/) — watched this happen to an entire profession in his native language. His [framework for measuring intelligence](https://arxiv.org/abs/1911.01547) focuses on _skill-acquisition efficiency_: not how good a system is at a task, but how quickly it can learn new tasks from minimal information. It's a useful lens, but it misses something crucial about what's happening right now.
 
 The interesting question isn't whether AI can acquire skills efficiently. It clearly can. The interesting question is: **when AI can produce anything, what determines whether it produces the right thing?**
 
@@ -37,11 +37,11 @@ The answer is specification. And that's a human problem.
 
 I [wrote recently](/writing/requirements-are-the-hard-part) about how the bottleneck in software has shifted from implementation to requirements. That was about engineering teams. This is bigger.
 
-The same pattern is replicating across every knowledge function. Legal. Finance. Marketing. Operations. Anywhere the work involves taking fuzzy intent and producing structured output, the cost of production is collapsing — and the cost of *not knowing what to produce* is compounding.
+The same pattern is replicating across every knowledge function. Legal. Finance. Marketing. Operations. Anywhere the work involves taking fuzzy intent and producing structured output, the cost of production is collapsing — and the cost of _not knowing what to produce_ is compounding.
 
 Think about that compound effect. When production was slow, vague requirements cost you time. An engineer would spend two weeks building the wrong thing, you'd course-correct, they'd spend another two weeks. Expensive, but linear.
 
-When production is instant, vague requirements cost you *trust*. An agent builds the wrong thing in minutes. You correct it. It builds the wrong thing again, differently. You correct it again. Each iteration is fast. Each iteration erodes confidence. After enough cycles, people start saying "AI doesn't work for us" — when the real problem is they can't specify what "working" means.
+When production is instant, vague requirements cost you _trust_. An agent builds the wrong thing in minutes. You correct it. It builds the wrong thing again, differently. You correct it again. Each iteration is fast. Each iteration erodes confidence. After enough cycles, people start saying "AI doesn't work for us" — when the real problem is they can't specify what "working" means.
 
 Lemkin's database didn't get wiped because the AI was stupid. It got wiped because the specification was incomplete. Nobody defined where the agent's authority ended. The agent did exactly what agents do — it optimised for the objective it was given, with no boundaries it wasn't told about.
 
@@ -49,7 +49,7 @@ Lemkin's database didn't get wiped because the AI was stupid. It got wiped becau
 
 Here's where it gets uncomfortable.
 
-A two-class system is emerging among knowledge workers. Not between "people who use AI" and "people who don't" — that distinction is already irrelevant. The split is between people who can *specify* precisely and people who can only *produce*.
+A two-class system is emerging among knowledge workers. Not between "people who use AI" and "people who don't" — that distinction is already irrelevant. The split is between people who can _specify_ precisely and people who can only _produce_.
 
 The producers are getting cheaper by the month. Not because they're bad at their jobs — because the work they do is increasingly automatable. Writing code, drafting contracts, creating marketing copy, building financial models. If your value is in the production step, you're competing with a marginal cost that's approaching zero.
 

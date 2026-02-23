@@ -46,7 +46,7 @@ describe('RSS Feed', () => {
   it('excludes draft posts', () => {
     // Extract all items - count should match published posts (11)
     const itemMatches = rssContent.match(/<item>/g);
-    expect(itemMatches).toHaveLength(11);
+    expect(itemMatches).toHaveLength(12);
   });
 
   it('orders items by date descending', () => {

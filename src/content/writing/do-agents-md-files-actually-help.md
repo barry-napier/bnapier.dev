@@ -1,7 +1,7 @@
 ---
 title: "Do AGENTS.md Files Actually Help? The Data Says It's Complicated"
 date: 2026-02-23
-description: "Two studies reach opposite conclusions about AGENTS.md files. One says they barely help and increase costs. The other says they hit 100% pass rates. Both are right — and the tension tells us something important about context engineering."
+description: 'Two studies reach opposite conclusions about AGENTS.md files. One says they barely help and increase costs. The other says they hit 100% pass rates. Both are right — and the tension tells us something important about context engineering.'
 featured: true
 draft: false
 tags: ['ai', 'agentic-coding', 'context-engineering', 'agents-md']
@@ -18,7 +18,7 @@ Researchers at ETH Zurich built [AGENTbench](https://arxiv.org/html/2602.11988),
 The results were underwhelming:
 
 - **Developer-written context files**: +4% improvement
-- **LLM-generated context files** (via `/init` commands): -3% — actually *worse*
+- **LLM-generated context files** (via `/init` commands): -3% — actually _worse_
 - **Both approaches**: 20%+ increase in token costs
 
 Four percent. That's the payoff for all that careful documentation. And if you let the model generate its own context file? You're paying more for worse results.
@@ -31,18 +31,18 @@ Then Vercel published [their own evaluation](https://vercel.com/blog/agents-md-o
 
 They compared three approaches:
 
-| Approach | Pass Rate |
-|----------|-----------|
-| Baseline (no help) | 53% |
-| Skills (invoked on demand) | 53% |
-| Skills + explicit instructions | 79% |
-| AGENTS.md docs index (8KB) | **100%** |
+| Approach                       | Pass Rate |
+| ------------------------------ | --------- |
+| Baseline (no help)             | 53%       |
+| Skills (invoked on demand)     | 53%       |
+| Skills + explicit instructions | 79%       |
+| AGENTS.md docs index (8KB)     | **100%**  |
 
-Read that again. Skills — the tool-use approach where the model actively retrieves documentation when it thinks it needs it — performed *identically* to having no help at all. 53%. The model didn't know what it didn't know, so it never asked for help.
+Read that again. Skills — the tool-use approach where the model actively retrieves documentation when it thinks it needs it — performed _identically_ to having no help at all. 53%. The model didn't know what it didn't know, so it never asked for help.
 
 But an 8KB compressed docs index sitting passively in the context? Perfect score.
 
-The key insight: **passive context beats active retrieval**. When information is just *there*, the model uses it. When it has to decide to go look for it, it often doesn't — because it doesn't realise it's missing something.
+The key insight: **passive context beats active retrieval**. When information is just _there_, the model uses it. When it has to decide to go look for it, it often doesn't — because it doesn't realise it's missing something.
 
 ## Both studies are right
 
@@ -50,7 +50,7 @@ These aren't contradictory findings. They're measuring completely different thin
 
 The ETH study tested tasks where the model already had relevant training data. The repos were established. The patterns were familiar. In that world, an AGENTS.md file that describes your architecture is just restating things the model can already infer from reading the code. You're adding noise, not signal.
 
-The Vercel study tested tasks where the model had *zero* prior knowledge. Next.js 16 APIs weren't in any training set. Without the docs index, the model was guessing. With it, the model had everything it needed right there in context.
+The Vercel study tested tasks where the model had _zero_ prior knowledge. Next.js 16 APIs weren't in any training set. Without the docs index, the model was guessing. With it, the model had everything it needed right there in context.
 
 The distinction isn't "do context files work?" It's "what are you putting in them?"
 
@@ -64,6 +64,7 @@ This is the highest-value content. If your project uses a non-standard pattern, 
 
 ```markdown
 ## Testing
+
 - Do NOT use `jest`. This project uses `vitest` with the config in `vitest.config.ts`.
 - Always run `pnpm test` not `npm test`. The npm scripts are broken.
 - Integration tests require `docker compose up -d` first.
@@ -75,6 +76,7 @@ The model has strong priors about how things "should" work. When your project de
 
 ```markdown
 ## Rules
+
 - Never push to main. Always use feature branches.
 - Never modify files in `src/generated/`. These are auto-generated from the schema.
 - Do not install new dependencies without asking first.
@@ -84,12 +86,13 @@ These aren't things the model would discover by reading code. They're organisati
 
 ### 3. Pointers — where to find things, not what they contain
 
-This is what Vercel got right. Their AGENTS.md wasn't a documentation dump. It was an 8KB *index* — compressed pointers to where the real documentation lives.
+This is what Vercel got right. Their AGENTS.md wasn't a documentation dump. It was an 8KB _index_ — compressed pointers to where the real documentation lives.
 
 ```markdown
 ## Key docs
+
 - API routes: see docs/api-routes.md
-- Auth flow: see docs/auth.md  
+- Auth flow: see docs/auth.md
 - Database migrations: see docs/migrations.md
 ```
 
@@ -99,6 +102,7 @@ You're not duplicating information. You're giving the model a map. Huge differen
 
 ```markdown
 ## Development
+
 - `pnpm dev` — starts the dev server on port 3000
 - `pnpm db:migrate` — run this after pulling if you see schema errors
 - `pnpm generate` — regenerates GraphQL types (run after schema changes)
@@ -115,6 +119,7 @@ All of which the model can determine by... reading the code.
 You're burning tokens on information the model would have gathered anyway, and worse, you're potentially anchoring it to a stale description when the code itself is the source of truth.
 
 **Don't put in your AGENTS.md:**
+
 - Architecture descriptions the model can infer
 - File-by-file documentation
 - Technology stack listings
@@ -125,11 +130,11 @@ If you wouldn't need to tell a competent new hire because they'd figure it out i
 
 ## The meta-lesson: context engineering is a skill
 
-There's an emerging discipline here that doesn't have a settled name yet, though "context engineering" is gaining traction. It's about managing what information models receive — and crucially, what they *don't*.
+There's an emerging discipline here that doesn't have a settled name yet, though "context engineering" is gaining traction. It's about managing what information models receive — and crucially, what they _don't_.
 
 The ETH study proves that more context ≠ better results. Stuffing everything you know into a file actively degrades performance and increases costs.
 
-The Vercel study proves that the *right* context at the *right* time is transformative. A well-curated 8KB index outperformed every other approach by a massive margin.
+The Vercel study proves that the _right_ context at the _right_ time is transformative. A well-curated 8KB index outperformed every other approach by a massive margin.
 
 This is a familiar pattern if you've worked in any information-heavy discipline. The skill isn't in having information. It's in curating it. Knowing what to include, what to leave out, and how to structure what remains.
 
@@ -144,7 +149,7 @@ For what it's worth, here's roughly how I structure AGENTS.md files now:
 
 Everything else? Leave it out. Let the model read the code. That's what it's good at.
 
-The files I've seen fail are the ones that try to be comprehensive. The ones that succeed are the ones that are *selective*. They contain the 5% of information that the model can't get anywhere else, and they leave out the 95% that it can.
+The files I've seen fail are the ones that try to be comprehensive. The ones that succeed are the ones that are _selective_. They contain the 5% of information that the model can't get anywhere else, and they leave out the 95% that it can.
 
 ## Where this goes next
 

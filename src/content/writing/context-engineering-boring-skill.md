@@ -2,8 +2,8 @@
 title: 'Context Engineering: The Boring Skill That Makes AI Agents Actually Work'
 description: 'How structured context — KB workflows, agent files, and skill definitions — turns unreliable AI agents into dependable systems. Lessons from ETH Zurich, Vercel, and building my own orchestrator.'
 date: 2026-02-24
-featured: false
-draft: true
+featured: true
+draft: false
 tags: ['ai', 'context-engineering', 'agents', 'software-engineering']
 ---
 

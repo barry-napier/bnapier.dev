@@ -17,7 +17,7 @@ Claude Code is the foundation stone. Bash scripts, cron jobs, LanceDB, markdown 
 
 I ran [OpenClaw](https://openclaw.ai) as my personal AI for 9 days. In that time, my agent handled 77+ distinct tasks across scheduling, email triage, finance tracking, CRM, health monitoring, project building, research, and family logistics. 15 automated checks ran daily. It worked. Really well, actually.
 
-Then Claude Code shipped Remote Control.
+Then Claude Code shipped [Remote Control](https://code.claude.com/docs/en/remote-control).
 
 That changed the equation.
 

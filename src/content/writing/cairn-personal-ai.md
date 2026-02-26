@@ -9,7 +9,7 @@ draft: false
 
 A cairn is a stack of stones placed by hand on hillsides. Simple materials, placed deliberately, built to endure. No mortar, no engineering — just the right stones in the right order.
 
-That's the design philosophy behind my personal AI assistant. The name works on two levels — a cairn is deliberate simplicity, and it sounds like Erin, because this is built in Ireland.
+That's the design philosophy behind my personal AI assistant. The name works on two levels — a cairn is deliberate simplicity, and it sounds like Erin.
 
 Claude Code is the foundation stone. Bash scripts, cron jobs, LanceDB, markdown files — each one placed with intention. Nothing fancy. Everything functional.
 

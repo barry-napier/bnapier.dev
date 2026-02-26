@@ -1,8 +1,8 @@
 ---
-title: "CAIRN: Building a Personal AI Assistant from Claude Code and Unix Primitives"
+title: 'CAIRN: Building a Personal AI Assistant from Claude Code and Unix Primitives'
 date: 2026-02-26
-description: "How I replaced a full AI agent platform with Claude Code, bash scripts, cron jobs, and deliberate simplicity."
-tags: ["ai", "claude-code", "personal-ai", "unix", "context-engineering"]
+description: 'How I replaced a full AI agent platform with Claude Code, bash scripts, cron jobs, and deliberate simplicity.'
+tags: ['ai', 'claude-code', 'personal-ai', 'unix', 'context-engineering']
 featured: true
 draft: false
 ---
@@ -132,14 +132,14 @@ Let me be clear: OpenClaw is good software. For multi-user messaging, built-in m
 
 But for a single user on a single machine? The math changes.
 
-| OpenClaw | CAIRN |
-|----------|-------|
-| Gateway daemon | Claude Code CLI |
-| Multi-agent routing | Claude Code subagents |
-| Heartbeat daemon | `launchd` cron |
-| SOUL.md + AGENTS.md | CLAUDE.md |
-| Plugin system | MCP connectors + bash |
-| Memory compaction service | LanceDB + markdown |
+| OpenClaw                  | CAIRN                 |
+| ------------------------- | --------------------- |
+| Gateway daemon            | Claude Code CLI       |
+| Multi-agent routing       | Claude Code subagents |
+| Heartbeat daemon          | `launchd` cron        |
+| SOUL.md + AGENTS.md       | CLAUDE.md             |
+| Plugin system             | MCP connectors + bash |
+| Memory compaction service | LanceDB + markdown    |
 
 Every row is a simplification. Same capability, fewer moving parts.
 
@@ -161,4 +161,4 @@ Specification over production. Simple materials, deliberately placed. Stones in 
 
 ---
 
-*CAIRN is in active development. I'll write more as the build progresses. If you're running Claude Code with Remote Control and want to compare notes, [find me on GitHub](https://github.com/barry-napier).*
+_CAIRN is in active development. I'll write more as the build progresses. If you're running Claude Code with Remote Control and want to compare notes, [find me on GitHub](https://github.com/barry-napier)._

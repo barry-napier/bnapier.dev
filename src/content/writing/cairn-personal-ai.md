@@ -7,8 +7,6 @@ featured: true
 draft: false
 ---
 
-# CAIRN: Building a Personal AI Assistant from Claude Code and Unix Primitives
-
 A cairn is a stack of stones placed by hand on hillsides. Simple materials, placed deliberately, built to endure. No mortar, no engineering — just the right stones in the right order.
 
 That's the design philosophy behind my personal AI assistant. The name works on two levels — a cairn is deliberate simplicity, and it sounds like Erin, because this is built in Ireland.
